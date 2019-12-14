@@ -1,0 +1,22 @@
+<h1>Players</h1>
+
+<p><%= link_to "Create a new player", new_player_path %></p>
+
+<table>
+  <tr>
+    <th>Player</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+
+  <% @players.each do |player| %>
+    <tr>
+      <td><%= link_to "#{player.first_name} #{player.last_name}", player_path(player) %></td>
+      <td><%= link_to "Edit", edit_player_path(player) %></td>
+      <td><%= link_to 'Delete', player_path(player),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+</table>

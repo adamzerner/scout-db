@@ -1,0 +1,91 @@
+<%= form_with model: @player do |form| %>
+  <p>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name %>
+  </p>
+
+  <p>
+    <%= form.label :middle_name %><br>
+    <%= form.text_field :middle_name %>
+  </p>
+
+  <p>
+    <%= form.label :last_name %><br>
+    <%= form.text_field :last_name %>
+  </p>
+
+  <p>
+    <%= form.label :height %><br>
+    <%= form.text_field :height %>
+  </p>
+
+  <p>
+    <%= form.label :weight %><br>
+    <%= form.text_field :weight %>
+  </p>
+
+  <p>
+    <%= form.label :birthday %><br>
+    <%= form.month_field :birthday %>
+  </p>
+
+  <p>
+    <%= form.label :high_school_team %><br>
+    <%= form.text_field :high_school_team %>
+  </p>
+
+  <p>
+    <%= form.label :club_team %><br>
+    <%= form.text_field :club_team %>
+  </p>
+
+  <p>
+    <%= form.label :email %><br>
+    <%= form.email_field :email %>
+  </p>
+
+  <p>
+    <%= form.label :phone_number %><br>
+    <%= form.phone_field :phone_number %>
+  </p>
+
+  <p>
+    <%= @player.address.inspect %>
+  </p>
+
+  <%= form.fields_for @player.address do |address_form| %>
+    <p>
+      <%= address_form.label :address_line_one %><br>
+      <%= address_form.text_field :line_one %>
+    </p>
+
+    <p>
+      <%= address_form.label :address_line_two %><br>
+      <%= address_form.text_field :line_two %>
+    </p>
+
+    <p>
+      <%= address_form.label :city %><br>
+      <%= address_form.text_field :city %>
+    </p>
+
+    <p>
+      <%= address_form.label :state %><br>
+      <%= address_form.text_field :state %>
+    </p>
+
+    <p>
+      <%= address_form.label :zip %><br>
+      <%= address_form.text_field :zip %>
+    </p>
+  <% end %>
+
+  <p>
+    <%= form.label :notes %><br>
+    <%= form.text_area :notes %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

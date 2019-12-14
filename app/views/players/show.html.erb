@@ -1,0 +1,84 @@
+<h1>Player: <%= @player.first_name + ' ' + @player.last_name %></h1>
+
+<p>
+  <strong>First name:</strong>
+  <%= @player.first_name %>
+</p>
+
+<p>
+  <strong>Middle name:</strong>
+  <%= @player.middle_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @player.last_name %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @player.height %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @player.weight %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @player.birthday %>
+</p>
+
+<p>
+  <strong>High school:</strong>
+  <%= @player.high_school_team %>
+</p>
+
+<p>
+  <strong>Club team:</strong>
+  <%= @player.club_team %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @player.email %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @player.phone_number %>
+</p>
+
+<p>
+  <strong>Address line one:</strong>
+  <%= @player.address.line_one %>
+</p>
+
+<p>
+  <strong>Address line two:</strong>
+  <%= @player.address.line_two %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @player.address.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @player.address.state %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @player.address.zip %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @player.notes %>
+</p>
+
+<%= link_to 'Edit', edit_player_path %>
+<%= link_to 'Back', players_path %>
