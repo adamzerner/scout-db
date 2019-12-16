@@ -1,55 +1,55 @@
-<%= form_with model: @player do |form| %>
+<%= form_with model: @player do |f| %>
   <p>
-    <%= form.label :first_name %><br>
-    <%= form.text_field :first_name %>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
   </p>
 
   <p>
-    <%= form.label :middle_name %><br>
-    <%= form.text_field :middle_name %>
+    <%= f.label :middle_name %><br>
+    <%= f.text_field :middle_name %>
   </p>
 
   <p>
-    <%= form.label :last_name %><br>
-    <%= form.text_field :last_name %>
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
   </p>
 
   <p>
-    <%= form.label :height %><br>
-    <%= form.text_field :height %>
+    <%= f.label :height %><br>
+    <%= f.text_field :height %>
   </p>
 
   <p>
-    <%= form.label :weight %><br>
-    <%= form.text_field :weight %>
+    <%= f.label :weight %><br>
+    <%= f.text_field :weight %>
   </p>
 
   <p>
-    <%= form.label :birthday %><br>
-    <%= form.month_field :birthday %>
+    <%= f.label :birthday %><br>
+    <%= f.month_field :birthday %>
   </p>
 
   <p>
-    <%= form.label :high_school_team %><br>
-    <%= form.text_field :high_school_team %>
+    <%= f.label :high_school_team %><br>
+    <%= f.text_field :high_school_team %>
   </p>
 
   <p>
-    <%= form.label :club_team %><br>
-    <%= form.text_field :club_team %>
+    <%= f.label :club_team %><br>
+    <%= f.text_field :club_team %>
   </p>
 
   <p>
-    <%= form.label :email %><br>
-    <%= form.email_field :email %>
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
   </p>
 
   <p>
-    <%= form.label :phone_number %><br>
-    <%= form.phone_field :phone_number %>
+    <%= f.label :phone_number %><br>
+    <%= f.phone_field :phone_number %>
   </p>
 
-  <%= form.fields_for :address do |address_form| %>
+  <%= f.fields_for :address do |address_form| %>
     <p>
       <%= address_form.label :address_line_one %><br>
       <%= address_form.text_field :line_one %>
@@ -77,11 +77,11 @@
   <% end %>
 
   <p>
-    <%= form.label :notes %><br>
-    <%= form.text_area :notes %>
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
   </p>
 
   <p>
-    <%= form.submit %>
+    <%= f.submit %>
   </p>
 <% end %>
