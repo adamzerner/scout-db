@@ -49,11 +49,7 @@
     <%= form.phone_field :phone_number %>
   </p>
 
-  <p>
-    <%= @player.address.inspect %>
-  </p>
-
-  <%= form.fields_for @player.address do |address_form| %>
+  <%= form.fields_for :address do |address_form| %>
     <p>
       <%= address_form.label :address_line_one %><br>
       <%= address_form.text_field :line_one %>
