@@ -31,7 +31,8 @@ ActiveRecord::Schema.define(version: 2019_12_12_025909) do
   end
 
   create_table "high_school_teams", force: :cascade do |t|
-    t.string "name"
+    t.string "school_name"
+    t.string "team_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
