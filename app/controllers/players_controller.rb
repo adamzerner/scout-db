@@ -45,8 +45,11 @@ class PlayersController < ApplicationController
 
   private
     def player_params
-       params
+      params_for_player = params
         .require(:player)
-        .permit(:first_name, :middle_name, :last_name, :height, :weight, :birthday, :high_school_team_id, :club_team_id, :email, :phone_number, :notes, address_attributes: [ :id, :line_one, :line_two, :city, :state, :zip ])
+        .permit(:first_name, :middle_name, :last_name, :feet_component_of_height, :inches_component_of_height, :weight, :birthday, :high_school_team_id, :club_team_id, :email, :phone_number, :notes, address_attributes: [ :id, :line_one, :line_two, :city, :state, :zip ])
+      params_for_player["height"] = (params_for_player["feet_component_of_height"].to_i * 12) + params_for_player["inches_component_of_height"].to_i
+
+      return params_for_player.except(:feet_component_of_height, :inches_component_of_height)
     end
 end

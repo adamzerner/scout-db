@@ -16,11 +16,14 @@
 
   <p>
     <%= f.label :height %><br>
-    <%= f.text_field :height %>
+    <%= f.label :feet %>
+    <%= f.number_field :feet_component_of_height %><br>
+    <%= f.label :inches %>
+    <%= f.number_field :inches_component_of_height %>
   </p>
 
   <p>
-    <%= f.label :weight %><br>
+    <%= f.label :weight, "Weight (lbs)" %><br>
     <%= f.text_field :weight %>
   </p>
 
