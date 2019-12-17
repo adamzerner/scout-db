@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   resources :players
   resources :high_school_teams
+  resources :club_teams
 end

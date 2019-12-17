@@ -1,0 +1,22 @@
+<h1>Club teams</h1>
+
+<p><%= link_to "Create a new club team", new_club_team_path %></p>
+
+<table>
+  <tr>
+    <th>Club team</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+
+  <% @club_teams.each do |club_team| %>
+    <tr>
+      <td><%= link_to "#{club_team.name}", club_team_path(club_team) %></td>
+      <td><%= link_to "Edit", edit_club_team_path(club_team) %></td>
+      <td><%= link_to 'Delete', club_team_path(club_team),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+</table>

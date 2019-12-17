@@ -1,0 +1,18 @@
+<h1>Club team page</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @club_team.name %>
+</p>
+
+<p>
+  Players:
+  <ol>
+    <% @club_team.players.each do |player| %>
+      <li><%= link_to player.full_name, player_path(player) %></li>
+    <% end %>
+  </ol>
+</p>
+
+<%= link_to 'Edit', edit_club_team_path %>
+<%= link_to 'Back', club_teams_path %>

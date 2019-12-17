@@ -36,7 +36,7 @@
 
   <p>
     <%= f.label :club_team %><br>
-    <%= f.text_field :club_team %>
+    <%= f.collection_select(:club_team_id, ClubTeam.all, :id, :name) %>
   </p>
 
   <p>
