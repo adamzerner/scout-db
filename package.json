@@ -1,5 +1,5 @@
 {
-  "name": "soccer_scout",
+  "name": "scout_db",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
