@@ -31,7 +31,7 @@
 
   <p>
     <%= f.label :high_school_team %><br>
-    <%= f.text_field :high_school_team %>
+    <%= f.collection_select(:high_school_team_id, HighSchoolTeam.all, :id, :school_name) %>
   </p>
 
   <p>

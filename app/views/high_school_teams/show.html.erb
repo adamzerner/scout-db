@@ -10,5 +10,14 @@
   <%= @high_school_team.team_name %>
 </p>
 
+<p>
+  Players:
+  <ol>
+    <% @high_school_team.players.each do |player| %>
+      <li><%= link_to player.first_name, player_path(player) %></li>
+    <% end %>
+  </ol>
+</p>
+
 <%= link_to 'Edit', edit_high_school_team_path %>
 <%= link_to 'Back', high_school_teams_path %>
