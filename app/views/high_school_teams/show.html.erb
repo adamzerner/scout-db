@@ -14,7 +14,7 @@
   Players:
   <ol>
     <% @high_school_team.players.each do |player| %>
-      <li><%= link_to player.first_name, player_path(player) %></li>
+      <li><%= link_to player.full_name, player_path(player) %></li>
     <% end %>
   </ol>
 </p>

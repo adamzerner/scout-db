@@ -4,4 +4,8 @@ class Player < ApplicationRecord
   belongs_to :club_team, optional: true
 
   accepts_nested_attributes_for :address, allow_destroy: true
+
+  def full_name
+    return "#{first_name} #{last_name}"
+  end
 end
