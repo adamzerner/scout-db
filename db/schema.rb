@@ -21,10 +21,11 @@ ActiveRecord::Schema.define(version: 2019_12_18_003905) do
     t.string "city"
     t.string "state"
     t.string "zip"
-    t.bigint "player_id"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["player_id"], name: "index_addresses_on_player_id"
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "club_teams", force: :cascade do |t|
@@ -58,7 +59,6 @@ ActiveRecord::Schema.define(version: 2019_12_18_003905) do
     t.index ["high_school_team_id"], name: "index_players_on_high_school_team_id"
   end
 
-  add_foreign_key "addresses", "players"
   add_foreign_key "players", "club_teams"
   add_foreign_key "players", "high_school_teams"
 end

@@ -1,3 +1,3 @@
 class Address < ApplicationRecord
-  belongs_to :player
+  belongs_to :addressable, polymorphic: true
 end

@@ -1,5 +1,5 @@
 class Player < ApplicationRecord
-  has_one :address, dependent: :destroy
+  has_one :address, as: :addressable, dependent: :destroy
   belongs_to :high_school_team, optional: true
   belongs_to :club_team, optional: true
 
