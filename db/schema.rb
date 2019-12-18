@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_12_025909) do
+ActiveRecord::Schema.define(version: 2019_12_18_003905) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
     t.string "line_one"
@@ -18,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_12_12_025909) do
     t.string "city"
     t.string "state"
     t.string "zip"
-    t.integer "player_id"
+    t.bigint "player_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["player_id"], name: "index_addresses_on_player_id"
@@ -44,8 +47,8 @@ ActiveRecord::Schema.define(version: 2019_12_12_025909) do
     t.decimal "height"
     t.decimal "weight"
     t.date "birthday"
-    t.integer "high_school_team_id"
-    t.integer "club_team_id"
+    t.bigint "high_school_team_id"
+    t.bigint "club_team_id"
     t.string "email"
     t.string "phone_number"
     t.text "notes"

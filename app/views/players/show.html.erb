@@ -27,17 +27,17 @@
 
 <p>
   <strong>Birthday:</strong>
-  <%= @player.birthday.to_formatted_s(:long) %>
+  <%= @player.birthday.to_formatted_s(:long) if @player.birthday %>
 </p>
 
 <p>
   <strong>High school:</strong>
-  <%= @player.high_school_team.school_name %>
+  <%= @player.high_school_team.try(:school_name) %>
 </p>
 
 <p>
   <strong>Club team:</strong>
-  <%= @player.club_team.name %>
+  <%= @player.club_team.try(:name) %>
 </p>
 
 <p>
