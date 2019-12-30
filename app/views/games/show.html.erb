@@ -1,0 +1,24 @@
+<h1>Game page</h1>
+
+<p>
+  <strong>Team one:</strong>
+  <%= @game.team_one.name %>
+</p>
+
+<p>
+  <strong>Team two:</strong>
+  <%= @game.team_two.name %>
+</p>
+
+<p>
+  <strong>Tournament:</strong>
+  <%= @game.tournament.name %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @game.field.try(:name) %>
+</p>
+
+<%= link_to 'Edit', edit_game_path %>
+<%= link_to 'Tournament', games_path %>

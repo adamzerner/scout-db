@@ -1,0 +1,7 @@
+<%= form_with model: @game do |f| %>
+  <%= render "form_fields" locals: { f: f } %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

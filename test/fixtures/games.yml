@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tournament: one
+  team_one: one
+  team_two: one
+  field: one
+  date: 2019-12-18
+  start_time: 2019-12-18 13:05:42
+
+two:
+  tournament: two
+  team_one: two
+  team_two: two
+  field: two
+  date: 2019-12-18
+  start_time: 2019-12-18 13:05:42

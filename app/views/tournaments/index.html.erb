@@ -1,0 +1,22 @@
+<h1>Tournaments</h1>
+
+<p><%= link_to "Create a new tournament", new_tournament_path %></p>
+
+<table>
+  <tr>
+    <th>Tournament</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+
+  <% @tournaments.each do |tournament| %>
+    <tr>
+      <td><%= link_to "#{tournament.name}", tournament_path(tournament) %></td>
+      <td><%= link_to "Edit", edit_tournament_path(tournament) %></td>
+      <td><%= link_to 'Delete', tournament_path(tournament),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,54 @@
+<section>
+  <% if HighSchoolTeam.all.count + ClubTeam.all.count < 2 %>
+    <p>You neeed at least two teams to create a game. Create more high school and/or club teams first.</p>
+  <% else %>
+    <section class="game-form">
+      <p>
+        <%= f.label :team_one %><br>
+        <%= f.select :team_one_id do %>
+          <optgroup label="High School Teams">
+            <% HighSchoolTeam.all.each do |high_school_team| %>
+              <option value="high-school-team-<%= high_school_team.id %>"><%= high_school_team.school_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Club Teams">
+            <% ClubTeam.all.each do |club_team| %>
+              <option value="club-team-<%= club_team.id %>"><%= club_team.name %></option>
+            <% end %>
+          </optgroup>
+        <% end %>
+      </p>
+
+      <p>
+        <%= f.label :team_two %><br>
+        <%= f.select :team_two_id do %>
+          <optgroup label="High School Teams">
+            <% HighSchoolTeam.all.each do |high_school_team| %>
+              <option value="high-school-team-<%= high_school_team.id %>"><%= high_school_team.school_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Club Teams">
+            <% ClubTeam.all.each do |club_team| %>
+              <option value="club-team-<%= club_team.id %>"><%= club_team.name %></option>
+            <% end %>
+          </optgroup>
+        <% end %>
+      </p>
+
+      <p>
+        <%= f.label :field %><br>
+        <%= f.collection_select(:field_id, Field.all, :id, :name) %>
+      </p>
+
+      <p>
+        <%= f.label :date %><br>
+        <%= f.date_field :date %>
+      </p>
+
+      <p>
+        <%= f.label :start_time %><br>
+        <%= f.time_field :start_time %>
+      </p>
+    </section>
+  <% end %>
+</section>

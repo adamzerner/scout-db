@@ -1,0 +1,19 @@
+<%= form_with model: @tournament, class: 'tournament-form' do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <strong>Game</strong><br>
+    <%= render partial: "games/form_fields", locals: { f: f } %>
+  </p>
+
+  <p>
+    <button type="button" class="add-game">Add game</button>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,21 @@
+$(document).on('turbolinks:load', function () {
+  let $tournamentForm = $('.tournament-form');
+
+  if ($tournamentForm.length) {
+    $('.add-game').on('click', function (e) {
+      addGame();
+      e.preventDefault();
+    });
+  }
+
+  function addGame() {
+    let $addGameContainer = $('.add-game').parent();
+    let $newGame = buildNewGame();
+
+    $newGame.insertBefore($addGameContainer);
+  }
+
+  function buildNewGame() {
+    return "<%= j render(partial: 'games/form_fields') %>";
+  }
+});

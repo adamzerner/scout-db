@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_003905) do
+ActiveRecord::Schema.define(version: 2019_12_24_011346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,29 @@ ActiveRecord::Schema.define(version: 2019_12_18_003905) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "fields", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.bigint "tournament_id", null: false
+    t.string "team_one_type", null: false
+    t.bigint "team_one_id", null: false
+    t.string "team_two_type", null: false
+    t.bigint "team_two_id", null: false
+    t.bigint "field_id", null: false
+    t.date "date"
+    t.datetime "start_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_id"], name: "index_games_on_field_id"
+    t.index ["team_one_type", "team_one_id"], name: "index_games_on_team_one_type_and_team_one_id"
+    t.index ["team_two_type", "team_two_id"], name: "index_games_on_team_two_type_and_team_two_id"
+    t.index ["tournament_id"], name: "index_games_on_tournament_id"
   end
 
   create_table "high_school_teams", force: :cascade do |t|
@@ -59,6 +82,14 @@ ActiveRecord::Schema.define(version: 2019_12_18_003905) do
     t.index ["high_school_team_id"], name: "index_players_on_high_school_team_id"
   end
 
+  create_table "tournaments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "games", "fields"
+  add_foreign_key "games", "tournaments"
   add_foreign_key "players", "club_teams"
   add_foreign_key "players", "high_school_teams"
 end
