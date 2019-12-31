@@ -5,7 +5,7 @@
     <section class="game-form">
       <p>
         <%= f.label :team_one %><br>
-        <%= f.select :team_one_id do %>
+        <%= f.select :team_one_id, nil, {}, class: "team-one-dropdown" do %>
           <optgroup label="High School Teams">
             <% HighSchoolTeam.all.each do |high_school_team| %>
               <option value="high-school-team-<%= high_school_team.id %>"><%= high_school_team.school_name %></option>
@@ -21,7 +21,7 @@
 
       <p>
         <%= f.label :team_two %><br>
-        <%= f.select :team_two_id do %>
+        <%= f.select :team_two_id, nil, {}, class: "team-two-dropdown" do %>
           <optgroup label="High School Teams">
             <% HighSchoolTeam.all.each do |high_school_team| %>
               <option value="high-school-team-<%= high_school_team.id %>"><%= high_school_team.school_name %></option>

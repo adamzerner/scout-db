@@ -25,6 +25,6 @@ class GamesController < ApplicationController
     def game_params
       params
         .require(:game)
-        .permit(:team_one_id, :team_two_id)
+        .permit(:team_one_id, :team_two_id, :field_id, :date, :start_time)
     end
 end

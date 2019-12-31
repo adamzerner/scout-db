@@ -1,13 +1,11 @@
 $(document).on('turbolinks:load', function () {
-  let $gameForm = $('.game-form');
-
-  if ($gameForm.length) {
-    let $teamOneDropdown = $gameForm.find('select#tournament_team_one_id');
-    let $teamTwoDropdown = $gameForm.find('select#tournament_team_two_id');
+  $(document).on('cocoon:before-insert', function (e, $gameForm) {
+    let $teamOneDropdown = $gameForm.find('select.team-one-dropdown');
+    let $teamTwoDropdown = $gameForm.find('select.team-two-dropdown');
 
     selectInitialOptions($teamOneDropdown, $teamTwoDropdown);
     makeSureSelectedOptionsAreDisabled($teamOneDropdown, $teamTwoDropdown);
-  }
+  });
 
   function selectInitialOptions($teamOneDropdown, $teamTwoDropdown) {
     $teamOneDropdown.find('option').eq(0).prop('selected', true);

@@ -17,6 +17,9 @@ class TournamentsController < ApplicationController
     if @tournament.save
       redirect_to @tournament
     else
+      @tournament.errors.full_messages.each do |message|
+        puts message
+      end
       render 'new'
     end
   end
@@ -46,6 +49,6 @@ class TournamentsController < ApplicationController
     def tournament_params
       params
         .require(:tournament)
-        .permit(:name)
+        .permit(:name, games_attributes: [:id, :_destroy, :team_one_id, :team_two_id, :field_id, :date, :start_time])
     end
 end
