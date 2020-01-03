@@ -1,0 +1,22 @@
+<h1>Fields</h1>
+
+<p><%= link_to "Create a new field", new_field_path %></p>
+
+<table>
+  <tr>
+    <th>Field</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+
+  <% @fields.each do |field| %>
+    <tr>
+      <td><%= link_to "#{field.name}", field_path(field) %></td>
+      <td><%= link_to "Edit", edit_field_path(field) %></td>
+      <td><%= link_to 'Delete', field_path(field),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+</table>

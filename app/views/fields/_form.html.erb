@@ -1,0 +1,37 @@
+<%= form_with model: @field do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <%= f.fields_for :address do |address_form| %>
+    <p>
+      <%= address_form.label :address_line_one %><br>
+      <%= address_form.text_field :line_one %>
+    </p>
+
+    <p>
+      <%= address_form.label :address_line_two %><br>
+      <%= address_form.text_field :line_two %>
+    </p>
+
+    <p>
+      <%= address_form.label :city %><br>
+      <%= address_form.text_field :city %>
+    </p>
+
+    <p>
+      <%= address_form.label :state %><br>
+      <%= address_form.text_field :state %>
+    </p>
+
+    <p>
+      <%= address_form.label :zip %><br>
+      <%= address_form.text_field :zip %>
+    </p>
+  <% end %>
+  
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :high_school_teams
   resources :club_teams
   resources :tournaments
+  resources :fields
 end
