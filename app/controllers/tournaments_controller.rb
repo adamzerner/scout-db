@@ -46,9 +46,32 @@ class TournamentsController < ApplicationController
   end
 
   private
-    def tournament_params
-      params
-        .require(:tournament)
-        .permit(:name, games_attributes: [:id, :_destroy, :team_one_id, :team_two_id, :field_id, :date, :start_time])
+def tournament_params
+  result = params
+    .require(:tournament)
+    .permit(:name, games_attributes: [:id, :_destroy, :team_one_id, :team_two_id, :field_id, :date, :start_time])
+  add_team_types(result)
+
+  return result
+end
+
+def add_team_types(tournament_params)
+  tournament_params[:games_attributes].each do |game_id, game_attributes|
+    if game_attributes[:team_one_id].include?("high-school-team")
+      game_attributes[:team_one_id] = game_attributes[:team_one_id].split(':').last
+      game_attributes[:team_one_type] = "HighSchoolTeam"
+    elsif game_attributes[:team_one_id].include?("club-team")
+      game_attributes[:team_one_id] = game_attributes[:team_one_id].split(':').last
+      game_attributes[:team_one_type] = "ClubTeam"
     end
+
+    if game_attributes[:team_two_id].include?("high-school-team")
+      game_attributes[:team_two_id] = game_attributes[:team_two_id].split(':').last
+      game_attributes[:team_two_type] = "HighSchoolTeam"
+    elsif game_attributes[:team_two_id].include?("club-team")
+      game_attributes[:team_two_id] = game_attributes[:team_two_id].split(':').last
+      game_attributes[:team_two_type] = "ClubTeam"
+    end
+  end
+end
 end
