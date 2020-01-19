@@ -12,7 +12,7 @@
     <li class="list-group-item">
       <strong>Address:</strong>
       <section>
-        <% if @field.address.try(:line_one).length > 0 %>
+        <% if @field.address.line_one && @field.address.try(:line_one).length > 0 %>
           <section>
             <%= @field.address.line_one %><br>
             <%= @field.address.line_two %><br>
