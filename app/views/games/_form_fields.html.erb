@@ -3,9 +3,9 @@
     <p>You neeed at least two teams to create a game. Create more high school and/or club teams first.</p>
   <% else %>
     <section class="game-form">
-      <p>
-        <%= f.label :team_one %><br>
-        <%= f.select :team_one_id, nil, {}, class: "team-one-dropdown" do %>
+      <section class="form-group">
+        <%= f.label :team_one %>
+        <%= f.select :team_one_id, nil, {}, class: "team-one-dropdown form-control" do %>
           <optgroup label="High School Teams">
             <% HighSchoolTeam.all.each do |high_school_team| %>
               <option value="high-school-team:<%= high_school_team.id %>"><%= high_school_team.school_name %></option>
@@ -17,11 +17,11 @@
             <% end %>
           </optgroup>
         <% end %>
-      </p>
+      </section>
 
-      <p>
-        <%= f.label :team_two %><br>
-        <%= f.select :team_two_id, nil, {}, class: "team-two-dropdown" do %>
+      <section class="form-group">
+        <%= f.label :team_two %>
+        <%= f.select :team_two_id, nil, {}, class: "team-two-dropdown form-control" do %>
           <optgroup label="High School Teams">
             <% HighSchoolTeam.all.each do |high_school_team| %>
               <option value="high-school-team:<%= high_school_team.id %>"><%= high_school_team.school_name %></option>
@@ -33,22 +33,22 @@
             <% end %>
           </optgroup>
         <% end %>
-      </p>
+      </section>
 
-      <p>
-        <%= f.label :field %><br>
-        <%= f.collection_select(:field_id, Field.all, :id, :name) %>
-      </p>
+      <section class="form-group">
+        <%= f.label :field %>
+        <%= f.collection_select(:field_id, Field.all, :id, :name, {}, class: "form-control") %>
+      </section>
 
-      <p>
-        <%= f.label :date %><br>
-        <%= f.date_field :date %>
-      </p>
+      <section class="form-group">
+        <%= f.label :date %>
+        <%= f.date_field :date, class: "form-control" %>
+      </section>
 
-      <p>
-        <%= f.label :start_time %><br>
-        <%= f.time_field :start_time %>
-      </p>
+      <section class="form-group">
+        <%= f.label :start_time %>
+        <%= f.time_field :start_time, class: "form-control" %>
+      </section>
     </section>
   <% end %>
 </section>

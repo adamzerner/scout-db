@@ -9,6 +9,10 @@ class Player < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def full_name_with_middle
+    "#{first_name} #{middle_name} #{last_name}"
+  end
+
   def display_height
     "#{feet_component_of_height}\" #{inches_component_of_height}"
   end
@@ -27,5 +31,17 @@ class Player < ApplicationRecord
     else
       return (height % 12).to_i
     end
+  end
+
+  def age
+    if !birthday
+      nil
+    else
+      ((Date.current - birthday).to_f / 365).round(2)
+    end
+  end
+
+  def address_str
+    "foo\nbar\nbaz"
   end
 end

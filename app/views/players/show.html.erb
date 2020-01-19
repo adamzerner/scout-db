@@ -1,84 +1,66 @@
-<h1>Player: <%= @player.full_name %></h1>
+<h1 class="page-header"><%= @player.full_name_with_middle %></h1>
 
-<p>
-  <strong>First name:</strong>
-  <%= @player.first_name %>
-</p>
+<section class="card">
+  <section class="card-header">
+    Athletic
+  </section>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong>Height:</strong>
+      <%= @player.display_height %>
+    </li>
+    <li class="list-group-item">
+      <strong>Weight:</strong>
+      <%= @player.weight %>
+    </li>
+    <li class="list-group-item">
+      <strong>Age:</strong>
+      <%= @player.age %>
+    </li>
+    <li class="list-group-item">
+      <strong>High school:</strong>
+      <%= link_to @player.high_school_team.school_name, high_school_team_path(@player.high_school_team) if @player.high_school_team.school_name %>
+    </li>
+    <li class="list-group-item">
+      <strong>Club team:</strong>
+      <%= link_to @player.club_team.name, club_team_path(@player.club_team) if @player.club_team.name %>
+    </li>
+  </ul>
+</section>
 
-<p>
-  <strong>Middle name:</strong>
-  <%= @player.middle_name %>
-</p>
+<section class="card">
+  <section class="card-header">
+    Personal
+  </section>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong>Email:</strong>
+      <%= @player.email %>
+    </li>
+    <li class="list-group-item">
+      <strong>Phone number:</strong>
+      <%= @player.phone_number %>
+    </li>
+    <li class="list-group-item">
+      <strong>Address:</strong>
+      <% if @player.address.try(:line_one).length > 0 %>
+        <section>
+          <%= @player.address.line_one %><br>
+          <%= @player.address.line_two %><br>
+          <%= "#{@player.address.city} #{@player.address.state}, #{@player.address.zip}" %>
+        </section>
+      <% end %>
+    </li>
+  </ul>
+</section>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @player.last_name %>
-</p>
-
-<p>
-  <strong>Height:</strong>
-  <%= @player.display_height %>
-</p>
-
-<p>
-  <strong>Weight:</strong>
-  <%= @player.weight %>
-</p>
-
-<p>
-  <strong>Birthday:</strong>
-  <%= @player.birthday.to_formatted_s(:long) if @player.birthday %>
-</p>
-
-<p>
-  <strong>High school:</strong>
-  <%= @player.high_school_team.try(:school_name) %>
-</p>
-
-<p>
-  <strong>Club team:</strong>
-  <%= @player.club_team.try(:name) %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @player.email %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @player.phone_number %>
-</p>
-
-<p>
-  <strong>Address line one:</strong>
-  <%= @player.address.line_one %>
-</p>
-
-<p>
-  <strong>Address line two:</strong>
-  <%= @player.address.line_two %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @player.address.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @player.address.state %>
-</p>
-
-<p>
-  <strong>Zip code:</strong>
-  <%= @player.address.zip %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @player.notes %>
-</p>
+<section class="card">
+  <section class="card-header">
+    Notes
+  </section>
+  <section class="card-body">
+    <%= @player.notes %>
+  </section>
+</section>
 
 <%= link_to 'Edit', edit_player_path %>
-<%= link_to 'Back', players_path %>

@@ -1,90 +1,92 @@
 <%= form_with model: @player do |f| %>
-  <p>
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </p>
+  <section class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </section>
 
-  <p>
-    <%= f.label :middle_name %><br>
-    <%= f.text_field :middle_name %>
-  </p>
+  <section class="form-group">
+    <%= f.label :middle_name %>
+    <%= f.text_field :middle_name, class: "form-control" %>
+  </section>
 
-  <p>
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </p>
+  <section class="form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </section>
 
-  <p>
-    <%= f.label :height %><br>
-    <%= f.label :feet %>
-    <%= f.number_field :feet_component_of_height %><br>
-    <%= f.label :inches %>
-    <%= f.number_field :inches_component_of_height %>
-  </p>
+  <section class="form-group">
+    <%= f.label "Height (feet)" %>
+    <%= f.number_field :feet_component_of_height, class: "form-control" %>
+  </section>
 
-  <p>
-    <%= f.label :weight, "Weight (lbs)" %><br>
-    <%= f.text_field :weight %>
-  </p>
+  <section class="form-group">
+    <%= f.label "Height (inches)" %>
+    <%= f.number_field :inches_component_of_height, class: "form-control" %>
+  </section>
 
-  <p>
-    <%= f.label :birthday %><br>
-    <%= f.date_field :birthday %>
-  </p>
+  <section class="form-group">
+    <%= f.label :weight, "Weight (lbs)" %>
+    <%= f.text_field :weight, class: "form-control" %>
+  </section>
 
-  <p>
-    <%= f.label :high_school_team %><br>
-    <%= f.collection_select(:high_school_team_id, HighSchoolTeam.all, :id, :school_name) %>
-  </p>
+  <section class="form-group">
+    <%= f.label :birthday %>
+    <%= f.date_field :birthday, class: "form-control" %>
+  </section>
 
-  <p>
-    <%= f.label :club_team %><br>
-    <%= f.collection_select(:club_team_id, ClubTeam.all, :id, :name) %>
-  </p>
+  <section class="form-group">
+    <%= f.label :high_school_team %>
+    <%= f.collection_select(:high_school_team_id, HighSchoolTeam.all, :id, :school_name, {}, class: "form-control") %>
+  </section>
 
-  <p>
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
-  </p>
+  <section class="form-group">
+    <%= f.label :club_team %>
+    <%= f.collection_select(:club_team_id, ClubTeam.all, :id, :name, {}, class: "form-control") %>
+  </section>
 
-  <p>
-    <%= f.label :phone_number %><br>
-    <%= f.phone_field :phone_number %>
-  </p>
+  <section class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control" %>
+  </section>
+
+  <section class="form-group">
+    <%= f.label :phone_number %>
+    <%= f.phone_field :phone_number, class: "form-control" %>
+  </section>
 
   <%= f.fields_for :address do |address_form| %>
-    <p>
-      <%= address_form.label :address_line_one %><br>
-      <%= address_form.text_field :line_one %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :address_line_one %>
+      <%= address_form.text_field :line_one, class: "form-control" %>
+    </section>
 
-    <p>
-      <%= address_form.label :address_line_two %><br>
-      <%= address_form.text_field :line_two %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :address_line_two %>
+      <%= address_form.text_field :line_two, class: "form-control" %>
+    </section>
 
-    <p>
-      <%= address_form.label :city %><br>
-      <%= address_form.text_field :city %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :city %>
+      <%= address_form.text_field :city, class: "form-control" %>
+    </section>
 
-    <p>
-      <%= address_form.label :state %><br>
-      <%= address_form.text_field :state %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :state %>
+      <%= address_form.text_field :state, class: "form-control" %>
+    </section>
 
-    <p>
-      <%= address_form.label :zip %><br>
-      <%= address_form.text_field :zip %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :zip %>
+      <%= address_form.text_field :zip, class: "form-control" %>
+    </section>
   <% end %>
 
-  <p>
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
-  </p>
+  <section class="form-group">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, class: "form-control" %>
+  </section>
 
-  <p>
-    <%= f.submit %>
-  </p>
+  <section class="form-group">
+    <%= f.submit nil, class: "btn btn-primary" %>
+  </section>
 <% end %>

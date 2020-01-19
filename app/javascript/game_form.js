@@ -1,11 +1,15 @@
 $(document).on('turbolinks:load', function () {
   $(document).on('cocoon:before-insert', function (e, $gameForm) {
+    setup($gameForm);
+  });
+
+  function setup($gameForm) {
     let $teamOneDropdown = $gameForm.find('select.team-one-dropdown');
     let $teamTwoDropdown = $gameForm.find('select.team-two-dropdown');
 
     selectInitialOptions($teamOneDropdown, $teamTwoDropdown);
     makeSureSelectedOptionsAreDisabled($teamOneDropdown, $teamTwoDropdown);
-  });
+  }
 
   function selectInitialOptions($teamOneDropdown, $teamTwoDropdown) {
     $teamOneDropdown.find('option').eq(0).prop('selected', true);

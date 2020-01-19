@@ -1,37 +1,34 @@
 <%= form_with model: @field do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
+  <section class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </section>
 
   <%= f.fields_for :address do |address_form| %>
-    <p>
-      <%= address_form.label :address_line_one %><br>
-      <%= address_form.text_field :line_one %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :address_line_one %>
+      <%= address_form.text_field :line_one, class: "form-control" %>
+    </section>
 
-    <p>
-      <%= address_form.label :address_line_two %><br>
-      <%= address_form.text_field :line_two %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :address_line_two %>
+      <%= address_form.text_field :line_two, class: "form-control" %>
+    </section>
 
-    <p>
-      <%= address_form.label :city %><br>
-      <%= address_form.text_field :city %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :city %>
+      <%= address_form.text_field :city, class: "form-control" %>
+    </section>
 
-    <p>
-      <%= address_form.label :state %><br>
-      <%= address_form.text_field :state %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :state %>
+      <%= address_form.text_field :state, class: "form-control" %>
+    </section>
 
-    <p>
-      <%= address_form.label :zip %><br>
-      <%= address_form.text_field :zip %>
-    </p>
+    <section class="form-group">
+      <%= address_form.label :zip %>
+      <%= address_form.text_field :zip, class: "form-control" %>
+    </section>
   <% end %>
-  
-  <p>
-    <%= f.submit %>
-  </p>
+  <%= f.submit nil, class: "btn btn-primary" %>
 <% end %>

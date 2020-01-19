@@ -1,25 +1,23 @@
 <%= form_with model: @tournament, class: 'tournament-form' do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
+  <section class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </section>
 
   <section class="games">
     <%= f.fields_for :games do |game| %>
       <%= render 'game_fields', f: game %>
     <% end %>
-    <hr>
     <p>
       <%= link_to_add_association "Add game", f, :games,
         data: {
           association_insertion_node: '.games',
           association_insertion_method: :prepend
-        }
+        },
+        class: "btn btn-light"
       %>
     </p>
   </section>
 
-  <p>
-    <%= f.submit %>
-  </p>
+  <%= f.submit nil, class: "btn btn-primary" %>
 <% end %>

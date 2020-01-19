@@ -1,35 +1,38 @@
-<h1>Field page</h1>
+<h1 class="page-header">Field page</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @field.name %>
-</p>
+<section class="card">
+  <section class="card-header">
+    Info
+  </section>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong>Name:</strong>
+      <%= @field.name %>
+    </li>
+    <li class="list-group-item">
+      <strong>Address:</strong>
+      <section>
+        <% if @field.address.try(:line_one).length > 0 %>
+          <section>
+            <%= @field.address.line_one %><br>
+            <%= @field.address.line_two %><br>
+            <%= "#{@field.address.city} #{@field.address.state}, #{@field.address.zip}" %>
+          </section>
+        <% end %>
+      </section>
+    </li>
+  </ul>
+</section>
 
-<p>
-  <strong>Address line one:</strong>
-  <%= @field.address.line_one %>
-</p>
-
-<p>
-  <strong>Address line two:</strong>
-  <%= @field.address.line_two %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @field.address.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @field.address.state %>
-</p>
-
-<p>
-  <strong>Zip code:</strong>
-  <%= @field.address.zip %>
-</p>
-
+<section class="card">
+  <section class="card-header">
+    Games
+  </section>
+  <ul class="list-group">
+    <% @field.games.each do |game| %>
+      <li class="list-group-item"><%= link_to game.long_name, game_path(game) %></li>
+    <% end %>
+  </ul>
+</section>
 
 <%= link_to 'Edit', edit_field_path %>
-<%= link_to 'Back', fields_path %>

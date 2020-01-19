@@ -1,24 +1,27 @@
-<h1>Game page</h1>
+<h1 class="page-header">Game page</h1>
 
-<p>
-  <strong>Team one:</strong>
-  <%= @game.team_one.name %>
-</p>
-
-<p>
-  <strong>Team two:</strong>
-  <%= @game.team_two.name %>
-</p>
-
-<p>
-  <strong>Tournament:</strong>
-  <%= @game.tournament.name %>
-</p>
-
-<p>
-  <strong>Field:</strong>
-  <%= @game.field.try(:name) %>
-</p>
+<section class="card">
+  <section class="card-header">
+    Info
+  </section>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong>Team one:</strong>
+      <%= link_to @game.team_one.name, team_path(@game.team_one) %>
+    </li>
+    <li class="list-group-item">
+      <strong>Team two:</strong>
+      <%= link_to @game.team_two.name, team_path(@game.team_two) %>
+    </li>
+    <li class="list-group-item">
+      <strong>Tournament:</strong>
+      <%= link_to @game.tournament.name, tournament_path(@game.tournament) %>
+    </li>
+    <li class="list-group-item">
+      <strong>Field:</strong>
+      <%= link_to @game.field.name, field_path(@game.field) %>
+    </li>
+  </ul>
+</section>
 
 <%= link_to 'Edit', edit_game_path %>
-<%= link_to 'Tournament', games_path %>

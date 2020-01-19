@@ -10,16 +10,9 @@
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <li><%= link_to "Home", "/" %></li>
-        <li><%= link_to "Tournaments", tournaments_path %></li>
-        <li><%= link_to "Players", players_path %></li>
-        <li><%= link_to "High school teams", high_school_teams_path %></li>
-        <li><%= link_to "Club teams", club_teams_path %></li>
-        <li><%= link_to "Fields", fields_path %></li>
-      </ul>
-    </nav>
-    <%= yield %>
+    <%= render 'layouts/navbar' %>
+    <section class="container">
+      <%= yield %>
+    </section>
   </body>
 </html>

@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :club_teams
   resources :tournaments
   resources :fields
+  resources :games, only: [:new, :show, :edit, :update]
 end

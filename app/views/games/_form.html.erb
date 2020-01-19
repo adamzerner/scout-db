@@ -1,7 +1,7 @@
 <%= form_with model: @game do |f| %>
-  <%= render "form_fields" locals: { f: f } %>
+  <%= render "form_fields", { f: f, game: @game } %>
 
   <p>
-    <%= f.submit %>
+    <%= f.submit nil, class: "btn btn-primary" %>
   </p>
 <% end %>

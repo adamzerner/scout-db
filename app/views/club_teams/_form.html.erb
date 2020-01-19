@@ -1,9 +1,7 @@
 <%= form_with model: @club_team do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+  <section class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </section>
+  <%= f.submit nil, class: "btn btn-primary" %>
 <% end %>

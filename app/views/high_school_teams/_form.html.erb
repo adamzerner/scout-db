@@ -1,13 +1,11 @@
 <%= form_with model: @high_school_team do |f| %>
-  <p>
-    <%= f.label :school_name %><br>
-    <%= f.text_field :school_name %>
-  </p>
-  <p>
-    <%= f.label :team_name %><br>
-    <%= f.text_field :team_name %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+  <section class="form-group">
+    <%= f.label :school_name %>
+    <%= f.text_field :school_name, class: "form-control" %>
+  </section>
+  <section class="form-group">
+    <%= f.label :team_name %>
+    <%= f.text_field :team_name, class: "form-control" %>
+  </section>
+  <%= f.submit nil, class: "btn btn-primary" %>
 <% end %>

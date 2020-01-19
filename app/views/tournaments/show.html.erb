@@ -1,4 +1,28 @@
-<h1>Tournament: <%= @tournament.name %></h1>
+<h1 class="page-header">Tournament: <%= @tournament.name %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Team one</th>
+      <th>Team two</th>
+      <th>Field</th>
+      <th>Date</th>
+      <th>Start time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tournament.games.each do |game| %>
+      <tr>
+        <td><%= link_to game.name, game_path(game) %></td>
+        <td><%= link_to game.team_one.name, team_path(game.team_one) %></td>
+        <td><%= link_to game.team_two.name, team_path(game.team_two) %></td>
+        <td><%= link_to game.field.name, field_path(game.field) %></td>
+        <td><%= game.date.to_formatted_s(:long) %></td>
+        <td><%= game.start_time.strftime("%I:%M %p") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_tournament_path %>
-<%= link_to 'Back', tournaments_path %>

@@ -1,6 +1,9 @@
-<section class="nested-fields">
-  <hr>
-  <p><strong>Game</strong></p>
-  <%= render "games/form_fields", f: f %>
-  <p><%= link_to_remove_association "Remove game", f %></p>
+<section class="nested-fields card">
+  <section class="card-header">
+    Game
+    <%= link_to_remove_association sanitize("&times;"), f, class: "close" %>
+  </section>
+  <section class="card-body">
+    <%= render "games/form_fields", f: f %>
+  </section>
 </section>

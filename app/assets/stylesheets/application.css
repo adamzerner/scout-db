@@ -14,12 +14,12 @@
  *= require_self
  */
 
-nav ul {
-  list-style-type: none;
-  background: lightgray;
-}
+ h1.page-header {
+   padding-bottom: 7.5px;
+   margin: 34px 0 17px;
+   border-bottom: 1px solid #eeeeee;
+ }
 
-nav ul li {
-  display: inline;
-
-}
+ .card {
+   margin-bottom: 16px;
+ }
