@@ -1,0 +1,17 @@
+<% if notice %>
+  <section class="alert alert-info alert-dismissible fade show">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert">
+      <span>&times;</span>
+    </button>
+  </section>
+<% end %>
+
+<% if alert %>
+  <section class="alert alert-danger alert-dismissible fade show">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert">
+      <span>&times;</span>
+    </button>
+  </section>
+<% end %>
