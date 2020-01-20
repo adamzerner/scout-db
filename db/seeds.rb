@@ -54,6 +54,9 @@ PLAYERS = [{
   birthday: Date.new(1992,2,3),
   high_school_team_id: HighSchoolTeam.first.id,
   club_team_id: ClubTeam.first.id,
+  gpa: 3.1,
+  class_year: 'Junior',
+  intended_major: 'Psychology',
   email: 'mattcohen@gmail.com',
   phone_number: '921-774-8990',
   address: Address.new({
@@ -123,7 +126,7 @@ GAMES = [{
   team_two_id: HighSchoolTeam.second.id,
   team_two_type: 'HighSchoolTeam',
   field_id: Field.first.id,
-  date: Date.new,
+  date: Date.today,
   start_time: Time.new
 }, {
   tournament_id: Tournament.first.id,
@@ -132,7 +135,7 @@ GAMES = [{
   team_two_id: ClubTeam.second.id,
   team_two_type: 'ClubTeam',
   field_id: Field.second.id,
-  date: Date.new,
+  date: Date.today,
   start_time: Time.new
 }]
 GAMES.each { |game| Game.create(game) }

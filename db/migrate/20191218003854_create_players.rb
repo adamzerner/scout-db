@@ -9,6 +9,9 @@ class CreatePlayers < ActiveRecord::Migration[6.0]
       t.date :birthday
       t.references :high_school_team, foreign_key: true
       t.references :club_team, foreign_key: true
+      t.decimal :gpa
+      t.string :class_year
+      t.string :intended_major
       t.string :email
       t.string :phone_number
       t.text :notes

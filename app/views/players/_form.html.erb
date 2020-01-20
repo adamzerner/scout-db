@@ -25,15 +25,15 @@
     <section class="card-body">
       <section class="form-group">
         <%= f.label "Height (feet)" %>
-        <%= f.number_field :feet_component_of_height, class: "form-control" %>
+        <%= f.number_field :feet_component_of_height, class: "form-control", in: 3..7 %>
       </section>
       <section class="form-group">
         <%= f.label "Height (inches)" %>
-        <%= f.number_field :inches_component_of_height, class: "form-control" %>
+        <%= f.number_field :inches_component_of_height, class: "form-control", in: 0..11.5, step: 0.5 %>
       </section>
       <section class="form-group">
         <%= f.label :weight, "Weight (lbs)" %>
-        <%= f.text_field :weight, class: "form-control" %>
+        <%= f.number_field :weight, class: "form-control", in: 60..400, step: 5 %>
       </section>
       <section class="form-group">
         <%= f.label :birthday %>
@@ -46,6 +46,26 @@
       <section class="form-group">
         <%= f.label :club_team %>
         <%= f.collection_select(:club_team_id, ClubTeam.all, :id, :name, {}, class: "form-control") %>
+      </section>
+    </section>
+  </section>
+
+  <section class="card">
+    <section class="card-header">
+      Academic
+    </section>
+    <section class="card-body">
+      <section class="form-group">
+        <%= f.label "GPA" %>
+        <%= f.number_field :gpa, class: "form-control", in: 0..4, step: 0.05 %>
+      </section>
+      <section class="form-group">
+        <%= f.label "Class year" %>
+        <%= f.select(:class_year, ['Freshman', 'Sophomore', 'Junior', 'Senior'], {}, class: "form-control") %>
+      </section>
+      <section class="form-group">
+        <%= f.label "Intended major" %>
+        <%= f.text_field :intended_major, class: "form-control" %>
       </section>
     </section>
   </section>
