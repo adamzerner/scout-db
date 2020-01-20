@@ -11,7 +11,7 @@
 
   <body>
     <%= render 'layouts/navbar' %>
-    <section class="container">
+    <section class="container <%= "#{controller.controller_name}-#{controller.action_name}" %>">
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
     </section>
