@@ -1,0 +1,9 @@
+<% if address && address.line_one %>
+  <section>
+    <%= address.line_one %><br>
+    <% if address.line_two.try(:length) && address.line_two.length > 0 %>
+      <%= address.line_two %><br>
+    <% end %>
+    <%= "#{address.city} #{address.state}, #{address.zip}" %>
+  </section>
+<% end %>

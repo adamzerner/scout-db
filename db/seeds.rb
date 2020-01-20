@@ -47,52 +47,63 @@ FIELDS.each { |field| Field.create(field) }
 
 PLAYERS = [{
   first_name: 'Matt',
+  middle_name: 'Brandon',
   last_name: 'Cohen',
-  address: Address.new,
   height: 70,
   weight: 140,
+  birthday: Date.new(1992,2,3),
   high_school_team_id: HighSchoolTeam.first.id,
-  club_team_id: ClubTeam.first.id
+  club_team_id: ClubTeam.first.id,
+  email: 'mattcohen@gmail.com',
+  phone_number: '921-774-8990',
+  address: Address.new({
+    line_one: '123 Main St.',
+    line_two: '',
+    city: 'Syosset',
+    state: 'NY',
+    zip: '11791'
+  }),
+  notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 }, {
   first_name: 'Adam',
   last_name: 'Cohen',
-  address: Address.new,
   height: 70,
   weight: 140,
   high_school_team_id: HighSchoolTeam.first.id,
-  club_team_id: ClubTeam.first.id
+  club_team_id: ClubTeam.first.id,
+  address: Address.new,
 }, {
   first_name: 'James',
   last_name: 'Ciano',
-  address: Address.new,
   height: 70,
   weight: 140,
   high_school_team_id: HighSchoolTeam.first.id,
-  club_team_id: ClubTeam.first.id
+  club_team_id: ClubTeam.first.id,
+  address: Address.new,
 }, {
   first_name: 'Justin',
   last_name: 'Leff',
-  address: Address.new,
   height: 70,
   weight: 140,
   high_school_team_id: HighSchoolTeam.second.id,
-  club_team_id: ClubTeam.second.id
+  club_team_id: ClubTeam.second.id,
+  address: Address.new,
 }, {
   first_name: 'Conner',
   last_name: 'Greene',
-  address: Address.new,
   height: 70,
   weight: 140,
   high_school_team_id: HighSchoolTeam.second.id,
-  club_team_id: ClubTeam.second.id
+  club_team_id: ClubTeam.second.id,
+  address: Address.new,
 }, {
   first_name: 'Steve',
   last_name: 'Jaycox',
-  address: Address.new,
   height: 70,
   weight: 140,
   high_school_team_id: HighSchoolTeam.second.id,
-  club_team_id: ClubTeam.second.id
+  club_team_id: ClubTeam.second.id,
+  address: Address.new,
 }]
 PLAYERS.each { |player| Player.create(player) }
 

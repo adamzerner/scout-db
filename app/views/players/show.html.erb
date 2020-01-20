@@ -30,12 +30,12 @@
 
 <section class="card">
   <section class="card-header">
-    Personal
+    Contact
   </section>
   <ul class="list-group">
     <li class="list-group-item">
       <strong>Email:</strong>
-      <%= @player.email %>
+      <%= mail_to @player.email %>
     </li>
     <li class="list-group-item">
       <strong>Phone number:</strong>
@@ -43,13 +43,7 @@
     </li>
     <li class="list-group-item">
       <strong>Address:</strong>
-      <% if @player.address.line_one && @player.address.line_one.length > 0 %>
-        <section>
-          <%= @player.address.line_one %><br>
-          <%= @player.address.line_two %><br>
-          <%= "#{@player.address.city} #{@player.address.state}, #{@player.address.zip}" %>
-        </section>
-      <% end %>
+      <%= render 'shared/address', address: @player.address %>
     </li>
   </ul>
 </section>
