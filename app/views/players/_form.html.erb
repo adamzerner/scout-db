@@ -1,17 +1,23 @@
 <%= form_with model: @player do |f| %>
-  <section class="form-group">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name, class: "form-control" %>
+  <section class="card">
+    <section class="card-header">
+      Name
+    </section>
+    <section class="card-body">
+      <section class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: "form-control" %>
+      </section>
+      <section class="form-group">
+        <%= f.label :middle_name %>
+        <%= f.text_field :middle_name, class: "form-control" %>
+      </section>
+      <section class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control" %>
+      </section>
+    </section>
   </section>
-  <section class="form-group">
-    <%= f.label :middle_name %>
-    <%= f.text_field :middle_name, class: "form-control" %>
-  </section>
-  <section class="form-group">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name, class: "form-control" %>
-  </section>
-
   <section class="card">
     <section class="card-header">
       Athletic
@@ -81,11 +87,17 @@
       <% end %>
     </section>
   </section>
-
-  <section class="form-group">
-    <%= f.label :notes %>
-    <%= f.text_area :notes, class: "form-control" %>
+  <section class="card">
+    <section class="card-header">
+      Notes
+    </section>
+    <section class="card-body">
+      <section class="form-group">
+        <%= f.text_area :notes, class: "form-control" %>
+      </section>
+    </section>
   </section>
+
 
   <section class="form-group">
     <%= f.submit nil, class: "btn btn-primary" %>

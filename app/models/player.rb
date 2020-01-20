@@ -14,7 +14,7 @@ class Player < ApplicationRecord
   end
 
   def display_height
-    "#{feet_component_of_height}\" #{inches_component_of_height}"
+    "#{feet_component_of_height}\"#{inches_component_of_height}"
   end
 
   def feet_component_of_height
