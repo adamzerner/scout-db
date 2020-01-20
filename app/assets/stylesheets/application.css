@@ -1,4 +1,8 @@
 /*
+  Note: This app is using webpacker instead of the asset pipeline
+*/
+
+/*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -13,17 +17,3 @@
  *= require_tree .
  *= require_self
  */
-
- .alert {
-   margin-top: 10px;
- }
-
- h1.page-header {
-   padding-bottom: 7.5px;
-   margin: 34px 0 17px;
-   border-bottom: 1px solid #eeeeee;
- }
-
- .card {
-   margin-bottom: 16px;
- }
