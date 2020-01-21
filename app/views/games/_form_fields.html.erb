@@ -8,12 +8,22 @@
         <%= f.select :team_one_id, nil, {}, class: "team-one-dropdown form-control" do %>
           <optgroup label="High School Teams">
             <% HighSchoolTeam.all.each do |high_school_team| %>
-              <option value="high-school-team:<%= high_school_team.id %>"><%= high_school_team.school_name %></option>
+              <option
+                value="high-school-team:<%= high_school_team.id %>"
+                <%= "selected" if game.team_one === high_school_team %>
+              >
+                <%= high_school_team.school_name %>
+              </option>
             <% end %>
           </optgroup>
           <optgroup label="Club Teams">
             <% ClubTeam.all.each do |club_team| %>
-              <option value="club-team:<%= club_team.id %>"><%= club_team.name %></option>
+              <option
+                value="club-team:<%= club_team.id %>"
+                <%= "selected" if game.team_two === club_team %>
+              >
+                <%= club_team.name %>
+              </option>
             <% end %>
           </optgroup>
         <% end %>
@@ -24,12 +34,22 @@
         <%= f.select :team_two_id, nil, {}, class: "team-two-dropdown form-control" do %>
           <optgroup label="High School Teams">
             <% HighSchoolTeam.all.each do |high_school_team| %>
-              <option value="high-school-team:<%= high_school_team.id %>"><%= high_school_team.school_name %></option>
+              <option
+                value="high-school-team:<%= high_school_team.id %>"
+                <%= "selected" if game.team_two === high_school_team %>
+              >
+                <%= high_school_team.school_name %>
+              </option>
             <% end %>
           </optgroup>
           <optgroup label="Club Teams">
             <% ClubTeam.all.each do |club_team| %>
-              <option value="club-team:<%= club_team.id %>"><%= club_team.name %></option>
+              <option
+                value="club-team:<%= club_team.id %>"
+                <%= "selected" if game.team_two === club_team %>
+              >
+                <%= club_team.name %>
+              </option>
             <% end %>
           </optgroup>
         <% end %>
