@@ -1,4 +1,4 @@
-// I only have this file because bootsnap requires it. Otherwise I'd like to remove app/assets given that I'm not using the asset pipeline anymore. See https://github.com/Shopify/bootsnap/issues/291.
+// I only have this file because some railtie stuff seems to require it. I'd like to get rid of it given that I'm not using webpacker instead of the asset pipeline.
 
 //= link_tree ../images
 //= link_directory ../stylesheets .css
