@@ -42,7 +42,14 @@ class Player < ApplicationRecord
     end
   end
 
-  def address_str
-    "foo\nbar\nbaz"
+  def self.search(query)
+    if query
+      where("
+        lower(first_name) LIKE ? OR
+        lower(last_name) LIKE ?
+      ", "%#{query.downcase}%", "%#{query.downcase}%")
+    else
+      all
+    end
   end
 end

@@ -1,0 +1,67 @@
+<h1 class="page-header">Search results</h1>
+
+<% if @players.length > 0 %>
+  <section class="card">
+    <section class="card-header">
+      Players
+    </section>
+    <ul class="list-group">
+      <% @players.each do |player| %>
+        <li class="list-group-item"><%= link_to player.full_name, player_path(player) %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<% if @high_school_teams.length > 0 %>
+  <section class="card">
+    <section class="card-header">
+      High School Teams
+    </section>
+    <ul class="list-group">
+      <% @high_school_teams.each do |high_school_team| %>
+        <li class="list-group-item"><%= link_to high_school_team.full_name, high_school_team_path(high_school_team) %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<% if @club_teams.length > 0 %>
+  <section class="card">
+    <section class="card-header">
+      Club Teams
+    </section>
+    <ul class="list-group">
+      <% @club_teams.each do |club_team| %>
+        <li class="list-group-item"><%= link_to club_team.name, club_team_path(club_team) %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<% if @tournaments.length > 0 %>
+  <section class="card">
+    <section class="card-header">
+      Tournaments
+    </section>
+    <ul class="list-group">
+      <% @tournaments.each do |tournament| %>
+        <li class="list-group-item"><%= link_to tournament.name, tournament_path(tournament) %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+
+<% if @fields.length > 0 %>
+  <section class="card">
+    <section class="card-header">
+      Fields
+    </section>
+    <ul class="list-group">
+      <% @fields.each do |field| %>
+        <li class="list-group-item"><%= link_to field.name, field_path(field) %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
+  get '/search', to: 'search#search'
+
   resources :players
   resources :high_school_teams
   resources :club_teams

@@ -1,6 +1,7 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import "actiontext.scss";
 @import "home.scss";
+@import "easy-autocomplete/dist/easy-autocomplete.css";
 
 .alert {
   margin-top: 10px;
@@ -14,4 +15,8 @@ h1.page-header {
 
 .card {
   margin-bottom: 16px;
+}
+
+.eac-category {
+  text-decoration: underline;
 }
