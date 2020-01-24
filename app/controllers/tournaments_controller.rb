@@ -5,9 +5,18 @@ class TournamentsController < ApplicationController
     @tournaments = Tournament.all
   end
 
-  def show    
+  def show
     @tournament = Tournament.find(params[:id])
-    @games = @tournament.games.order(sort_column + ' ' + sort_direction)
+
+    if sort_column === "team_one"
+      @games = @tournament.games
+    elsif sort_column === "team_two"
+      @games = @tournament.games
+    elsif sort_column === "field"
+      @games = @tournament.games.left_joins(:field).order("fields.name #{sort_direction}")
+    else
+      @games = @tournament.games.order("#{sort_column} #{sort_direction}")
+    end
   end
 
   def new
