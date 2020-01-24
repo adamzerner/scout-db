@@ -20,11 +20,13 @@ $(document).on('turbolinks:load', function () {
     disableOptionThatIsSelectedInOtherDropdown($teamOneDropdown, $teamTwoDropdown.val());
     disableOptionThatIsSelectedInOtherDropdown($teamTwoDropdown, $teamOneDropdown.val());
 
-    $teamOneDropdown.on('change', function () {
-      disableOptionThatIsSelectedInOtherDropdown($teamTwoDropdown, $(this).val());
+    $teamOneDropdown.on('change', function (e) {
+      disableOptionThatIsSelectedInOtherDropdown($teamOneDropdown, $teamTwoDropdown.val());
+      disableOptionThatIsSelectedInOtherDropdown($teamTwoDropdown, $teamOneDropdown.val());
     });
-    $teamTwoDropdown.on('change', function () {
-      disableOptionThatIsSelectedInOtherDropdown($teamOneDropdown, $(this).val());
+    $teamTwoDropdown.on('change', function (e) {
+      disableOptionThatIsSelectedInOtherDropdown($teamOneDropdown, $teamTwoDropdown.val());
+      disableOptionThatIsSelectedInOtherDropdown($teamTwoDropdown, $teamOneDropdown.val());
     });
   }
 
@@ -33,7 +35,7 @@ $(document).on('turbolinks:load', function () {
       if ($(this).val() === optionThatIsSelectedInOtherDropdown) {
         $(this).prop('disabled', true);
       } else {
-        $(this).removeProp('disabled')
+        $(this).prop('disabled', false);
       }
     });
   }
