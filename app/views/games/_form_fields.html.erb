@@ -10,7 +10,7 @@
             <% HighSchoolTeam.all.each do |high_school_team| %>
               <option
                 value="high-school-team:<%= high_school_team.id %>"
-                <%= "selected" if game.team_one === high_school_team %>
+                <%= "selected" if game.try(:team_one) === high_school_team %>
               >
                 <%= high_school_team.school_name %>
               </option>
@@ -20,7 +20,7 @@
             <% ClubTeam.all.each do |club_team| %>
               <option
                 value="club-team:<%= club_team.id %>"
-                <%= "selected" if game.team_two === club_team %>
+                <%= "selected" if game.try(:team_one) === club_team %>
               >
                 <%= club_team.name %>
               </option>
@@ -36,7 +36,7 @@
             <% HighSchoolTeam.all.each do |high_school_team| %>
               <option
                 value="high-school-team:<%= high_school_team.id %>"
-                <%= "selected" if game.team_two === high_school_team %>
+                <%= "selected" if game.try(:team_two) === high_school_team %>
               >
                 <%= high_school_team.school_name %>
               </option>
@@ -46,7 +46,7 @@
             <% ClubTeam.all.each do |club_team| %>
               <option
                 value="club-team:<%= club_team.id %>"
-                <%= "selected" if game.team_two === club_team %>
+                <%= "selected" if game.try(:team_two) === club_team %>
               >
                 <%= club_team.name %>
               </option>

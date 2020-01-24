@@ -4,6 +4,6 @@
     <%= link_to_remove_association sanitize("&times;"), f, class: "close" %>
   </section>
   <section class="card-body">
-    <%= render "games/form_fields", f: f %>
+    <%= render "games/form_fields", { f: f, game: f.object } %>
   </section>
 </section>
