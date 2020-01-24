@@ -9,9 +9,15 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:id])
 
     if sort_column === "team_one"
-      @games = @tournament.games
+      @games = @tournament.games.sort do |a, b|
+        a.team_one.name <=> b.team_one.name
+      end
+      @games.reverse! if sort_direction === "desc"
     elsif sort_column === "team_two"
-      @games = @tournament.games
+      @games = @tournament.games.sort do |a, b|
+        a.team_two.name <=> b.team_two.name
+      end
+      @games.reverse! if sort_direction === "desc"
     elsif sort_column === "field"
       @games = @tournament.games.left_joins(:field).order("fields.name #{sort_direction}")
     else
