@@ -3,23 +3,23 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Game</th>
-      <th>Team one</th>
-      <th>Team two</th>
-      <th>Field</th>
-      <th>Date</th>
-      <th>Start time</th>
+      <th>Game ID</th>
+      <th><%= sortable "team_one" %></th>
+      <th><%= sortable "team_two" %></th>
+      <th><%= sortable "date" %></th>
+      <th><%= sortable "start_time" %></th>
+      <th><%= sortable "field" %></th>
     </tr>
   </thead>
   <tbody>
-    <% @tournament.games.each do |game| %>
+    <% @games.each do |game| %>
       <tr>
-        <td><%= link_to game.name, game_path(game) %></td>
+        <td><%= link_to game.id, game_path(game) %></td>
         <td><%= link_to game.team_one.name, team_path(game.team_one) %></td>
         <td><%= link_to game.team_two.name, team_path(game.team_two) %></td>
-        <td><%= link_to game.field.name, field_path(game.field) %></td>
         <td><%= game.date.to_formatted_s(:long) %></td>
         <td><%= game.start_time.strftime("%I:%M %p") %></td>
+        <td><%= link_to game.field.name, field_path(game.field) %></td>
       </tr>
     <% end %>
   </tbody>

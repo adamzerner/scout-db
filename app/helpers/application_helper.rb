@@ -6,4 +6,20 @@ module ApplicationHelper
       "/club_teams/#{team.id}"
     end
   end
+
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
+    link = link_to title, sort: column, direction: direction
+
+    if column == sort_column && sort_direction == "asc"
+      icon = " ▴"
+    elsif column == sort_column && sort_direction == "desc"
+      icon = " ▾"
+    else
+      icon = nil
+    end
+
+    return link + icon
+  end
 end

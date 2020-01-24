@@ -1,10 +1,13 @@
 class TournamentsController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
   def index
     @tournaments = Tournament.all
   end
 
-  def show
+  def show    
     @tournament = Tournament.find(params[:id])
+    @games = @tournament.games.order(sort_column + ' ' + sort_direction)
   end
 
   def new
@@ -73,5 +76,13 @@ class TournamentsController < ApplicationController
           game_attributes[:team_two_type] = "ClubTeam"
         end
       end
+    end
+
+    def sort_column
+      %w[team_one team_two date start_time field].include?(params[:sort]) ? params[:sort] : "date"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
