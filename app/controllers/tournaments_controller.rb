@@ -88,7 +88,7 @@ class TournamentsController < ApplicationController
     end
 
     def sort_column
-      %w[team_one team_two date start_time field].include?(params[:sort]) ? params[:sort] : "date"
+      %w[id team_one team_two date start_time field].include?(params[:sort]) ? params[:sort] : "date"
     end
 
     def sort_direction
