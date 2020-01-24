@@ -8,16 +8,16 @@
     <%= f.fields_for :games do |game| %>
       <%= render 'game_fields', f: game %>
     <% end %>
-    <p>
-      <%= link_to_add_association "Add game", f, :games,
-        data: {
-          association_insertion_node: '.games',
-          association_insertion_method: :prepend
-        },
-        class: "btn btn-light"
-      %>
-    </p>
   </section>
+  <p>
+    <%= link_to_add_association "Add game", f, :games,
+      data: {
+        association_insertion_node: '.games',
+        association_insertion_method: :append
+      },
+      class: "btn btn-light"
+    %>
+  </p>
 
   <%= f.submit nil, class: "btn btn-primary" %>
 <% end %>
