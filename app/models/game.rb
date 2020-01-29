@@ -11,4 +11,8 @@ class Game < ApplicationRecord
   def long_name
     "#{team_one.name} vs #{team_two.name} on #{date.to_formatted_s(:long)}"
   end
+
+  def passes_through_filters(filters)
+    true
+  end
 end

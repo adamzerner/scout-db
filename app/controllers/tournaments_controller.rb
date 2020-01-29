@@ -23,6 +23,12 @@ class TournamentsController < ApplicationController
     else
       @games = @tournament.games.order("#{sort_column} #{sort_direction}")
     end
+
+    @filter_options = @tournament.filter_options
+
+    if params[:filters]
+      @games = get_filtered_games(@games, params[:filters])
+    end
   end
 
   def new
@@ -99,5 +105,11 @@ class TournamentsController < ApplicationController
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def get_filtered_games(games, filters)
+      return games.filter do |game|
+        game.passes_through_filters(filters)
+      end
     end
 end
