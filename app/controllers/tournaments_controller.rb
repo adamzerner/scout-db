@@ -93,7 +93,7 @@ class TournamentsController < ApplicationController
     end
 
     def filter_params
-      params.permit(:earliest_start_time, :latest_start_time, :commit, :id, player_filters: [], team_filters: [], date_filters: [], field_filters: []).except(:id, :commit)
+      params.permit(:sort, :direction, :earliest_start_time, :latest_start_time, :commit, :id, player_filters: [], team_filters: [], date_filters: [], field_filters: []).except(:id, :commit, :sort, :direction)
     end
 
     def get_filtered_games(games, filters)
