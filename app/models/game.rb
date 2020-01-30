@@ -43,6 +43,8 @@ class Game < ApplicationRecord
   end
 
   def passes_through_team_filters(team_filters)
+    return true if !team_filters
+
     result = false
 
     team_filters.each do |team_filter|
