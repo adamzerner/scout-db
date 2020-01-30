@@ -12,7 +12,7 @@
           <% @filter_options[:players].each do |player| %>
             <section class="form-check">
               <label class="form-check-label">
-                <%= f.check_box "player_filters[]", { class: "form-check-input", checked: params[:player_filters].try(:include?, player.id.to_s) }, player.id, nil %>
+                <%= f.check_box "player_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:player_filters].try(:include?, player.id.to_s) }, player.id, nil %>
                 <%= player.full_name %>
               </label>
             </section>
@@ -23,7 +23,7 @@
           <% @filter_options[:teams].each do |team| %>
             <section class="form-check">
               <label class="form-check-label">
-                <%= f.check_box "team_filters[]", { class: "form-check-input", checked: params[:team_filters].try(:include?, "#{team.class}-#{team.id}") }, "#{team.class}-#{team.id}", nil %>
+                <%= f.check_box "team_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:team_filters].try(:include?, "#{team.class}-#{team.id}") }, "#{team.class}-#{team.id}", nil %>
                 <%= team.name %>
               </label>
             </section>
@@ -34,7 +34,7 @@
           <% @filter_options[:dates].each do |date| %>
             <section class="form-check">
               <label class="form-check-label">
-                <%= f.check_box "date_filters[]", { class: "form-check-input", checked: params[:date_filters].try(:include?, date.to_s) }, date, nil %>
+                <%= f.check_box "date_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:date_filters].try(:include?, date.to_s) }, date, nil %>
                 <%= date.to_formatted_s(:long) %>
               </label>
             </section>
@@ -45,7 +45,7 @@
           <% @filter_options[:fields].each do |field| %>
             <section class="form-check">
               <label class="form-check-label">
-                <%= f.check_box "field_filters[]", { class: "form-check-input", checked: params[:field_filters].try(:include?, field.id.to_s) }, field.id, nil %>
+                <%= f.check_box "field_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:field_filters].try(:include?, field.id.to_s) }, field.id, nil %>
                 <%= field.name %>
               </label>
             </section>

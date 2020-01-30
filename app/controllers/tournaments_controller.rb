@@ -25,8 +25,9 @@ class TournamentsController < ApplicationController
     end
 
     @filter_options = @tournament.filter_options
+    @filters_to_apply = filter_params && !filter_params.empty?
 
-    if filter_params
+    if @filters_to_apply
       @games = get_filtered_games(@games, filter_params)
     end
   end
@@ -108,7 +109,7 @@ class TournamentsController < ApplicationController
     end
 
     def filter_params
-      params.permit(:earliest_start_time, :latest_start_time, :commit, :id, player_filters: [], team_filters: [], date_filters: [], field_filters: [])
+      params.permit(:earliest_start_time, :latest_start_time, :commit, :id, player_filters: [], team_filters: [], date_filters: [], field_filters: []).except(:id, :commit)
     end
 
     def get_filtered_games(games, filters)
