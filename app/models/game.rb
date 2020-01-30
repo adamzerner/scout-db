@@ -23,8 +23,15 @@ class Game < ApplicationRecord
   end
 
   def passes_through_player_filters(player_filters)
-    return true if !player_filters
+    if !player_filters
+      return true
+    else
+      return has_at_least_one_of_the_players(player_filters)
+    end
 
+  end
+
+  def has_at_least_one_of_the_players(players)
     has_at_least_one_of_the_players = false
 
     team_one.players.each do |player|
