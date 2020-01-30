@@ -11,6 +11,26 @@ class Tournament < ApplicationRecord
     end
   end
 
+  def sorted_games(sort_column, sort_direction)
+    if sort_column === "team_one"
+      result = games.sort do |a, b|
+        a.team_one.name <=> b.team_one.name
+      end
+      result.reverse! if sort_direction === "desc"
+    elsif sort_column === "team_two"
+      result = games.sort do |a, b|
+        a.team_two.name <=> b.team_two.name
+      end
+      result.reverse! if sort_direction === "desc"
+    elsif sort_column === "field"
+      result = games.left_joins(:field).order("fields.name #{sort_direction}")
+    else
+      result = games.order("#{sort_column} #{sort_direction}")
+    end
+
+    return result
+  end
+
   def filter_options
     result = {}
 

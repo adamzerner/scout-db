@@ -7,23 +7,7 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
-
-    if sort_column === "team_one"
-      @games = @tournament.games.sort do |a, b|
-        a.team_one.name <=> b.team_one.name
-      end
-      @games.reverse! if sort_direction === "desc"
-    elsif sort_column === "team_two"
-      @games = @tournament.games.sort do |a, b|
-        a.team_two.name <=> b.team_two.name
-      end
-      @games.reverse! if sort_direction === "desc"
-    elsif sort_column === "field"
-      @games = @tournament.games.left_joins(:field).order("fields.name #{sort_direction}")
-    else
-      @games = @tournament.games.order("#{sort_column} #{sort_direction}")
-    end
-
+    @games = @tournament.sorted_games(sort_column, sort_direction)
     @filter_options = @tournament.filter_options
     @filters_to_apply = filter_params && !filter_params.empty?
 
