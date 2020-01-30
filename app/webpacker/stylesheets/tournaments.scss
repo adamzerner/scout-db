@@ -5,6 +5,11 @@
       display: block;
     }
 
+    &:first-of-type {
+      max-height: 210px;
+      overflow-y: scroll;
+    }
+
     @media (max-width: 768px) {
       &:not(:last-of-type) {
         margin-bottom: 25px;

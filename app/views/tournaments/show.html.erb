@@ -5,41 +5,49 @@
     Filters
   </section>
   <section class="card-body">
-    <%= form_with url: tournament_path(@tournament), scope: "filters", method: :get, local: true do |f| %>
+    <%= form_with url: tournament_path(@tournament), method: :get, local: true do |f| %>
       <section class="row">
         <section class="col-md">
-          <span>Players to include:</span>
+          <span>Players:</span>
           <% @filter_options[:players].each do |player| %>
             <section class="form-check">
-              <%= f.check_box "player_#{player.id}", class: "form-check-input", checked: true %>
-              <%= f.label "player_#{player.id}", player.full_name, class: "form-check-label" %>
+              <label class="form-check-label">
+                <%= f.check_box "player_filters[]", { class: "form-check-input", checked: params[:player_filters].try(:include?, player.id.to_s) }, player.id, nil %>
+                <%= player.full_name %>
+              </label>
             </section>
           <% end %>
         </section>
         <section class="col-md">
-          <span>Teams to include:</span>
+          <span>Teams:</span>
           <% @filter_options[:teams].each do |team| %>
             <section class="form-check">
-              <%= f.check_box "team_#{team.id}", class: "form-check-input", checked: true %>
-              <%= f.label "team_#{team.id}", team.name, class: "form-check-label" %>
+              <label class="form-check-label">
+                <%= f.check_box "team_filters[]", { class: "form-check-input", checked: params[:team_filters].try(:include?, "#{team.class}-#{team.id}") }, "#{team.class}-#{team.id}", nil %>
+                <%= team.name %>
+              </label>
             </section>
           <% end %>
         </section>
         <section class="col-md">
-          <span>Dates to include:</span>
+          <span>Dates:</span>
           <% @filter_options[:dates].each do |date| %>
             <section class="form-check">
-              <%= f.check_box "date_#{date}", class: "form-check-input", checked: true %>
-              <%= f.label "date_#{date}", date.to_formatted_s(:long), class: "form-check-label" %>
+              <label class="form-check-label">
+                <%= f.check_box "date_filters[]", { class: "form-check-input", checked: params[:date_filters].try(:include?, date.to_s) }, date, nil %>
+                <%= date.to_formatted_s(:long) %>
+              </label>
             </section>
           <% end %>
         </section>
         <section class="col-md">
-          <span>Fields to include:</span>
+          <span>Fields:</span>
           <% @filter_options[:fields].each do |field| %>
             <section class="form-check">
-              <%= f.check_box "field_#{field.id}", class: "form-check-input", checked: true %>
-              <%= f.label "field_#{field.id}", field.name, class: "form-check-label" %>
+              <label class="form-check-label">
+                <%= f.check_box "field_filters[]", { class: "form-check-input", checked: params[:field_filters].try(:include?, field.id.to_s) }, field.id, nil %>
+                <%= field.name %>
+              </label>
             </section>
           <% end %>
         </section>
@@ -47,11 +55,11 @@
           <span>Time:</span>
           <section class="form-group">
             <%= f.label :earliest_start_time %>
-            <%= f.time_field :earliest_start_time, class: "form-control" %>
+            <%= f.time_field :earliest_start_time, value: params[:earliest_start_time], class: "form-control" %>
           </section>
           <section class="form-group">
             <%= f.label :latest_start_time %>
-            <%= f.time_field :latest_start_time, class: "form-control" %>
+            <%= f.time_field :latest_start_time, value: params[:latest_start_time], class: "form-control" %>
           </section>
         </section>
       </section>

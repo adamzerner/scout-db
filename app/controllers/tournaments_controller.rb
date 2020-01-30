@@ -26,8 +26,8 @@ class TournamentsController < ApplicationController
 
     @filter_options = @tournament.filter_options
 
-    if params[:filters]
-      @games = get_filtered_games(@games, params[:filters])
+    if filter_params
+      @games = get_filtered_games(@games, filter_params)
     end
   end
 
@@ -105,6 +105,10 @@ class TournamentsController < ApplicationController
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def filter_params
+      params.permit(:earliest_start_time, :latest_start_time, :commit, :id, player_filters: [], team_filters: [], date_filters: [], field_filters: [])
     end
 
     def get_filtered_games(games, filters)
