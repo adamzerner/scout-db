@@ -11,7 +11,7 @@
 
   <% @tournaments.each do |tournament| %>
     <tr>
-      <td><%= link_to "#{tournament.name}", tournament_path(tournament) %></td>
+      <td><%= link_to tournament.name, tournament_path(tournament) %></td>
       <td><%= link_to "Edit", edit_tournament_path(tournament) %></td>
       <td><%= link_to 'Delete', tournament_path(tournament),
               method: :delete,

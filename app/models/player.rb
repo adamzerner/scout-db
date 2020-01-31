@@ -1,7 +1,7 @@
 class Player < ApplicationRecord
   has_one :address, as: :addressable, dependent: :destroy
-  belongs_to :high_school_team, optional: true
-  belongs_to :club_team, optional: true
+  belongs_to :high_school_team, class_name: "Team", optional: true
+  belongs_to :club_team, class_name: "Team", optional: true
 
   accepts_nested_attributes_for :address, allow_destroy: true
   has_rich_text :notes

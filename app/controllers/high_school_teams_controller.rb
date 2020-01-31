@@ -39,7 +39,7 @@ class HighSchoolTeamsController < ApplicationController
     @high_school_team = HighSchoolTeam.find(params[:id])
     @high_school_team.destroy
 
-    redirect_to players_path
+    redirect_to high_school_teams_path
   end
 
   private

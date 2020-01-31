@@ -41,7 +41,7 @@
       </section>
       <section class="form-group">
         <%= f.label :high_school_team %>
-        <%= f.collection_select(:high_school_team_id, HighSchoolTeam.all, :id, :school_name, {}, class: "form-control") %>
+        <%= f.collection_select(:high_school_team_id, HighSchoolTeam.all, :id, :full_name, {}, class: "form-control") %>
       </section>
       <section class="form-group">
         <%= f.label :club_team %>
@@ -56,15 +56,15 @@
     </section>
     <section class="card-body">
       <section class="form-group">
-        <%= f.label "GPA" %>
+        <%= f.label :gpa, "GPA" %>
         <%= f.number_field :gpa, class: "form-control", in: 0..4, step: 0.05 %>
       </section>
       <section class="form-group">
-        <%= f.label "Class year" %>
+        <%= f.label :class_year %>
         <%= f.select(:class_year, ['Freshman', 'Sophomore', 'Junior', 'Senior'], {}, class: "form-control") %>
       </section>
       <section class="form-group">
-        <%= f.label "Intended major" %>
+        <%= f.label :intended_major %>
         <%= f.text_field :intended_major, class: "form-control" %>
       </section>
     </section>
@@ -112,9 +112,7 @@
       Notes
     </section>
     <section class="card-body">
-      <section class="form-group">
-        <%= f.rich_text_area :notes, class: "form-control" %>
-      </section>
+      <%= f.rich_text_area :notes, class: "form-control" %>
     </section>
   </section>
 

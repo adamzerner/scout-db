@@ -1,7 +1,7 @@
 class Game < ApplicationRecord
   belongs_to :tournament
-  belongs_to :team_one, polymorphic: true
-  belongs_to :team_two, polymorphic: true
+  belongs_to :team_one, class_name: "Team"
+  belongs_to :team_two, class_name: "Team"
   belongs_to :field, optional: true
 
   def name
@@ -25,47 +25,23 @@ class Game < ApplicationRecord
   def passes_through_player_filters(player_filters)
     if !player_filters
       return true
-    else
-      return has_at_least_one_of_the_players(player_filters)
     end
 
-  end
-
-  def has_at_least_one_of_the_players(players)
-    has_at_least_one_of_the_players = false
-
-    team_one.players.each do |player|
-      if player_filters.include? player.id.to_s
-        has_at_least_one_of_the_players = true
-      end
-    end
-
-    team_two.players.each do |player|
-      if player_filters.include? player.id.to_s
-        has_at_least_one_of_the_players = true
-      end
-    end
-
-    return has_at_least_one_of_the_players
+    return (
+      team_one.has_at_least_one_of_the_players(player_filters) ||
+      team_two.has_at_least_one_of_the_players(player_filters)
+    )
   end
 
   def passes_through_team_filters(team_filters)
-    return true if !team_filters
-
-    result = false
-
-    team_filters.each do |team_filter|
-      team_filter_class, team_filter_id = team_filter.split('-')
-
-      if (
-        (team_one.class.to_s === team_filter_class && team_one.id.to_s === team_filter_id) ||
-        (team_two.class.to_s === team_filter_class && team_two.id.to_s === team_filter_id)
-      )
-        result = true
-      end
+    if !team_filters
+      return true
     end
 
-    return result
+    return (
+      team_filters.include?(team_one.id.to_s) ||
+      team_filters.include?(team_two.id.to_s)
+    )
   end
 
   def passes_through_date_filters(date_filters)
@@ -87,6 +63,14 @@ class Game < ApplicationRecord
     )
   end
 
+  def start_time_later_than_or_equal_to(str_time)
+    return start_time_aggregate_mins >= get_str_time_aggregate_mins(str_time)
+  end
+
+  def start_time_earlier_than_or_equal_to(str_time)
+    return start_time_aggregate_mins <= get_str_time_aggregate_mins(str_time)
+  end
+
   def start_time_aggregate_mins
     return (start_time.hour * 60) + start_time.min
   end
@@ -96,13 +80,5 @@ class Game < ApplicationRecord
     minutes = str_time.split(':')[1].to_i
 
     return (60 * hours) + minutes
-  end
-
-  def start_time_later_than_or_equal_to(str_time)
-    return start_time_aggregate_mins >= get_str_time_aggregate_mins(str_time)
-  end
-
-  def start_time_earlier_than_or_equal_to(str_time)
-    return start_time_aggregate_mins <= get_str_time_aggregate_mins(str_time)
   end
 end

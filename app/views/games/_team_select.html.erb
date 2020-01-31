@@ -1,0 +1,22 @@
+<%= f.select "team_#{team_number}_id", nil, {}, class: "team-#{team_number}-dropdown form-control" do %>
+  <optgroup label="High School Teams">
+    <% HighSchoolTeam.all.each do |high_school_team| %>
+      <option
+        value="<%= high_school_team.id %>"
+        <%= "selected" if game.try("team_#{team_number}") === high_school_team %>
+      >
+        <%= high_school_team.full_name %>
+      </option>
+    <% end %>
+  </optgroup>
+  <optgroup label="Club Teams">
+    <% ClubTeam.all.each do |club_team| %>
+      <option
+        value="<%= club_team.id %>"
+        <%= "selected" if game.try("team_#{team_number}") === club_team %>
+      >
+        <%= club_team.full_name %>
+      </option>
+    <% end %>
+  </optgroup>
+<% end %>

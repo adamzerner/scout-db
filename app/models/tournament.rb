@@ -13,22 +13,14 @@ class Tournament < ApplicationRecord
 
   def sorted_games(sort_column, sort_direction)
     if sort_column === "team_one"
-      result = games.sort do |a, b|
-        a.team_one.name <=> b.team_one.name
-      end
-      result.reverse! if sort_direction === "desc"
+      return games.joins("INNER JOIN teams ON teams.id = games.team_one_id").order("teams.name #{sort_direction}")
     elsif sort_column === "team_two"
-      result = games.sort do |a, b|
-        a.team_two.name <=> b.team_two.name
-      end
-      result.reverse! if sort_direction === "desc"
+      return games.joins("INNER JOIN teams ON teams.id = games.team_two_id").order("teams.name #{sort_direction}")
     elsif sort_column === "field"
-      result = games.left_joins(:field).order("fields.name #{sort_direction}")
+      return games.left_joins(:field).order("fields.name #{sort_direction}")
     else
-      result = games.order("#{sort_column} #{sort_direction}")
+      return games.order("#{sort_column} #{sort_direction}")
     end
-
-    return result
   end
 
   def filter_options
@@ -79,7 +71,7 @@ class Tournament < ApplicationRecord
     fields = []
 
     games.each do |game|
-      fields << game.field if !fields.include?(game.date)
+      fields << game.field if !fields.include?(game.field)
     end
 
     return fields

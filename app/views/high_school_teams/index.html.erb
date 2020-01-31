@@ -11,7 +11,7 @@
 
   <% @high_school_teams.each do |high_school_team| %>
     <tr>
-      <td><%= link_to "#{high_school_team.team_name}", high_school_team_path(high_school_team) %></td>
+      <td><%= link_to high_school_team.full_name, high_school_team_path(high_school_team) %></td>
       <td><%= link_to "Edit", edit_high_school_team_path(high_school_team) %></td>
       <td><%= link_to 'Delete', high_school_team_path(high_school_team),
               method: :delete,

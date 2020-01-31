@@ -11,7 +11,7 @@
 
   <% @club_teams.each do |club_team| %>
     <tr>
-      <td><%= link_to "#{club_team.name}", club_team_path(club_team) %></td>
+      <td><%= link_to club_team.name, club_team_path(club_team) %></td>
       <td><%= link_to "Edit", edit_club_team_path(club_team) %></td>
       <td><%= link_to 'Delete', club_team_path(club_team),
               method: :delete,

@@ -1,7 +1,7 @@
 Player.all.delete_all
+Game.all.delete_all
 ClubTeam.all.delete_all
 HighSchoolTeam.all.delete_all
-Game.all.delete_all
 Field.all.delete_all
 Address.all.delete_all
 Tournament.all.delete_all
@@ -122,18 +122,14 @@ TOURNAMENTS.each { |tournament| Tournament.create(tournament) }
 GAMES = [{
   tournament_id: Tournament.first.id,
   team_one_id: HighSchoolTeam.first.id,
-  team_one_type: 'HighSchoolTeam',
   team_two_id: HighSchoolTeam.second.id,
-  team_two_type: 'HighSchoolTeam',
   field_id: Field.first.id,
   date: Date.today,
   start_time: Time.new
 }, {
   tournament_id: Tournament.first.id,
   team_one_id: ClubTeam.first.id,
-  team_one_type: 'ClubTeam',
   team_two_id: ClubTeam.second.id,
-  team_two_type: 'ClubTeam',
   field_id: Field.second.id,
   date: Date.today,
   start_time: Time.new

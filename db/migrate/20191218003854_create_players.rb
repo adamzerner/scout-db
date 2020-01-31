@@ -7,8 +7,8 @@ class CreatePlayers < ActiveRecord::Migration[6.0]
       t.decimal :height
       t.decimal :weight
       t.date :birthday
-      t.references :high_school_team, foreign_key: true
-      t.references :club_team, foreign_key: true
+      t.references :high_school_team
+      t.references :club_team
       t.decimal :gpa
       t.string :class_year
       t.string :intended_major

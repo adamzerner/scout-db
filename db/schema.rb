@@ -10,10 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_19_202140) do
+ActiveRecord::Schema.define(version: 2020_01_20_185833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.string "line_one"
@@ -28,12 +59,6 @@ ActiveRecord::Schema.define(version: 2020_01_19_202140) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
-  create_table "club_teams", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "fields", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -42,9 +67,7 @@ ActiveRecord::Schema.define(version: 2020_01_19_202140) do
 
   create_table "games", force: :cascade do |t|
     t.bigint "tournament_id", null: false
-    t.string "team_one_type", null: false
     t.bigint "team_one_id", null: false
-    t.string "team_two_type", null: false
     t.bigint "team_two_id", null: false
     t.bigint "field_id", null: false
     t.date "date"
@@ -52,16 +75,9 @@ ActiveRecord::Schema.define(version: 2020_01_19_202140) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["field_id"], name: "index_games_on_field_id"
-    t.index ["team_one_type", "team_one_id"], name: "index_games_on_team_one_type_and_team_one_id"
-    t.index ["team_two_type", "team_two_id"], name: "index_games_on_team_two_type_and_team_two_id"
+    t.index ["team_one_id"], name: "index_games_on_team_one_id"
+    t.index ["team_two_id"], name: "index_games_on_team_two_id"
     t.index ["tournament_id"], name: "index_games_on_tournament_id"
-  end
-
-  create_table "high_school_teams", force: :cascade do |t|
-    t.string "school_name"
-    t.string "team_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "players", force: :cascade do |t|
@@ -85,6 +101,14 @@ ActiveRecord::Schema.define(version: 2020_01_19_202140) do
     t.index ["high_school_team_id"], name: "index_players_on_high_school_team_id"
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string "type"
+    t.string "name"
+    t.string "team_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tournaments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -103,8 +127,9 @@ ActiveRecord::Schema.define(version: 2020_01_19_202140) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "games", "fields"
+  add_foreign_key "games", "teams", column: "team_one_id"
+  add_foreign_key "games", "teams", column: "team_two_id"
   add_foreign_key "games", "tournaments"
-  add_foreign_key "players", "club_teams"
-  add_foreign_key "players", "high_school_teams"
 end

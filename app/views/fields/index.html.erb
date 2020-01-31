@@ -11,7 +11,7 @@
 
   <% @fields.each do |field| %>
     <tr>
-      <td><%= link_to "#{field.name}", field_path(field) %></td>
+      <td><%= link_to field.name, field_path(field) %></td>
       <td><%= link_to "Edit", edit_field_path(field) %></td>
       <td><%= link_to 'Delete', field_path(field),
               method: :delete,
