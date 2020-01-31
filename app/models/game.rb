@@ -53,14 +53,18 @@ class Game < ApplicationRecord
   end
 
   def passes_through_start_time_filters(earliest_start_time, latest_start_time)
-    if earliest_start_time.empty? || latest_start_time.empty?
+    if earliest_start_time.empty? && latest_start_time.empty?
       return true
+    elsif !earliest_start_time.empty? && latest_start_time.empty?
+      return start_time_later_than_or_equal_to(earliest_start_time)
+    elsif earliest_start_time.empty? && !latest_start_time.empty?
+      return start_time_earlier_than_or_equal_to(latest_start_time)
+    elsif !earliest_start_time.empty? && !latest_start_time.empty?
+      return (
+        start_time_later_than_or_equal_to(earliest_start_time) &&
+        start_time_earlier_than_or_equal_to(latest_start_time)
+      )
     end
-
-    return (
-      start_time_later_than_or_equal_to(earliest_start_time) &&
-      start_time_earlier_than_or_equal_to(latest_start_time)
-    )
   end
 
   def start_time_later_than_or_equal_to(str_time)
