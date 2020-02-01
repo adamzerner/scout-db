@@ -41,11 +41,11 @@
       </section>
       <section class="form-group">
         <%= f.label :high_school_team %>
-        <%= f.collection_select(:high_school_team_id, HighSchoolTeam.all, :id, :full_name, {}, class: "form-control") %>
+        <%= f.collection_select(:high_school_team_id, HighSchoolTeam.all, :id, :full_name, { include_blank: true }, class: "form-control") %>
       </section>
       <section class="form-group">
         <%= f.label :club_team %>
-        <%= f.collection_select(:club_team_id, ClubTeam.all, :id, :name, {}, class: "form-control") %>
+        <%= f.collection_select(:club_team_id, ClubTeam.all, :id, :name, { include_blank: true }, class: "form-control") %>
       </section>
     </section>
   </section>
@@ -61,7 +61,7 @@
       </section>
       <section class="form-group">
         <%= f.label :class_year %>
-        <%= f.select(:class_year, ['Freshman', 'Sophomore', 'Junior', 'Senior'], {}, class: "form-control") %>
+        <%= f.select(:class_year, ['Freshman', 'Sophomore', 'Junior', 'Senior'], { include_blank: true }, class: "form-control") %>
       </section>
       <section class="form-group">
         <%= f.label :intended_major %>

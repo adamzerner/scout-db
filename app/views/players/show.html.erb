@@ -19,7 +19,7 @@
     </li>
     <li class="list-group-item">
       <strong>High school:</strong>
-      <%= link_to @player.high_school_team.full_name, high_school_team_path(@player.high_school_team) if @player.high_school_team.school_name %>
+      <%= link_to @player.high_school_team.full_name, high_school_team_path(@player.high_school_team) if @player.try(:high_school_team).try(:school_name) %>
     </li>
     <li class="list-group-item">
       <strong>Club team:</strong>

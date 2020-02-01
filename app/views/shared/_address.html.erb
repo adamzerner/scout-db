@@ -1,4 +1,4 @@
-<% if address && address.line_one %>
+<% if address && !address.line_one.empty? %>
   <section>
     <%= address.line_one %><br>
     <% if address.line_two.try(:length) && address.line_two.length > 0 %>
