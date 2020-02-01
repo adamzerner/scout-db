@@ -1,22 +1,40 @@
 <h1 class="page-header">Players</h1>
 
-<p><%= link_to "Create a new player", new_player_path, class: "btn btn-primary" %></p>
+<% if is_admin? %>
+  <p><%= link_to "Create a new player", new_player_path, class: "btn btn-primary" %></p>
+<% end %>
 
 <table class="table table-hover">
   <tr>
     <th>Player</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    <th>Height</th>
+    <th>Weight</th>
+    <th>High school team</th>
+    <th>Club team</th>
+    <th>Class year</th>
+    <th>GPA</th>
+    <% if is_admin? %>
+      <th>Edit</th>
+      <th>Delete</th>
+    <% end %>
   </tr>
 
   <% @players.each do |player| %>
     <tr>
       <td><%= link_to player.full_name, player_path(player) %></td>
-      <td><%= link_to "Edit", edit_player_path(player) %></td>
-      <td><%= link_to 'Delete', player_path(player),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-      </td>
+      <td><%= player.display_height %></td>
+      <td><%= player.weight %></td>
+      <td><%= link_to player.high_school_team.full_name, high_school_team_path(player.high_school_team) if player.high_school_team %></td>
+      <td><%= link_to player.club_team.full_name, club_team_path(player.club_team) if player.club_team %></td>
+      <td><%= player.class_year %></td>
+      <td><%= player.gpa %></td>
+      <% if is_admin? %>
+        <td><%= link_to "Edit", edit_player_path(player) %></td>
+        <td><%= link_to 'Delete', player_path(player),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>

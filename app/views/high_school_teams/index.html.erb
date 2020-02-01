@@ -1,22 +1,26 @@
 <h1 class="page-header">High school teams</h1>
 
-<p><%= link_to "Create a new high school team", new_high_school_team_path, class: "btn btn-primary" %></p>
+<p><%= link_to "Create a new high school team", new_high_school_team_path, class: "btn btn-primary" if is_admin? %></p>
 
 <table class="table table-hover">
   <tr>
     <th>High school team</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    <% if is_admin? %>
+      <th>Edit</th>
+      <th>Delete</th>
+    <% end %>
   </tr>
 
   <% @high_school_teams.each do |high_school_team| %>
     <tr>
       <td><%= link_to high_school_team.full_name, high_school_team_path(high_school_team) %></td>
-      <td><%= link_to "Edit", edit_high_school_team_path(high_school_team) %></td>
-      <td><%= link_to 'Delete', high_school_team_path(high_school_team),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-      </td>
+      <% if is_admin? %>
+        <td><%= link_to "Edit", edit_high_school_team_path(high_school_team) %></td>
+        <td><%= link_to 'Delete', high_school_team_path(high_school_team),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>

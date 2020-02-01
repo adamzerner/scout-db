@@ -1,22 +1,26 @@
 <h1 class="page-header">Fields</h1>
 
-<p><%= link_to "Create a new field", new_field_path, class: "btn btn-primary" %></p>
+<p><%= link_to "Create a new field", new_field_path, class: "btn btn-primary" if is_admin? %></p>
 
 <table class="table table-hover">
   <tr>
     <th>Field</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    <% if is_admin? %>
+      <th>Edit</th>
+      <th>Delete</th>
+    <% end %>
   </tr>
 
   <% @fields.each do |field| %>
     <tr>
       <td><%= link_to field.name, field_path(field) %></td>
-      <td><%= link_to "Edit", edit_field_path(field) %></td>
-      <td><%= link_to 'Delete', field_path(field),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-      </td>
+      <% if is_admin? %>
+        <td><%= link_to "Edit", edit_field_path(field) %></td>
+        <td><%= link_to 'Delete', field_path(field),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>

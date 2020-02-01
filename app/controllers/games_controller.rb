@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  before_action :authorize_user, except: [:show]
+
   def new
     @game = Game.new
   end

@@ -1,4 +1,6 @@
 class PlayersController < ApplicationController
+  before_action :authorize_user, except: [:index, :show]
+  
   def index
     @players = Player.all
   end

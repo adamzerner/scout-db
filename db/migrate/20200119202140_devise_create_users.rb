@@ -3,6 +3,9 @@
 class DeviseCreateUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :users do |t|
+      ## Specific to ScoutDB
+      t.string :role
+
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""

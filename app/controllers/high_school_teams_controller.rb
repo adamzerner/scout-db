@@ -1,4 +1,6 @@
 class HighSchoolTeamsController < ApplicationController
+  before_action :authorize_user, except: [:index, :show]
+  
   def index
     @high_school_teams = HighSchoolTeam.all
   end

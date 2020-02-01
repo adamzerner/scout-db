@@ -1,4 +1,5 @@
 class TournamentsController < ApplicationController
+  before_action :authorize_user, except: [:index, :show]
   helper_method :sort_column, :sort_direction, :filter_params
 
   def index

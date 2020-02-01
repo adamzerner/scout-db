@@ -1,4 +1,6 @@
 class ClubTeamsController < ApplicationController
+  before_action :authorize_user, except: [:index, :show]
+  
   def index
     @club_teams = ClubTeam.all
   end
