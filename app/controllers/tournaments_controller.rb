@@ -1,5 +1,5 @@
 class TournamentsController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :filter_params
 
   def index
     @tournaments = Tournament.all
@@ -7,13 +7,10 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
-    @games = @tournament.sorted_games(sort_column, sort_direction)
     @filter_options = @tournament.filter_options
     @filters_to_apply = filter_params && !filter_params.empty?
-
-    if @filters_to_apply
-      @games = get_filtered_games(@games, filter_params)
-    end
+    @games = @tournament.sorted_games(sort_column, sort_direction)
+    @games = @filters_to_apply ? get_filtered_games(@games, filter_params) : @games
   end
 
   def new
