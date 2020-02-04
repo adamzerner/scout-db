@@ -11,6 +11,28 @@ class Tournament < ApplicationRecord
     end
   end
 
+  def self.sorted_tournaments(sort_column, sort_direction)
+    sorted_tournaments = nil
+
+    if sort_column === "name"
+      sorted_tournaments = self.all.order("#{sort_column} #{sort_direction}")
+    elsif sort_column === "dates"
+      sorted_tournaments = self.all.sort do |a,b|
+        a.date_range <=> b.date_range
+      end
+      sorted_tournaments.reverse! if sort_direction === "asc"
+    elsif sort_column === "location"
+      sorted_tournaments = self.all.sort do |a,b|
+        a.location <=> b.location
+      end
+      sorted_tournaments.reverse! if sort_direction === "asc"
+    else
+      sorted_tournaments = self.all
+    end
+
+    return sorted_tournaments
+  end
+
   def games?
     return (games && games.length && games.length > 0)
   end

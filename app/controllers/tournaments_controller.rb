@@ -3,7 +3,7 @@ class TournamentsController < ApplicationController
   helper_method :sort_column, :sort_direction, :filter_params
 
   def index
-    @tournaments = Tournament.all
+    @tournaments = Tournament.sorted_tournaments(sort_column, sort_direction)
   end
 
   def show
@@ -60,7 +60,7 @@ class TournamentsController < ApplicationController
     end
 
     def sort_column
-      %w[id team_one team_two date start_time field].include?(params[:sort]) ? params[:sort] : "date"
+      %w[name dates location id team_one team_two date start_time field].include?(params[:sort]) ? params[:sort] : "date"
     end
 
     def sort_direction
