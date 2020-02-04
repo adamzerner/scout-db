@@ -6,6 +6,37 @@ class Player < ApplicationRecord
   accepts_nested_attributes_for :address, allow_destroy: true
   has_rich_text :notes
 
+  def self.search(query)
+    if query
+      where("
+        lower(first_name) LIKE ? OR
+        lower(last_name) LIKE ?
+      ", "%#{query.downcase}%", "%#{query.downcase}%")
+    else
+      all
+    end
+  end
+
+  def self.sorted_players(sort_column, sort_direction)
+    sorted_players = nil
+
+    if sort_column === "class_year"
+      class_years = ["freshman", "sophomore", "junior", "senior"]
+      sorted_players = self.all.sort do |a,b|
+        class_years.index(a.class_year) <=> class_years.index(b.class_year)
+      end
+      sorted_players.reverse! if sort_direction === "desc"
+    elsif sort_column === "high_school_team"
+      sorted_players = self.all.joins("INNER JOIN teams ON teams.id = players.high_school_team_id").order("teams.name #{sort_direction}")
+    elsif sort_column === "club_team"
+      sorted_players = self.all.joins("INNER JOIN teams ON teams.id = players.club_team_id").order("teams.name #{sort_direction}")
+    else
+      sorted_players = self.all.order("#{sort_column} #{sort_direction}")
+    end
+
+    return sorted_players
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -43,17 +74,6 @@ class Player < ApplicationRecord
       nil
     else
       ((Date.current - birthday).to_f / 365).round(2)
-    end
-  end
-
-  def self.search(query)
-    if query
-      where("
-        lower(first_name) LIKE ? OR
-        lower(last_name) LIKE ?
-      ", "%#{query.downcase}%", "%#{query.downcase}%")
-    else
-      all
     end
   end
 end

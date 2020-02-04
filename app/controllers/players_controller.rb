@@ -1,8 +1,9 @@
 class PlayersController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
-  
+  helper_method :sort_column, :sort_direction
+
   def index
-    @players = Player.all
+    @players = Player.sorted_players(sort_column, sort_direction)
   end
 
   def show
@@ -58,5 +59,13 @@ class PlayersController < ApplicationController
       end
 
       return params_for_player.except(:feet_component_of_height, :inches_component_of_height)
+    end
+
+    def sort_column
+      %w[first_name height weight high_school_team club_team class_year gpa].include?(params[:sort]) ? params[:sort] : "first_name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

@@ -6,13 +6,13 @@
 
 <table class="table table-hover">
   <tr>
-    <th>Player</th>
-    <th>Height</th>
-    <th>Weight</th>
-    <th>High school team</th>
-    <th>Club team</th>
-    <th>Class year</th>
-    <th>GPA</th>
+    <th><%= sortable "first_name", "Name" %></th>
+    <th><%= sortable "height" %></th>
+    <th><%= sortable "weight" %></th>
+    <th><%= sortable "high_school_team", "High school team" %></th>
+    <th><%= sortable "club_team", "Club team" %></th>
+    <th><%= sortable "class_year", "Class year" %></th>
+    <th><%= sortable "gpa", "GPA" %></th>
     <% if is_admin? %>
       <th>Edit</th>
       <th>Delete</th>
