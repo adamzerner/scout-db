@@ -5,6 +5,7 @@
 <table class="table table-hover">
   <tr>
     <th>Field</th>
+    <th>Location</th>
     <% if is_admin? %>
       <th>Edit</th>
       <th>Delete</th>
@@ -14,6 +15,7 @@
   <% @fields.each do |field| %>
     <tr>
       <td><%= link_to field.name, field_path(field) %></td>
+      <td><%= field.location %></td>
       <% if is_admin? %>
         <td><%= link_to "Edit", edit_field_path(field) %></td>
         <td><%= link_to 'Delete', field_path(field),

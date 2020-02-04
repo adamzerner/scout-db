@@ -11,4 +11,12 @@ class Field < ApplicationRecord
       all
     end
   end
+
+  def location
+    if !address.city
+      return ""
+    end
+
+    return "#{address.city}, #{address.state}"
+  end
 end

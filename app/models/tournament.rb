@@ -24,13 +24,11 @@ class Tournament < ApplicationRecord
   end
 
   def location
-    if (!games? || !games.first.field.address.city)
+    if (!games?)
       return ""
     end
 
-    address = games.first.field.address
-
-    return "#{address.city}, #{address.state}"
+    return games.first.field.location
   end
 
   def earliest_date
