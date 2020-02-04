@@ -11,6 +11,56 @@ class Tournament < ApplicationRecord
     end
   end
 
+  def games?
+    return (games && games.length && games.length > 0)
+  end
+
+  def date_range
+    if !games?
+      return ""
+    end
+
+    return "#{earliest_date.to_formatted_s(:long)} - #{latest_date.to_formatted_s(:long)}"
+  end
+
+  def location
+    if (!games? || !games.first.field.address.city)
+      return ""
+    end
+
+    address = games.first.field.address
+
+    return "#{address.city}, #{address.state}"
+  end
+
+  def earliest_date
+    earliest = nil
+
+    self.games.each do |game|
+      if !earliest
+        earliest = game.date
+      elsif game.date < earliest
+        earliest = game.date
+      end
+    end
+
+    return earliest
+  end
+
+  def latest_date
+    latest = nil
+
+    self.games.each do |game|
+      if !latest
+        latest = game.date
+      elsif game.date > latest
+        latest = game.date
+      end
+    end
+
+    return latest
+  end
+
   def sorted_games(sort_column, sort_direction)
     if sort_column === "team_one"
       return games.joins("INNER JOIN teams ON teams.id = games.team_one_id").order("teams.name #{sort_direction}")
