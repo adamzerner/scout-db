@@ -12,6 +12,14 @@ class Field < ApplicationRecord
     end
   end
 
+  def self.sorted_fields(sort_column, sort_direction)
+    if sort_column === "location"
+      return self.all.left_joins(:address).order("addresses.city #{sort_direction}")
+    else
+      return self.all.order("#{sort_column} #{sort_direction}")
+    end
+  end
+
   def location
     if !address.city
       return ""

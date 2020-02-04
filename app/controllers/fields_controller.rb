@@ -1,8 +1,9 @@
 class FieldsController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
+  helper_method :sort_column, :sort_direction
 
   def index
-    @fields = Field.all
+    @fields = Field.sorted_fields(sort_column, sort_direction)
   end
 
   def show
@@ -50,5 +51,13 @@ class FieldsController < ApplicationController
       params
         .require(:field)
         .permit(:name, address_attributes: [ :id, :line_one, :line_two, :city, :state, :zip ])
+    end
+
+    def sort_column
+      %w[name location].include?(params[:sort]) ? params[:sort] : "location"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
