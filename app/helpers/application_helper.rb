@@ -7,7 +7,7 @@ module ApplicationHelper
     end
   end
 
-  def sortable(column, title = nil)
+  def sortable(column, sort_column, sort_direction, title = nil)
     title ||= column.titleize
     filter_params ||= {}
     direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"

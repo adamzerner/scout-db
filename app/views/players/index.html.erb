@@ -4,4 +4,4 @@
   <p><%= link_to "Create a new player", new_player_path, class: "btn btn-primary" %></p>
 <% end %>
 
-<%= render "table", players: @players, filters_url: players_path, excludes: [] %>
+<%= render "table", players: @players, filters_url: players_path, excludes: [], sort_column: players_table_sort_column, sort_direction: sort_direction %>

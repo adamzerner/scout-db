@@ -16,15 +16,8 @@
   </ul>
 </section>
 
-<section class="card">
-  <section class="card-header">
-    Players
-  </section>
-  <ul class="list-group">
-    <% @high_school_team.players.each do |player| %>
-      <li class="list-group-item"><%= link_to player.full_name, player_path(player) %></li>
-    <% end %>
-  </ul>
-</section>
+<br>
+<h4>Players</h4>
+<%= render "players/table", players: @players, filters_url: high_school_team_path(@high_school_team), sort_column: players_table_sort_column, sort_direction: sort_direction, excludes: [:high_school_team] %>
 
 <%= link_to 'Edit', edit_high_school_team_path if is_admin? %>

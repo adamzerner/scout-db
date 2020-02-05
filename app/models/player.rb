@@ -17,38 +17,38 @@ class Player < ApplicationRecord
     end
   end
 
-  def self.sorted_players(sort_column, sort_direction)
+  def self.sorted_players(sort_column, sort_direction, players = self.all)
     sorted_players = nil
 
     if sort_column === "class_year"
       class_years = ["freshman", "sophomore", "junior", "senior"]
-      sorted_players = self.all.sort do |a,b|
+      sorted_players = players.sort do |a,b|
         class_years.index(a.class_year) <=> class_years.index(b.class_year)
       end
       sorted_players.reverse! if sort_direction === "desc"
     elsif sort_column === "high_school_team"
-      sorted_players = self.all.joins("INNER JOIN teams ON teams.id = players.high_school_team_id").order("teams.name #{sort_direction}")
+      sorted_players = players.joins("INNER JOIN teams ON teams.id = players.high_school_team_id").order("teams.name #{sort_direction}")
     elsif sort_column === "club_team"
-      sorted_players = self.all.joins("INNER JOIN teams ON teams.id = players.club_team_id").order("teams.name #{sort_direction}")
+      sorted_players = players.joins("INNER JOIN teams ON teams.id = players.club_team_id").order("teams.name #{sort_direction}")
     else
-      sorted_players = self.all.order("#{sort_column} #{sort_direction}")
+      sorted_players = players.order("#{sort_column} #{sort_direction}")
     end
 
     return sorted_players
   end
 
-  def self.filter_options
+  def self.filter_options(players = self.all)
     return {
-      high_school_teams: self.high_school_teams_filter_options,
-      club_teams: self.club_teams_filter_options,
-      class_years: ["Freshman", "Sophomore", "Junior", "Senior"]
+      high_school_teams: self.high_school_teams_filter_options(players),
+      club_teams: self.club_teams_filter_options(players),
+      class_years: self.class_years_filter_options(players)
     }
   end
 
-  def self.high_school_teams_filter_options
+  def self.high_school_teams_filter_options(players)
     high_school_teams = []
 
-    self.all.each do |player|
+    players.each do |player|
       if !high_school_teams.include? player.high_school_team
         high_school_teams << player.high_school_team
       end
@@ -57,16 +57,28 @@ class Player < ApplicationRecord
     return high_school_teams
   end
 
-  def self.club_teams_filter_options
+  def self.club_teams_filter_options(players)
     club_teams = []
 
-    self.all.each do |player|
+    players.each do |player|
       if !club_teams.include? player.club_team
         club_teams << player.club_team
       end
     end
 
     return club_teams
+  end
+
+  def self.class_years_filter_options(players)
+    class_years = []
+
+    players.each do |player|
+      if !class_years.include?(player.class_year) && !player.class_year.empty?
+        class_years << player.class_year
+      end
+    end
+
+    return class_years
   end
 
   def passes_through_filters(filters)
@@ -140,15 +152,19 @@ class Player < ApplicationRecord
   end
 
   def passes_through_gpa_filters(smallest_gpa, largest_gpa)
-    if smallest_gpa.empty? && largest_gpa.empty?
-      return true
-    end
-
     if !self.gpa
       return true
     end
 
-    return self.gpa >= smallest_gpa.to_f && self.gpa <= largest_gpa.to_f
+    if smallest_gpa.empty? && largest_gpa.empty?
+      return true
+    elsif smallest_gpa.empty?
+      return self.gpa <= largest_gpa.to_f
+    elsif largest_gpa.empty?
+      return self.gpa >= smallest_gpa.to_f
+    else
+      return self.gpa >= smallest_gpa.to_f && self.gpa <= largest_gpa.to_f
+    end
   end
 
   def full_name

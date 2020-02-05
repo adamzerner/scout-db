@@ -1,130 +1,132 @@
-<section class="card bg-light filters">
-  <section class="card-header">
-    Filters
-  </section>
-  <section class="card-body">
-    <%= form_with url: filters_url, method: :get, local: true do |f| %>
-      <%= hidden_field_tag 'sort', params[:sort] if params[:sort] %>
-      <%= hidden_field_tag 'direction', params[:direction] if params[:direction] %>
-      <section class="row">
-        <section class="col-md height">
-          <span>Height</span>
-          <section class="form-group">
-            <%= f.label :shortest %>
-            <%= f.number_field :shortest_feet, value: params[:shortest_feet], class: "form-control", in: 3..7, placeholder: "ft" %>
-            <%= f.number_field :shortest_inches, value: params[:shortest_inches], class: "form-control", in: 0..11.5, step: 0.5, placeholder: "in" %>
+<section class="players-table">
+  <section class="card bg-light filters">
+    <section class="card-header">
+      Filters
+    </section>
+    <section class="card-body">
+      <%= form_with url: filters_url, method: :get, local: true do |f| %>
+        <%= hidden_field_tag 'sort', params[:sort] if params[:sort] %>
+        <%= hidden_field_tag 'direction', params[:direction] if params[:direction] %>
+        <section class="row">
+          <section class="col-md height">
+            <span>Height</span>
+            <section class="form-group">
+              <%= f.label :shortest %>
+              <%= f.number_field :shortest_feet, value: params[:shortest_feet], class: "form-control", in: 3..7, placeholder: "ft" %>
+              <%= f.number_field :shortest_inches, value: params[:shortest_inches], class: "form-control", in: 0..11.5, step: 0.5, placeholder: "in" %>
+            </section>
+            <section class="form-group">
+              <%= f.label :tallest %>
+              <%= f.number_field :tallest_feet, value: params[:tallest_feet], class: "form-control", in: 3..7, placeholder: "ft" %>
+              <%= f.number_field :tallest_inches, value: params[:tallest_inches], class: "form-control", in: 0..11.5, step: 0.5, placeholder: "in" %>
+            </section>
           </section>
-          <section class="form-group">
-            <%= f.label :tallest %>
-            <%= f.number_field :tallest_feet, value: params[:tallest_feet], class: "form-control", in: 3..7, placeholder: "ft" %>
-            <%= f.number_field :tallest_inches, value: params[:tallest_inches], class: "form-control", in: 0..11.5, step: 0.5, placeholder: "in" %>
-          </section>
-        </section>
-        <section class="col-md">
-          <span>Weight</span>
-          <section class="form-group">
-            <%= f.label :lightest %>
-            <%= f.number_field :lightest, value: params[:lightest], class: "form-control", in: 60..400, step: 5 %>
-          </section>
-          <section class="form-group">
-            <%= f.label :heaviest %>
-            <%= f.number_field :heaviest, value: params[:heaviest], class: "form-control", in: 60..400, step: 5 %>
-          </section>
-        </section>
-        <% if !excludes.include? :high_school_team %>
           <section class="col-md">
-            <span>High school teams</span>
-            <% @filter_options[:high_school_teams].each do |high_school_team| %>
-              <section class="form-check">
-                <label class="form-check-label">
-                  <%= f.check_box "high_school_team_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:high_school_team_filters].try(:include?, high_school_team.id.to_s) }, high_school_team.id, nil %>
-                  <%= high_school_team.full_name %>
-                </label>
-              </section>
-            <% end %>
+            <span>Weight</span>
+            <section class="form-group">
+              <%= f.label :lightest %>
+              <%= f.number_field :lightest, value: params[:lightest], class: "form-control", in: 60..400, step: 5 %>
+            </section>
+            <section class="form-group">
+              <%= f.label :heaviest %>
+              <%= f.number_field :heaviest, value: params[:heaviest], class: "form-control", in: 60..400, step: 5 %>
+            </section>
           </section>
-        <% end %>
-        <% if !excludes.include? :club_team %>
-          <section class="col-md">
-            <span>Club teams</span>
-            <% @filter_options[:club_teams].each do |club_team| %>
-              <section class="form-check">
-                <label class="form-check-label">
-                  <%= f.check_box "club_team_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:club_team_filters].try(:include?, club_team.id.to_s) }, club_team.id, nil %>
-                  <%= club_team.full_name %>
-                </label>
-              </section>
-            <% end %>
-          </section>
-        <% end %>
-        <section class="col-md">
-          <span>Class years</span>
-          <% @filter_options[:class_years].each do |class_year| %>
-            <section class="form-check">
-              <label class="form-check-label">
-                <%= f.check_box "class_year_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:class_year_filters].try(:include?, class_year) }, class_year, nil %>
-                <%= class_year %>
-              </label>
+          <% if !excludes.include? :high_school_team %>
+            <section class="col-md">
+              <span>High school teams</span>
+              <% @filter_options[:high_school_teams].each do |high_school_team| %>
+                <section class="form-check">
+                  <label class="form-check-label">
+                    <%= f.check_box "high_school_team_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:high_school_team_filters].try(:include?, high_school_team.id.to_s) }, high_school_team.id, nil %>
+                    <%= high_school_team.full_name %>
+                  </label>
+                </section>
+              <% end %>
             </section>
           <% end %>
-        </section>
-        <section class="col-md">
-          <span>GPA</span>
-          <section class="form-group">
-            <%= f.label :smallest %>
-            <%= f.number_field :smallest_gpa, value: params[:smallest_gpa], class: "form-control", in: 0..4, step: 0.05 %>
+          <% if !excludes.include? :club_team %>
+            <section class="col-md">
+              <span>Club teams</span>
+              <% @filter_options[:club_teams].each do |club_team| %>
+                <section class="form-check">
+                  <label class="form-check-label">
+                    <%= f.check_box "club_team_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:club_team_filters].try(:include?, club_team.id.to_s) }, club_team.id, nil %>
+                    <%= club_team.full_name %>
+                  </label>
+                </section>
+              <% end %>
+            </section>
+          <% end %>
+          <section class="col-md">
+            <span>Class years</span>
+            <% @filter_options[:class_years].each do |class_year| %>
+              <section class="form-check">
+                <label class="form-check-label">
+                  <%= f.check_box "class_year_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:class_year_filters].try(:include?, class_year) }, class_year, nil %>
+                  <%= class_year %>
+                </label>
+              </section>
+            <% end %>
           </section>
-          <section class="form-group">
-            <%= f.label :largest %>
-            <%= f.number_field :largest_gpa, value: params[:largest_gpa], class: "form-control", in: 0..4, step: 0.05 %>
+          <section class="col-md">
+            <span>GPA</span>
+            <section class="form-group">
+              <%= f.label :smallest %>
+              <%= f.number_field :smallest_gpa, value: params[:smallest_gpa], class: "form-control", in: 0..4, step: 0.05 %>
+            </section>
+            <section class="form-group">
+              <%= f.label :largest %>
+              <%= f.number_field :largest_gpa, value: params[:largest_gpa], class: "form-control", in: 0..4, step: 0.05 %>
+            </section>
           </section>
         </section>
-      </section>
-      <hr>
-      <%= submit_tag "Apply filters", class: "btn btn-secondary" %>
-    <% end %>
+        <hr>
+        <%= submit_tag "Apply filters", class: "btn btn-secondary" %>
+      <% end %>
+    </section>
   </section>
-</section>
 
-<table class="table table-hover">
-  <tr>
-    <th><%= sortable "first_name", "Name" %></th>
-    <th><%= sortable "height" %></th>
-    <th><%= sortable "weight" %></th>
-    <% if !excludes.include? :high_school_team %>
-      <th><%= sortable "high_school_team", "High school team" %></th>
-    <% end %>
-    <% if !excludes.include? :club_team %>
-      <th><%= sortable "club_team", "Club team" %></th>
-    <% end %>
-    <th><%= sortable "class_year", "Class year" %></th>
-    <th><%= sortable "gpa", "GPA" %></th>
-    <% if is_admin? %>
-      <th>Edit</th>
-      <th>Delete</th>
-    <% end %>
-  </tr>
-
-  <% players.each do |player| %>
+  <table class="table table-hover">
     <tr>
-      <td><%= link_to player.full_name, player_path(player) %></td>
-      <td><%= player.display_height %></td>
-      <td><%= player.weight %></td>
+      <th><%= sortable "first_name", sort_column, sort_direction, "Name" %></th>
+      <th><%= sortable "height", sort_column, sort_direction %></th>
+      <th><%= sortable "weight", sort_column, sort_direction %></th>
       <% if !excludes.include? :high_school_team %>
-        <td><%= link_to player.high_school_team.full_name, high_school_team_path(player.high_school_team) if player.high_school_team %></td>
+        <th><%= sortable "high_school_team", sort_column, sort_direction, "High school team" %></th>
       <% end %>
       <% if !excludes.include? :club_team %>
-        <td><%= link_to player.club_team.full_name, club_team_path(player.club_team) if player.club_team %></td>
+        <th><%= sortable "club_team", sort_column, sort_direction, "Club team" %></th>
       <% end %>
-      <td><%= player.class_year %></td>
-      <td><%= player.gpa %></td>
+      <th><%= sortable "class_year", sort_column, sort_direction, "Class year" %></th>
+      <th><%= sortable "gpa", sort_column, sort_direction, "GPA" %></th>
       <% if is_admin? %>
-        <td><%= link_to "Edit", edit_player_path(player) %></td>
-        <td><%= link_to 'Delete', player_path(player),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-        </td>
+        <th>Edit</th>
+        <th>Delete</th>
       <% end %>
     </tr>
-  <% end %>
-</table>
+
+    <% players.each do |player| %>
+      <tr>
+        <td><%= link_to player.full_name, player_path(player) %></td>
+        <td><%= player.display_height %></td>
+        <td><%= player.weight %></td>
+        <% if !excludes.include? :high_school_team %>
+          <td><%= link_to player.high_school_team.full_name, high_school_team_path(player.high_school_team) if player.high_school_team %></td>
+        <% end %>
+        <% if !excludes.include? :club_team %>
+          <td><%= link_to player.club_team.full_name, club_team_path(player.club_team) if player.club_team %></td>
+        <% end %>
+        <td><%= player.class_year %></td>
+        <td><%= player.gpa %></td>
+        <% if is_admin? %>
+          <td><%= link_to "Edit", edit_player_path(player) %></td>
+          <td><%= link_to 'Delete', player_path(player),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</section>
