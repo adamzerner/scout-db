@@ -1,0 +1,16 @@
+.players-index {
+  .col-md span {
+    text-decoration: underline;
+  }
+  
+  .height {
+    label {
+      display: block;
+    }
+
+    input[type="number"] {
+      display: inline-block;
+      width: 45%;
+    }
+  }
+}

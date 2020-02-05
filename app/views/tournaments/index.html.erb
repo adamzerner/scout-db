@@ -2,7 +2,7 @@
 
 <p><%= link_to "Create a new tournament", new_tournament_path, class: "btn btn-primary" if is_admin? %></p>
 
-<section class="card bg-light">
+<section class="card bg-light filters">
   <section class="card-header">
     Filters
   </section>
@@ -12,7 +12,7 @@
       <%= hidden_field_tag 'direction', params[:direction] if params[:direction] %>
       <section class="row">
         <section class="col-md">
-          <span>Locations</span>
+          <span>Approximate locations</span>
           <% @filter_options[:locations].each do |location| %>
             <section class="form-check">
               <label class="form-check-label">
@@ -24,13 +24,13 @@
         </section>
         <section class="col-md">
           <section class="form-group">
-            <%= f.label :earliest_start_date %>
+            <%= f.label :earliest_start_date, class: "col-header" %>
             <%= f.date_field :earliest_start_date, value: params[:earliest_start_date], class: "form-control" %>
           </section>
         </section>
         <section class="col-md">
           <section class="form-group">
-            <%= f.label :latest_start_date %>
+            <%= f.label :latest_start_date, class: "col-header" %>
             <%= f.date_field :latest_start_date, value: params[:latest_start_date], class: "form-control" %>
           </section>
         </section>

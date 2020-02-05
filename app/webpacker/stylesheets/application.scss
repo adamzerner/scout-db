@@ -2,6 +2,7 @@
 @import "easy-autocomplete/dist/easy-autocomplete.css";
 @import "home.scss";
 @import "tournaments.scss";
+@import "players.scss";
 @import "actiontext.scss";
 
 .alert {
@@ -19,5 +20,9 @@ h1.page-header {
 }
 
 .eac-category {
+  text-decoration: underline;
+}
+
+.filters .col-md span, .filters .col-md .col-header {
   text-decoration: underline;
 }

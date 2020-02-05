@@ -37,6 +37,120 @@ class Player < ApplicationRecord
     return sorted_players
   end
 
+  def self.filter_options
+    return {
+      high_school_teams: self.high_school_teams_filter_options,
+      club_teams: self.club_teams_filter_options,
+      class_years: ["Freshman", "Sophomore", "Junior", "Senior"]
+    }
+  end
+
+  def self.high_school_teams_filter_options
+    high_school_teams = []
+
+    self.all.each do |player|
+      if !high_school_teams.include? player.high_school_team
+        high_school_teams << player.high_school_team
+      end
+    end
+
+    return high_school_teams
+  end
+
+  def self.club_teams_filter_options
+    club_teams = []
+
+    self.all.each do |player|
+      if !club_teams.include? player.club_team
+        club_teams << player.club_team
+      end
+    end
+
+    return club_teams
+  end
+
+  def passes_through_filters(filters)
+    return (
+      passes_through_height_filters(filters[:shortest_feet], filters[:shortest_inches], filters[:tallest_feet], filters[:tallest_inches]) &&
+      passes_through_weight_filters(filters[:lightest], filters[:heaviest]) &&
+      passes_through_high_school_team_filters(filters[:high_school_team_filters]) &&
+      passes_through_club_team_filters(filters[:club_team_filters]) &&
+      passes_through_class_year_filters(filters[:class_year_filters]) &&
+      passes_through_gpa_filters(filters[:smallest_gpa], filters[:largest_gpa])
+    )
+  end
+
+  def passes_through_height_filters(shortest_feet, shortest_inches, tallest_feet, tallest_inches)
+    if (shortest_feet.empty? || shortest_inches.empty?) && (tallest_feet.empty? || tallest_inches.empty?)
+      return true
+    end
+
+    if !self.height || self.height.empty?
+      return true
+    end
+
+    shortest_height_allowed_in_inches = (shortest_feet.to_f * 12) + shortest_inches.to_f
+    tallest_height_allowed_in_inches = (tallest_feet.to_f * 12) + tallest_inches.to_f
+
+    return self.height >= shortest_height_allowed_in_inches && self.height <= tallest_height_allowed_in_inches
+  end
+
+  def passes_through_weight_filters(lightest, heaviest)
+    if !self.weight
+      return true
+    end
+
+    if lightest.empty? && heaviest.empty?
+      return true
+    elsif lightest.empty?
+      return self.weight <= heaviest.to_f
+    elsif heaviest.empty?
+      return self.weight >= lightest.to_f
+    else
+      return self.weight >= lightest.to_f && self.weight <= heaviest.to_f
+    end
+  end
+
+  def passes_through_high_school_team_filters(high_school_team_ids_allowed)
+    if !high_school_team_ids_allowed
+      return true
+    end
+
+    return high_school_team_ids_allowed.include? self.high_school_team.id.to_s
+  end
+
+  def passes_through_club_team_filters(club_team_ids_allowed)
+    if !club_team_ids_allowed
+      return true
+    end
+
+    return club_team_ids_allowed.include? self.club_team.id.to_s
+  end
+
+  def passes_through_class_year_filters(class_years_allowed)
+    if !class_years_allowed || class_years_allowed.empty?
+      return true
+    end
+
+    if !self.class_year || self.class_year.empty?
+      return true
+    end
+
+    return class_years_allowed.include? self.class_year
+  end
+
+  def passes_through_gpa_filters(smallest_gpa, largest_gpa)
+    if smallest_gpa.empty? && largest_gpa.empty?
+      return true
+    end
+
+    if !self.gpa
+      return true
+    end
+
+    return self.gpa >= smallest_gpa.to_f && self.gpa <= largest_gpa.to_f
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
