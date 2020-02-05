@@ -33,6 +33,52 @@ class Tournament < ApplicationRecord
     return sorted_tournaments
   end
 
+  def self.filter_options
+    return {
+      locations: self.location_filter_options,
+    }
+  end
+
+  def self.location_filter_options
+    locations = []
+
+    self.all.each do |tournament|
+      if !locations.include? tournament.location
+        locations << tournament.location
+      end
+    end
+
+    return locations
+  end
+
+  def passes_through_filters(filters)
+    return (
+      passes_through_location_filters(filters[:location_filters]) &&
+      passes_through_earliest_start_date_filters(filters[:earliest_start_date]) &&
+      passes_through_latest_start_date_filters(filters[:latest_start_date])
+    )
+  end
+
+  def passes_through_location_filters(location_filters)
+    return location_filters.include? self.location
+  end
+
+  def passes_through_earliest_start_date_filters(earliest_start_date)
+    if self.earliest_date === nil || !earliest_start_date || earliest_start_date.length === 0
+      return true
+    end
+
+    return self.earliest_date >= Date.parse(earliest_start_date)
+  end
+
+  def passes_through_latest_start_date_filters(latest_start_date)
+    if self.earliest_date === nil || !latest_start_date || latest_start_date.length === 0
+      return true
+    end
+
+    return self.earliest_date <= Date.parse(latest_start_date)
+  end
+
   def games?
     return (games && games.length && games.length > 0)
   end
@@ -42,7 +88,7 @@ class Tournament < ApplicationRecord
       return ""
     end
 
-    return "#{earliest_date.to_formatted_s(:long)} - #{latest_date.to_formatted_s(:long)}"
+    return "#{earliest_date.to_formatted_s(:long)} - #{earliest_date.to_formatted_s(:long)}"
   end
 
   def location

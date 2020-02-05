@@ -3,7 +3,10 @@ class TournamentsController < ApplicationController
   helper_method :sort_column, :sort_direction, :filter_params
 
   def index
+    @filter_options = Tournament.filter_options
+    @filters_to_apply = filter_params && !filter_params.empty?
     @tournaments = Tournament.sorted_tournaments(sort_column, sort_direction)
+    @tournaments = @filters_to_apply ? get_filtered_tournaments(@tournaments, filter_params) : @tournaments
   end
 
   def show
@@ -68,7 +71,13 @@ class TournamentsController < ApplicationController
     end
 
     def filter_params
-      params.permit(:sort, :direction, :earliest_start_time, :latest_start_time, :commit, :id, player_filters: [], team_filters: [], date_filters: [], field_filters: []).except(:id, :commit, :sort, :direction)
+      params.permit(:sort, :direction, :earliest_start_date, :latest_start_date, :earliest_start_time, :latest_start_time, :commit, :id, location_filters: [], player_filters: [], team_filters: [], date_filters: [], field_filters: []).except(:id, :commit, :sort, :direction)
+    end
+
+    def get_filtered_tournaments(tournaments, filters)
+      return tournaments.filter do |tournament|
+        tournament.passes_through_filters(filters)
+      end
     end
 
     def get_filtered_games(games, filters)
