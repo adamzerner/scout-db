@@ -1,12 +1,16 @@
 class ClubTeamsController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
-  
+
   def index
     @club_teams = ClubTeam.all
   end
 
   def show
     @club_team = ClubTeam.find(params[:id])
+    @filter_options = Player.filter_options(@club_team.players)
+    @filters_to_apply = players_table_filter_params && !players_table_filter_params.empty?
+    @players = Player.sorted_players(players_table_sort_column, sort_direction, @club_team.players)
+    @players = @filters_to_apply ? get_filtered_players(@players, players_table_filter_params) : @players
   end
 
   def new
