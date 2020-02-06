@@ -48,7 +48,7 @@ class Tournament < ApplicationRecord
       end
     end
 
-    return locations
+    return locations.sort { |a,b| a.name <=> b.name }
   end
 
   def passes_through_filters(filters)
@@ -159,7 +159,7 @@ class Tournament < ApplicationRecord
       end
     end
 
-    return players
+    return players.sort { |a,b| a.first_name <=> b.first_name }
   end
 
   def get_teams_for_filter_options(games)
@@ -170,7 +170,7 @@ class Tournament < ApplicationRecord
       teams << game.team_two if !teams.include?(game.team_two)
     end
 
-    return teams
+    return teams.sort { |a,b| a.name <=> b.name }
   end
 
   def get_dates_for_filter_options(games)
@@ -180,7 +180,7 @@ class Tournament < ApplicationRecord
       dates << game.date if !dates.include?(game.date)
     end
 
-    return dates
+    return dates.sort { |a,b| a <=> b }
   end
 
   def get_fields_for_filter_options(games)
@@ -190,6 +190,6 @@ class Tournament < ApplicationRecord
       fields << game.field if !fields.include?(game.field)
     end
 
-    return fields
+    return fields.sort { |a,b| a.name <=> b.name }
   end
 end

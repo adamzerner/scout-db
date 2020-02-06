@@ -54,7 +54,7 @@ class Player < ApplicationRecord
       end
     end
 
-    return high_school_teams
+    return high_school_teams.sort { |a,b| a.name <=> b.name }
   end
 
   def self.club_teams_filter_options(players)
@@ -66,10 +66,11 @@ class Player < ApplicationRecord
       end
     end
 
-    return club_teams
+    return club_teams.sort { |a,b| a.name <=> b.name }
   end
 
   def self.class_years_filter_options(players)
+    order = ["Freshman", "Sophomore", "Junior", "Senior"]
     class_years = []
 
     players.each do |player|
@@ -78,7 +79,7 @@ class Player < ApplicationRecord
       end
     end
 
-    return class_years
+    return class_years.sort { |a,b| order.index(a) <=> order.index(b) }
   end
 
   def passes_through_filters(filters)
