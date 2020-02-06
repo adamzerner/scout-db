@@ -74,12 +74,12 @@
 <table class="table">
   <thead>
     <tr>
-      <th><%= sortable "id", "Game ID" %></th>
-      <th><%= sortable "team_one" %></th>
-      <th><%= sortable "team_two" %></th>
-      <th><%= sortable "date" %></th>
-      <th><%= sortable "start_time" %></th>
-      <th><%= sortable "field" %></th>
+      <th><%= sortable "id", sort_column, sort_direction, "Game ID" %></th>
+      <th><%= sortable "team_one", sort_column, sort_direction%></th>
+      <th><%= sortable "team_two", sort_column, sort_direction %></th>
+      <th><%= sortable "date", sort_column, sort_direction %></th>
+      <th><%= sortable "start_time", sort_column, sort_direction %></th>
+      <th><%= sortable "field", sort_column, sort_direction %></th>
     </tr>
   </thead>
   <tbody>

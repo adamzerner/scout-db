@@ -43,9 +43,9 @@
 
 <table class="table table-hover">
   <tr>
-    <th><%= sortable "name" %></th>
-    <th><%= sortable "dates" %></th>
-    <th><%= sortable "location", "Approximate location" %></th>
+    <th><%= sortable "name", sort_column, sort_direction %></th>
+    <th><%= sortable "dates", sort_column, sort_direction %></th>
+    <th><%= sortable "location", sort_column, sort_direction, "Approximate location" %></th>
     <% if is_admin? %>
       <th>Edit</th>
       <th>Delete</th>
