@@ -4,8 +4,8 @@
 
 <table class="table table-hover">
   <tr>
-    <th><%= sortable "name" %></th>
-    <th><%= sortable "location" %></th>
+    <th><%= sortable "name", sort_column, sort_direction %></th>
+    <th><%= sortable "location", sort_column, sort_direction %></th>
     <% if is_admin? %>
       <th>Edit</th>
       <th>Delete</th>

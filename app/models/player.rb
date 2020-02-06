@@ -73,7 +73,7 @@ class Player < ApplicationRecord
     class_years = []
 
     players.each do |player|
-      if !class_years.include?(player.class_year) && !player.class_year.empty?
+      if !class_years.include?(player.class_year) && player.class_year && !player.class_year.empty?
         class_years << player.class_year
       end
     end

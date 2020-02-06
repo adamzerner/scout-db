@@ -1,6 +1,6 @@
 class FieldsController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column
 
   def index
     @fields = Field.sorted_fields(sort_column, sort_direction)
@@ -55,9 +55,5 @@ class FieldsController < ApplicationController
 
     def sort_column
       %w[name location].include?(params[:sort]) ? params[:sort] : "location"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

@@ -1,8 +1,9 @@
 class HighSchoolTeamsController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
+  helper_method :sort_column
 
   def index
-    @high_school_teams = HighSchoolTeam.all
+    @high_school_teams = HighSchoolTeam.sorted_high_school_teams(sort_column, sort_direction)
   end
 
   def show
@@ -15,6 +16,7 @@ class HighSchoolTeamsController < ApplicationController
 
   def new
     @high_school_team = HighSchoolTeam.new
+    @high_school_team.address = Address.new
   end
 
   def edit
@@ -52,6 +54,10 @@ class HighSchoolTeamsController < ApplicationController
     def high_school_team_params
       params
         .require(:high_school_team)
-        .permit(:school_name, :team_name)
+        .permit(:name, :team_name, address_attributes: [ :id, :line_one, :line_two, :city, :state, :zip ])
+    end
+
+    def sort_column
+      %w[name location].include?(params[:sort]) ? params[:sort] : "location"
     end
 end

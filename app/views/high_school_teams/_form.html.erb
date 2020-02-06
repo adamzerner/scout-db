@@ -1,11 +1,19 @@
 <%= form_with model: @high_school_team, url: url, method: method do |f| %>
   <section class="form-group">
-    <%= f.label :school_name %>
-    <%= f.text_field :school_name, class: "form-control" %>
+    <%= f.label :name, "School name" %>
+    <%= f.text_field :name, class: "form-control" %>
   </section>
   <section class="form-group">
     <%= f.label :team_name %>
     <%= f.text_field :team_name, class: "form-control" %>
+  </section>
+  <section class="card">
+    <section class="card-header">
+      Address
+    </section>
+    <section class="card-body">
+      <%= render "shared/address_form", f: f %>
+    </section>
   </section>
   <%= f.submit nil, class: "btn btn-primary" %>
 <% end %>

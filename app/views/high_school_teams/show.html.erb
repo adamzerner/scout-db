@@ -13,6 +13,10 @@
       <strong>Team name:</strong>
       <%= @high_school_team.team_name %>
     </li>
+    <li class="list-group-item">
+      <strong>Address:</strong>
+      <%= render "shared/address", address: @high_school_team.address %>
+    </li>
   </ul>
 </section>
 

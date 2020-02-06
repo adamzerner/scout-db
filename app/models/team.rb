@@ -14,6 +14,14 @@ class Team < ApplicationRecord
            foreign_key: :team_two_id,
            class_name: 'Game'
 
+  def self.search(query)
+    if query
+      where("lower(name) LIKE ?", "%#{query.downcase}%")
+    else
+      all
+    end
+  end
+
   def full_name
     name
   end
@@ -28,11 +36,15 @@ class Team < ApplicationRecord
     return false
   end
 
-  def self.search(query)
-    if query
-      where("lower(name) LIKE ?", "%#{query.downcase}%")
+  def location(city = city, state = state)
+    if city && state
+      return "#{city}, #{state}"
+    elsif city
+      return city
+    elsif state
+      return state
     else
-      all
+      return ""
     end
   end
 end

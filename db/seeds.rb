@@ -7,20 +7,25 @@ Address.all.delete_all
 Tournament.all.delete_all
 
 HIGH_SCHOOL_TEAMS = [{
-  school_name: 'Syosset',
-  team_name: 'Braves'
+  name: 'Syosset',
+  team_name: 'Braves',
+  address: Address.new
 }, {
-  school_name: 'Jericho',
-  team_name: 'Japs'
+  name: 'Jericho',
+  team_name: 'Japs',
+  address: Address.new
 }, {
-  school_name: 'Roslyn',
-  team_name: 'Rich Pricks'
+  name: 'Roslyn',
+  team_name: 'Rich Pricks',
+  address: Address.new
 }, {
-  school_name: 'Massapequa',
-  team_name: 'Firemen'
+  name: 'Massapequa',
+  team_name: 'Firemen',
+  address: Address.new
 }, {
-  school_name: 'Plainview',
-  team_name: 'Jews'
+  name: 'Plainview',
+  team_name: 'Jews',
+  address: Address.new
 }]
 HIGH_SCHOOL_TEAMS.each { |high_school_team| HighSchoolTeam.create(high_school_team) }
 

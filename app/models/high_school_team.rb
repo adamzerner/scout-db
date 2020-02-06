@@ -1,23 +1,12 @@
 class HighSchoolTeam < Team
-  def initialize(args)
-    if (!args)
-      super()
-    elsif (args)
-      super({
-        name: args[:school_name],
-        team_name: args[:team_name]
-      })
-    end
-  end
+  has_one :address, as: :addressable, dependent: :destroy
+  accepts_nested_attributes_for :address, allow_destroy: true
 
-  def update(args)
-    if (!args)
-      super()
-    elsif (args)
-      super({
-        name: args[:school_name],
-        team_name: args[:team_name]
-      })
+  def self.sorted_high_school_teams(sort_column, sort_direction)
+    if sort_column === "location"
+      return self.all.left_joins(:address).order("addresses.city #{sort_direction}")
+    else
+      return self.all.order("#{sort_column} #{sort_direction}")
     end
   end
 
@@ -31,6 +20,10 @@ class HighSchoolTeam < Team
 
   def players
     high_school_team_players
+  end
+
+  def location
+    super(address.city, address.state)
   end
 
   def self.search(query)

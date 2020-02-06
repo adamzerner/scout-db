@@ -105,6 +105,8 @@ ActiveRecord::Schema.define(version: 2020_01_20_185833) do
     t.string "type"
     t.string "name"
     t.string "team_name"
+    t.string "city"
+    t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

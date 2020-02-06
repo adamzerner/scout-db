@@ -4,7 +4,8 @@
 
 <table class="table table-hover">
   <tr>
-    <th>High school team</th>
+    <th><%= sortable "name", sort_column, sort_direction %></th>
+    <th><%= sortable "location", sort_column, sort_direction %></th>
     <% if is_admin? %>
       <th>Edit</th>
       <th>Delete</th>
@@ -14,6 +15,7 @@
   <% @high_school_teams.each do |high_school_team| %>
     <tr>
       <td><%= link_to high_school_team.full_name, high_school_team_path(high_school_team) %></td>
+      <td><%= high_school_team.location %></td>
       <% if is_admin? %>
         <td><%= link_to "Edit", edit_high_school_team_path(high_school_team) %></td>
         <td><%= link_to 'Delete', high_school_team_path(high_school_team),
