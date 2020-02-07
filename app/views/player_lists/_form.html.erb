@@ -15,7 +15,7 @@
 
   <section class="add-player-container">
     <%= collection_select(nil, nil, Player.all, :id, :full_name, { include_blank: true }, class: "form-control") %>
-    <button class="btn btn-light">Add player</button>
+    <button type="button" class="btn btn-light">Add player</button>
   </section>
 
   <hr>
