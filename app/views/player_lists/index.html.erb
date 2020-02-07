@@ -1,3 +1,13 @@
 <h1 class="page-header">Player lists</h1>
 
 <p><%= link_to "Create a new player list", new_player_list_path, class: "btn btn-primary" %></p>
+
+
+<% @player_lists.each do |player_list| %>
+  <section class="card">
+    <section class="card-header">
+      <%= link_to player_list.name, player_list_path(player_list) %>
+    </section>
+    <%= render "list", players: player_list.players %>
+  </section>
+<% end %>

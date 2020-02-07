@@ -22,13 +22,13 @@ $(document).on('turbolinks:load', function () {
 
   function addPlayer(playerToAdd, $players, $hiddenPlayerInputs) {
     $players.append(`
-      <li class="list-group-item" data-id="${playerToAdd.id}" name="player_list[players]">
+      <li class="list-group-item" data-id="${playerToAdd.id}">
         ${playerToAdd.fullName}
         <span class="close">&times;</span>
       </li>
     `);
     $hiddenPlayerInputs.append(`
-      <input type="hidden" value="${playerToAdd.id}" name="player_list[players][]" />
+      <input type="hidden" value="${playerToAdd.id}" name="player_list[player_ids][]" />
     `);
     disablePlayerOption(playerToAdd.id);
     $addPlayerSelect.val('');

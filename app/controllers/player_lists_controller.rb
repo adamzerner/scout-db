@@ -16,7 +16,9 @@ class PlayerListsController < ApplicationController
   end
 
   def create
-    @player_list = PlayerList.new(player_list_params)
+    @player_list = PlayerList.new({ name: player_list_params[:name] })
+    @player_list.user = current_user
+    @player_list.player_ids = player_list_params[:player_ids]
 
     if @player_list.save
       redirect_to @player_list
@@ -44,8 +46,11 @@ class PlayerListsController < ApplicationController
 
   private
     def player_list_params
-      return params
+      result = params
         .require(:player_list)
-        .permit(:name, players: [])
+        .permit(:name, player_ids: [])
+      result[:player_ids] = result[:player_ids].map { |player_id| player_id.to_i }
+
+      return result
     end
 end

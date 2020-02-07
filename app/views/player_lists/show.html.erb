@@ -1,0 +1,8 @@
+<h1 class="page-header">Player List</h1>
+<p>Name: <%= @player_list.name %></p>
+<section class="card">
+  <section class="card-header">
+    Players
+  </section>
+  <%= render "list", players: @player_list.players %>
+</section>
