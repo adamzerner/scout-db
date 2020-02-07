@@ -7,4 +7,8 @@ class User < ApplicationRecord
   def admin?
     self.role === "admin"
   end
+
+  def read_access?
+    self.role === "read"
+  end
 end

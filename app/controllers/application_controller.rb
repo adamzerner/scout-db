@@ -1,8 +1,20 @@
 class ApplicationController < ActionController::Base
   helper_method :is_admin?, :players_table_sort_column, :sort_direction, :players_table_filter_params
+  before_action :require_read_access
+
+  def require_read_access
+    unless has_read_access?
+      flash[:alert] = "You must have read access in order to view this page."
+      redirect_to root_path
+    end
+  end
 
   def is_admin?
     user_signed_in? && current_user.admin?
+  end
+
+  def has_read_access?
+    user_signed_in? && current_user.read_access?
   end
 
   def authorize_user
@@ -28,5 +40,4 @@ class ApplicationController < ActionController::Base
       player.passes_through_filters(filters)
     end
   end
-
 end
