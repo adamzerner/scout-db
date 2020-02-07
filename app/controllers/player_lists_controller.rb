@@ -46,6 +46,6 @@ class PlayerListsController < ApplicationController
     def player_list_params
       return params
         .require(:player_list)
-        .permit(players: [])
+        .permit(:name, players: [])
     end
 end

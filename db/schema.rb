@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_02_07_001233) do
   end
 
   create_table "player_lists", force: :cascade do |t|
+    t.string "name"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
