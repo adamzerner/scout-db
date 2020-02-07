@@ -1,0 +1,22 @@
+<%= form_with model: @player_list do |f| %>
+  <section class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </section>
+
+  <section class="card">
+    <section class="card-header">
+      Players:
+    </section>
+    <ul class="list-group"></ul>
+  </section>
+
+  <section class="add-player-container">
+    <%= collection_select(nil, nil, Player.all, :id, :full_name, { include_blank: true }, class: "form-control") %>
+    <button class="btn btn-light">Add player</button>
+  </section>
+
+  <hr>
+
+  <%= f.submit nil, class: "btn btn-primary" %>
+<% end %>

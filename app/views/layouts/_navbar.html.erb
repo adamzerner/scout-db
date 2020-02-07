@@ -17,6 +17,7 @@
           <%= f.search_field :query, placeholder: "Search", class: "form-control" %>
           <% end %>
         </li>
+        <li class="nav-item"><%= link_to "Player lists", player_lists_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Account", edit_user_registration_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
       <% else %>

@@ -1,0 +1,8 @@
+.player_lists-new, .player_lists-edit {
+  select.form-control {
+    display: inline-block;
+    width: 200px;
+    position: relative;
+    top: 2px;
+  }
+}

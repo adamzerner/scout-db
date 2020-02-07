@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     resources :tournaments
     resources :fields
     resources :games, only: [:new, :show, :edit, :update]
+    resources :player_lists
   end
 end

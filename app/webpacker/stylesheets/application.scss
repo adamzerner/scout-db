@@ -3,6 +3,7 @@
 @import "home.scss";
 @import "tournaments.scss";
 @import "players-table.scss";
+@import "player-lists.scss";
 @import "actiontext.scss";
 
 .alert {
@@ -25,4 +26,8 @@ h1.page-header {
 
 .filters .col-md span, .filters .col-md .col-header {
   text-decoration: underline;
+}
+
+.close {
+  cursor: pointer;
 }
