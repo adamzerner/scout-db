@@ -1,7 +1,6 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "easy-autocomplete/dist/easy-autocomplete.css";
 @import "home.scss";
-@import "tournaments.scss";
 @import "players-table.scss";
 @import "player-lists.scss";
 @import "actiontext.scss";
@@ -24,8 +23,12 @@ h1.page-header {
   text-decoration: underline;
 }
 
-.filters .col-md span, .filters .col-md .col-header {
-  text-decoration: underline;
+.filters .filter-category {
+  margin-bottom: 10px;
+
+  .col-header, span {
+    text-decoration: underline;
+  }
 }
 
 .close {

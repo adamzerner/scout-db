@@ -1,111 +1,115 @@
 <h1 class="page-header">Tournament: <%= @tournament.name %></h1>
 
-<section class="card bg-light filters">
-  <section class="card-header">
-    Filters
-  </section>
-  <section class="card-body">
-    <%= form_with url: tournament_path(@tournament), method: :get, local: true do |f| %>
-      <%= hidden_field_tag 'sort', params[:sort] if params[:sort] %>
-      <%= hidden_field_tag 'direction', params[:direction] if params[:direction] %>
-      <section class="row">
-        <section class="col-md">
+<section class="row">
+  <section class="col-lg-3">
+    <section class="card bg-light filters">
+      <section class="card-header">
+        Filters
+      </section>
+      <section class="card-body">
+        <%= form_with url: tournament_path(@tournament), method: :get, local: true do |f| %>
+          <%= hidden_field_tag 'sort', params[:sort] if params[:sort] %>
+          <%= hidden_field_tag 'direction', params[:direction] if params[:direction] %>
           <% if !@filter_options[:player_lists].empty? %>
-            <span>Players lists:</span>
-            <% @filter_options[:player_lists].each do |player_list| %>
+            <section class="filter-category">
+              <span>Players lists:</span>
+              <% @filter_options[:player_lists].each do |player_list| %>
+                <section class="form-check">
+                  <label class="form-check-label">
+                    <%= f.check_box "player_list_filters[]", { class: "form-check-input", checked: params[:player_list_filters].try(:include?, player_list.id.to_s) }, player_list.id, nil %>
+                    <%= player_list.name %>
+                  </label>
+                </section>
+              <% end %>
+            </section>
+          <% end %>
+          <section class="filter-category">
+            <span>Players:</span>
+            <% @filter_options[:players].each do |player| %>
               <section class="form-check">
                 <label class="form-check-label">
-                  <%= f.check_box "player_list_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:player_list_filters].try(:include?, player_list.id.to_s) }, player_list.id, nil %>
-                  <%= player_list.name %>
+                  <%= f.check_box "player_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:player_filters].try(:include?, player.id.to_s) }, player.id, nil %>
+                  <%= player.full_name %>
                 </label>
               </section>
             <% end %>
-            <br>
-          <% end %>
-          <span>Players:</span>
-          <% @filter_options[:players].each do |player| %>
-            <section class="form-check">
-              <label class="form-check-label">
-                <%= f.check_box "player_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:player_filters].try(:include?, player.id.to_s) }, player.id, nil %>
-                <%= player.full_name %>
-              </label>
-            </section>
-          <% end %>
-        </section>
-        <section class="col-md">
-          <span>Teams:</span>
-          <% @filter_options[:teams].each do |team| %>
-            <section class="form-check">
-              <label class="form-check-label">
-                <%= f.check_box "team_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:team_filters].try(:include?, team.id.to_s) }, team.id, nil %>
-                <%= team.full_name %>
-              </label>
-            </section>
-          <% end %>
-        </section>
-        <section class="col-md">
-          <span>Dates:</span>
-          <% @filter_options[:dates].each do |date| %>
-            <section class="form-check">
-              <label class="form-check-label">
-                <%= f.check_box "date_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:date_filters].try(:include?, date.to_s) }, date, nil %>
-                <%= date.to_formatted_s(:long) %>
-              </label>
-            </section>
-          <% end %>
-        </section>
-        <section class="col-md">
-          <span>Fields:</span>
-          <% @filter_options[:fields].each do |field| %>
-            <section class="form-check">
-              <label class="form-check-label">
-                <%= f.check_box "field_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:field_filters].try(:include?, field.id.to_s) }, field.id, nil %>
-                <%= field.name %>
-              </label>
-            </section>
-          <% end %>
-        </section>
-        <section class="col-md">
-          <span>Time:</span>
-          <section class="form-group">
-            <%= f.label :earliest_start_time %>
-            <%= f.time_field :earliest_start_time, value: params[:earliest_start_time], class: "form-control" %>
           </section>
-          <section class="form-group">
-            <%= f.label :latest_start_time %>
-            <%= f.time_field :latest_start_time, value: params[:latest_start_time], class: "form-control" %>
+          <section class="filter-category">
+            <span>Teams:</span>
+            <% @filter_options[:teams].each do |team| %>
+              <section class="form-check">
+                <label class="form-check-label">
+                  <%= f.check_box "team_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:team_filters].try(:include?, team.id.to_s) }, team.id, nil %>
+                  <%= team.full_name %>
+                </label>
+              </section>
+            <% end %>
           </section>
-        </section>
+          <section class="filter-category">
+            <span>Dates:</span>
+            <% @filter_options[:dates].each do |date| %>
+              <section class="form-check">
+                <label class="form-check-label">
+                  <%= f.check_box "date_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:date_filters].try(:include?, date.to_s) }, date, nil %>
+                  <%= date.to_formatted_s(:long) %>
+                </label>
+              </section>
+            <% end %>
+          </section>
+          <section class="filter-category">
+            <span>Fields:</span>
+            <% @filter_options[:fields].each do |field| %>
+              <section class="form-check">
+                <label class="form-check-label">
+                  <%= f.check_box "field_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:field_filters].try(:include?, field.id.to_s) }, field.id, nil %>
+                  <%= field.name %>
+                </label>
+              </section>
+            <% end %>
+          </section>
+          <section class="filter-category">
+            <span>Time:</span>
+            <section class="form-group">
+              <%= f.label :earliest_start_time %>
+              <%= f.time_field :earliest_start_time, value: params[:earliest_start_time], class: "form-control" %>
+            </section>
+            <section class="form-group">
+              <%= f.label :latest_start_time %>
+              <%= f.time_field :latest_start_time, value: params[:latest_start_time], class: "form-control" %>
+            </section>
+          </section>
+          <hr>
+          <%= submit_tag "Apply filters", class: "btn btn-secondary btn-block" %>
+        <% end %>
       </section>
-      <hr>
-      <%= submit_tag "Apply filters", class: "btn btn-secondary" %>
-    <% end %>
+    </section>
+  </section>
+  <section class="col-lg-9">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= sortable "id", sort_column, sort_direction, "Game ID" %></th>
+          <th><%= sortable "team_one", sort_column, sort_direction%></th>
+          <th><%= sortable "team_two", sort_column, sort_direction %></th>
+          <th><%= sortable "date", sort_column, sort_direction %></th>
+          <th><%= sortable "start_time", sort_column, sort_direction %></th>
+          <th><%= sortable "field", sort_column, sort_direction %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @games.each do |game| %>
+          <tr>
+            <td><%= link_to game.id, game_path(game) %></td>
+            <td><%= link_to game.team_one.full_name, team_path(game.team_one) %></td>
+            <td><%= link_to game.team_two.full_name, team_path(game.team_two) %></td>
+            <td><%= game.date.to_formatted_s(:long) %></td>
+            <td><%= game.start_time.strftime("%I:%M %p") %></td>
+            <td><%= link_to game.field.name, field_path(game.field) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </section>
 </section>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= sortable "id", sort_column, sort_direction, "Game ID" %></th>
-      <th><%= sortable "team_one", sort_column, sort_direction%></th>
-      <th><%= sortable "team_two", sort_column, sort_direction %></th>
-      <th><%= sortable "date", sort_column, sort_direction %></th>
-      <th><%= sortable "start_time", sort_column, sort_direction %></th>
-      <th><%= sortable "field", sort_column, sort_direction %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @games.each do |game| %>
-      <tr>
-        <td><%= link_to game.id, game_path(game) %></td>
-        <td><%= link_to game.team_one.full_name, team_path(game.team_one) %></td>
-        <td><%= link_to game.team_two.full_name, team_path(game.team_two) %></td>
-        <td><%= game.date.to_formatted_s(:long) %></td>
-        <td><%= game.start_time.strftime("%I:%M %p") %></td>
-        <td><%= link_to game.field.name, field_path(game.field) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <%= link_to 'Edit', edit_tournament_path if is_admin? %>

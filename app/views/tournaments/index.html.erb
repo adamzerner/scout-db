@@ -2,67 +2,70 @@
 
 <p><%= link_to "Create a new tournament", new_tournament_path, class: "btn btn-primary" if is_admin? %></p>
 
-<section class="card bg-light filters">
-  <section class="card-header">
-    Filters
-  </section>
-  <section class="card-body">
-    <%= form_with url: tournaments_path, method: :get, local: true do |f| %>
-      <%= hidden_field_tag 'sort', params[:sort] if params[:sort] %>
-      <%= hidden_field_tag 'direction', params[:direction] if params[:direction] %>
-      <section class="row">
-        <section class="col-md">
-          <span>Approximate locations</span>
-          <% @filter_options[:locations].each do |location| %>
-            <section class="form-check">
-              <label class="form-check-label">
-                <%= f.check_box "location_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:location_filters].try(:include?, location) }, location, nil %>
-                <%= location %>
-              </label>
-            </section>
-          <% end %>
-        </section>
-        <section class="col-md">
-          <section class="form-group">
-            <%= f.label :earliest_start_date, class: "col-header" %>
-            <%= f.date_field :earliest_start_date, value: params[:earliest_start_date], class: "form-control" %>
-          </section>
-        </section>
-        <section class="col-md">
-          <section class="form-group">
-            <%= f.label :latest_start_date, class: "col-header" %>
-            <%= f.date_field :latest_start_date, value: params[:latest_start_date], class: "form-control" %>
-          </section>
-        </section>
+<section class="row">
+  <section class="col-lg-3">
+    <section class="card bg-light filters">
+      <section class="card-header">
+        Filters
       </section>
-      <hr>
-      <%= submit_tag "Apply filters", class: "btn btn-secondary" %>
-    <% end %>
+      <section class="card-body">
+        <%= form_with url: tournaments_path, method: :get, local: true do |f| %>
+          <%= hidden_field_tag 'sort', params[:sort] if params[:sort] %>
+          <%= hidden_field_tag 'direction', params[:direction] if params[:direction] %>
+          <section class="filter-category">
+            <span>Approximate locations</span>
+            <% @filter_options[:locations].each do |location| %>
+              <section class="form-check">
+                <label class="form-check-label">
+                  <%= f.check_box "location_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:location_filters].try(:include?, location) }, location, nil %>
+                  <%= location %>
+                </label>
+              </section>
+            <% end %>
+          </section>
+          <section class="filter-category">
+            <section class="form-group">
+              <%= f.label :earliest_start_date, class: "col-header" %>
+              <%= f.date_field :earliest_start_date, value: params[:earliest_start_date], class: "form-control" %>
+            </section>
+          </section>
+          <section class="filter-category">
+            <section class="form-group">
+              <%= f.label :latest_start_date, class: "col-header" %>
+              <%= f.date_field :latest_start_date, value: params[:latest_start_date], class: "form-control" %>
+            </section>
+          </section>
+          <hr>
+          <%= submit_tag "Apply filters", class: "btn btn-secondary btn-block" %>
+        <% end %>
+      </section>
+    </section>
+  </section>
+  <section class="col-lg-9">
+    <table class="table table-hover">
+      <tr>
+        <th><%= sortable "name", sort_column, sort_direction %></th>
+        <th><%= sortable "dates", sort_column, sort_direction %></th>
+        <th><%= sortable "location", sort_column, sort_direction, "Approximate location" %></th>
+        <% if is_admin? %>
+          <th>Edit</th>
+          <th>Delete</th>
+        <% end %>
+      </tr>
+      <% @tournaments.each do |tournament| %>
+        <tr>
+          <td><%= link_to tournament.name, tournament_path(tournament) %></td>
+          <td><%= tournament.date_range %></td>
+          <td><%= tournament.location %></td>
+          <% if is_admin? %>
+            <td><%= link_to "Edit", edit_tournament_path(tournament) %></td>
+            <td><%= link_to 'Delete', tournament_path(tournament),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
   </section>
 </section>
-
-<table class="table table-hover">
-  <tr>
-    <th><%= sortable "name", sort_column, sort_direction %></th>
-    <th><%= sortable "dates", sort_column, sort_direction %></th>
-    <th><%= sortable "location", sort_column, sort_direction, "Approximate location" %></th>
-    <% if is_admin? %>
-      <th>Edit</th>
-      <th>Delete</th>
-    <% end %>
-  </tr>
-  <% @tournaments.each do |tournament| %>
-    <tr>
-      <td><%= link_to tournament.name, tournament_path(tournament) %></td>
-      <td><%= tournament.date_range %></td>
-      <td><%= tournament.location %></td>
-      <% if is_admin? %>
-        <td><%= link_to "Edit", edit_tournament_path(tournament) %></td>
-        <td><%= link_to 'Delete', tournament_path(tournament),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
