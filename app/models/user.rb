@@ -9,6 +9,6 @@ class User < ApplicationRecord
   end
 
   def read_access?
-    self.role === "read"
+    self.role === "read" || self.role === "admin"
   end
 end
