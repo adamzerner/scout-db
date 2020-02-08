@@ -96,18 +96,26 @@ class Player < ApplicationRecord
   end
 
   def passes_through_height_filters(shortest_feet, shortest_inches, tallest_feet, tallest_inches)
-    if (shortest_feet.empty? || shortest_inches.empty?) && (tallest_feet.empty? || tallest_inches.empty?)
-      return true
-    end
-
     if !self.height
       return true
     end
 
-    shortest_height_allowed_in_inches = (shortest_feet.to_f * 12) + shortest_inches.to_f
-    tallest_height_allowed_in_inches = (tallest_feet.to_f * 12) + tallest_inches.to_f
+    if (!shortest_feet.empty? && !shortest_inches.empty?) && (!tallest_feet.empty? && !tallest_inches.empty?)
+      shortest_height_allowed_in_inches = (shortest_feet.to_f * 12) + shortest_inches.to_f
+      tallest_height_allowed_in_inches = (tallest_feet.to_f * 12) + tallest_inches.to_f
 
-    return self.height >= shortest_height_allowed_in_inches && self.height <= tallest_height_allowed_in_inches
+      return self.height >= shortest_height_allowed_in_inches && self.height <= tallest_height_allowed_in_inches
+    elsif (!shortest_feet.empty? && !shortest_inches.empty?)
+      shortest_height_allowed_in_inches = (shortest_feet.to_f * 12) + shortest_inches.to_f
+
+      return self.height >= shortest_height_allowed_in_inches
+    elsif (!tallest_feet.empty? && !tallest_inches.empty?)
+      tallest_height_allowed_in_inches = (tallest_feet.to_f * 12) + tallest_inches.to_f
+
+      return self.height <= tallest_height_allowed_in_inches
+    else # both empty
+      return true
+    end
   end
 
   def passes_through_weight_filters(lightest, heaviest)
