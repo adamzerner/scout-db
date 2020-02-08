@@ -139,15 +139,20 @@ class Tournament < ApplicationRecord
     end
   end
 
-  def filter_options
+  def filter_options(current_user)
     result = {}
 
+    result[:player_lists] = get_player_lists_for_filter_options(current_user.player_lists)
     result[:teams] = get_teams_for_filter_options(self.games)
     result[:players] = get_players_for_filter_options(result[:teams])
     result[:dates] = get_dates_for_filter_options(self.games)
     result[:fields] = get_fields_for_filter_options(self.games)
 
     return result
+  end
+
+  def get_player_lists_for_filter_options(player_lists)
+    return player_lists.sort { |a,b| a.name <=> b.name }
   end
 
   def get_players_for_filter_options(teams)

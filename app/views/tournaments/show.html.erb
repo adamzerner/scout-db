@@ -10,6 +10,18 @@
       <%= hidden_field_tag 'direction', params[:direction] if params[:direction] %>
       <section class="row">
         <section class="col-md">
+          <% if !@filter_options[:player_lists].empty? %>
+            <span>Players lists:</span>
+            <% @filter_options[:player_lists].each do |player_list| %>
+              <section class="form-check">
+                <label class="form-check-label">
+                  <%= f.check_box "player_list_filters[]", { class: "form-check-input", checked: !@filters_to_apply || params[:player_list_filters].try(:include?, player_list.id.to_s) }, player_list.id, nil %>
+                  <%= player_list.name %>
+                </label>
+              </section>
+            <% end %>
+            <br>
+          <% end %>
           <span>Players:</span>
           <% @filter_options[:players].each do |player| %>
             <section class="form-check">

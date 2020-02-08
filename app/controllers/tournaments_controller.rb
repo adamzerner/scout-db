@@ -11,7 +11,7 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
-    @filter_options = @tournament.filter_options
+    @filter_options = @tournament.filter_options(current_user)
     @filters_to_apply = filter_params && !filter_params.empty?
     @games = @tournament.sorted_games(sort_column, sort_direction)
     @games = @filters_to_apply ? get_filtered_games(@games, filter_params) : @games
@@ -71,7 +71,7 @@ class TournamentsController < ApplicationController
     end
 
     def filter_params
-      params.permit(:sort, :direction, :earliest_start_date, :latest_start_date, :earliest_start_time, :latest_start_time, :commit, :id, location_filters: [], player_filters: [], team_filters: [], date_filters: [], field_filters: []).except(:id, :commit, :sort, :direction)
+      params.permit(:sort, :direction, :earliest_start_date, :latest_start_date, :earliest_start_time, :latest_start_time, :commit, :id, location_filters: [], player_list_filters: [], player_filters: [], team_filters: [], date_filters: [], field_filters: []).except(:id, :commit, :sort, :direction)
     end
 
     def get_filtered_tournaments(tournaments, filters)

@@ -26,14 +26,20 @@ class Team < ApplicationRecord
     name
   end
 
-  def has_at_least_one_of_the_players(player_filters)
+  def has_at_least_one_of_the_players(player_ids)
     players.each do |player|
-      if player_filters.include? player.id.to_s
+      if player_ids.include? player.id.to_s
         return true
       end
     end
 
     return false
+  end
+
+  def has_at_least_one_of_the_players_in_the_player_lists(player_list_ids)
+    player_ids = PlayerList.get_player_ids(player_list_ids)
+
+    return self.has_at_least_one_of_the_players(player_ids)
   end
 
   def location(city = city, state = state)

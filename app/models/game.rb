@@ -14,11 +14,23 @@ class Game < ApplicationRecord
 
   def passes_through_filters(filters)
     return (
+      passes_through_player_list_filters(filters[:player_list_filters]) &&
       passes_through_player_filters(filters[:player_filters]) &&
       passes_through_team_filters(filters[:team_filters]) &&
       passes_through_date_filters(filters[:date_filters]) &&
       passes_through_field_filters(filters[:field_filters]) &&
       passes_through_start_time_filters(filters[:earliest_start_time], filters[:latest_start_time])
+    )
+  end
+
+  def passes_through_player_list_filters(player_list_filters)
+    if !player_list_filters
+      return true
+    end
+
+    return (
+      team_one.has_at_least_one_of_the_players_in_the_player_lists(player_list_filters) ||
+      team_two.has_at_least_one_of_the_players_in_the_player_lists(player_list_filters)
     )
   end
 
