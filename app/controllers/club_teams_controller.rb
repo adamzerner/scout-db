@@ -1,6 +1,6 @@
 class ClubTeamsController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
-  helper_method :sort_column
+  helper_method :sort_column, :filter_params
 
   def index
     @club_teams = ClubTeam.sorted_club_teams(sort_column, sort_direction)
@@ -54,6 +54,10 @@ class ClubTeamsController < ApplicationController
       params
         .require(:club_team)
         .permit(:name, :city, :state)
+    end
+
+    def filter_params
+      players_table_filter_params
     end
 
     def sort_column

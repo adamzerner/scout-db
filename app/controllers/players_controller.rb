@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
+  helper_method :filter_params
 
   def index
     @filter_options = Player.filter_options
@@ -61,5 +62,9 @@ class PlayersController < ApplicationController
       end
 
       return params_for_player.except(:feet_component_of_height, :inches_component_of_height)
+    end
+
+    def filter_params
+      players_table_filter_params
     end
 end

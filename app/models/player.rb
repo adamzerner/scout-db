@@ -100,7 +100,7 @@ class Player < ApplicationRecord
       return true
     end
 
-    if !self.height || self.height.empty?
+    if !self.height
       return true
     end
 

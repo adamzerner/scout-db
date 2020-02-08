@@ -9,8 +9,13 @@ module ApplicationHelper
 
   def sortable(column, sort_column, sort_direction, title = nil)
     title ||= column.titleize
-    filter_params ||= {}
     direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
+    url_params = {}
+
+    if filter_params
+      url_params = filter_params.merge({ sort: column, direction: direction })
+    end
+
     link = link_to title, filter_params.merge({ sort: column, direction: direction })
 
     if column == sort_column && sort_direction == "asc"
