@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :player_lists, dependent: :destroy
+  has_many :player_notes, dependent: :destroy
 
   def admin?
     self.role === "admin"

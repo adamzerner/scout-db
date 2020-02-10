@@ -77,4 +77,16 @@
   </section>
 </section>
 
+<section class="card">
+  <section class="card-header">
+    My notes
+  </section>
+  <section class="card-body">
+    <%= form_with model: @player_note, url: "/players/#{@player.id}/create_or_update_player_note" do |f| %>
+      <%= f.rich_text_area :notes, class: "form-control" %><br>
+      <%= f.submit nil, class: "btn btn-primary" %>
+    <% end %>
+  </section>
+</section>
+
 <%= link_to 'Edit', edit_player_path if is_admin? %>

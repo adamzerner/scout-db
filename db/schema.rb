@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_07_193002) do
+ActiveRecord::Schema.define(version: 2020_02_10_190036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,16 @@ ActiveRecord::Schema.define(version: 2020_02_07_193002) do
     t.index ["user_id"], name: "index_player_lists_on_user_id"
   end
 
+  create_table "player_notes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "player_id", null: false
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_player_notes_on_player_id"
+    t.index ["user_id"], name: "index_player_notes_on_user_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
@@ -155,4 +165,6 @@ ActiveRecord::Schema.define(version: 2020_02_07_193002) do
   add_foreign_key "player_list_players", "player_lists"
   add_foreign_key "player_list_players", "players"
   add_foreign_key "player_lists", "users"
+  add_foreign_key "player_notes", "players"
+  add_foreign_key "player_notes", "users"
 end
