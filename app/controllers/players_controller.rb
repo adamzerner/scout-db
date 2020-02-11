@@ -19,18 +19,6 @@ class PlayersController < ApplicationController
     end
   end
 
-  def create_or_update_player_note
-    @player_note = PlayerNote.find_or_initialize_by(player_note_params)
-    @player_note.player_id = params[:player_id].to_i
-    @player_note.user_id = current_user.id
-
-    if @player_note.save
-      redirect_to player_path(params[:player_id])
-    else
-      render 'show'
-    end
-  end
-
   def new
     @player = Player.new
     @player.address = Address.new
@@ -80,10 +68,6 @@ class PlayersController < ApplicationController
       end
 
       return params_for_player.except(:feet_component_of_height, :inches_component_of_height)
-    end
-
-    def player_note_params
-      params.require(:player_note).permit(:notes)
     end
 
     def filter_params

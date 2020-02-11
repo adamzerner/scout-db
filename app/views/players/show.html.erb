@@ -82,9 +82,9 @@
     My notes
   </section>
   <section class="card-body">
-    <%= form_with model: @player_note, url: "/players/#{@player.id}/create_or_update_player_note" do |f| %>
+    <%= form_with model: @player_note, url: [@player, @player_note] do |f| %>
       <%= f.rich_text_area :notes, class: "form-control" %><br>
-      <%= f.submit nil, class: "btn btn-primary" %>
+      <%= f.submit "Save", class: "btn btn-primary" %>
     <% end %>
   </section>
 </section>
