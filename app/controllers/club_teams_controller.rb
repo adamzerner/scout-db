@@ -63,6 +63,6 @@ class ClubTeamsController < ApplicationController
     end
 
     def sort_column
-      %w[name location].include?(params[:sort]) ? params[:sort] : "location"
+      %w[name location coach manager].include?(params[:sort]) ? params[:sort] : "location"
     end
 end

@@ -6,6 +6,8 @@
   <tr>
     <th><%= sortable "name", sort_column, sort_direction %></th>
     <th><%= sortable "location", sort_column, sort_direction %></th>
+    <th><%= sortable "coach", sort_column, sort_direction %></th>
+    <th><%= sortable "manager", sort_column, sort_direction %></th>
     <% if is_admin? %>
       <th>Edit</th>
       <th>Delete</th>
@@ -16,6 +18,8 @@
     <tr>
       <td><%= link_to club_team.name, club_team_path(club_team) %></td>
       <td><%= club_team.location %></td>
+      <td><%= club_team.coach.full_name %></td>
+      <td><%= club_team.manager.full_name %></td>
       <% if is_admin? %>
         <td><%= link_to "Edit", edit_club_team_path(club_team) %></td>
         <td><%= link_to 'Delete', club_team_path(club_team),
