@@ -1,0 +1,10 @@
+<span>
+  <%= person.full_name %>
+  <% if person.phone_number && !person.phone_number.empty? && person.email && !person.email.empty? %>
+    (<%= person.phone_number %>, <%= mail_to person.email %>)
+  <% elsif person.phone_number && !person.phone_number.empty? %>
+    (<%= person.phone_number %>)
+  <% elsif person.email && !person.email.empty? %>
+    (<%= mail_to person.email %>)
+  <% end %>
+</span>

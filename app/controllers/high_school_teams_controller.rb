@@ -16,6 +16,8 @@ class HighSchoolTeamsController < ApplicationController
 
   def new
     @high_school_team = HighSchoolTeam.new
+    @high_school_team.coach = Coach.new
+    @high_school_team.manager = Manager.new
     @high_school_team.address = Address.new
   end
 
@@ -54,7 +56,7 @@ class HighSchoolTeamsController < ApplicationController
     def high_school_team_params
       params
         .require(:high_school_team)
-        .permit(:name, :team_name, address_attributes: [ :id, :line_one, :line_two, :city, :state, :zip ])
+        .permit(:name, :team_name, coach_attributes: [ :first_name, :middle_name, :last_name, :phone_number, :email ], manager_attributes: [ :first_name, :middle_name, :last_name, :phone_number, :email ], address_attributes: [ :id, :line_one, :line_two, :city, :state, :zip ])
     end
 
     def filter_params

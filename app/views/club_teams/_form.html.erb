@@ -11,5 +11,22 @@
     <%= f.label :state %>
     <%= f.text_field :state, class: "form-control" %>
   </section>
+  <section class="card">
+    <section class="card-header">
+      Coach
+    </section>
+    <section class="card-body">
+      <%= render "shared/coach_manager_form", f: f, coach_or_manager: :coach %>
+    </section>
+  </section>
+  <section class="card">
+    <section class="card-header">
+      Manager
+    </section>
+    <section class="card-body">
+      <%= render "shared/coach_manager_form", f: f, coach_or_manager: :manager %>
+    </section>
+  </section>
+
   <%= f.submit nil, class: "btn btn-primary" %>
 <% end %>

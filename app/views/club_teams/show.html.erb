@@ -10,6 +10,14 @@
       <%= @club_team.name %>
     </li>
     <li class="list-group-item">
+      <strong>Coach:</strong>
+      <%= render "shared/coach_or_manager", person: @club_team.coach %>
+    </li>
+    <li class="list-group-item">
+      <strong>Manager:</strong>
+      <%= render "shared/coach_or_manager", person: @club_team.manager %>
+    </li>
+    <li class="list-group-item">
       <strong>Location:</strong>
       <%= @club_team.location %>
     </li>

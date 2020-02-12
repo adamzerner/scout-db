@@ -16,6 +16,8 @@ class ClubTeamsController < ApplicationController
 
   def new
     @club_team = ClubTeam.new
+    @club_team.coach = Coach.new
+    @club_team.manager = Manager.new
   end
 
   def edit
@@ -53,7 +55,7 @@ class ClubTeamsController < ApplicationController
     def club_team_params
       params
         .require(:club_team)
-        .permit(:name, :city, :state)
+        .permit(:name, :city, :state, coach_attributes: [ :first_name, :middle_name, :last_name, :phone_number, :email ], manager_attributes: [ :first_name, :middle_name, :last_name, :phone_number, :email ])
     end
 
     def filter_params

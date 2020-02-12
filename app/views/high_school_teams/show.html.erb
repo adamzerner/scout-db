@@ -14,6 +14,14 @@
       <%= @high_school_team.team_name %>
     </li>
     <li class="list-group-item">
+      <strong>Coach:</strong>
+      <%= render "shared/coach_or_manager", person: @high_school_team.coach %>
+    </li>
+    <li class="list-group-item">
+      <strong>Manager:</strong>
+      <%= render "shared/coach_or_manager", person: @high_school_team.manager %>
+    </li>
+    <li class="list-group-item">
       <strong>Address:</strong>
       <%= render "shared/address", address: @high_school_team.address %>
     </li>

@@ -1,4 +1,6 @@
 class Team < ApplicationRecord
+  has_one :coach, dependent: :destroy
+  has_one :manager, dependent: :destroy
   has_many :high_school_team_players,
            foreign_key: :high_school_team_id,
            class_name: 'Player'
@@ -13,6 +15,9 @@ class Team < ApplicationRecord
            dependent: :destroy,
            foreign_key: :team_two_id,
            class_name: 'Game'
+
+  accepts_nested_attributes_for :coach, allow_destroy: true
+  accepts_nested_attributes_for :manager, allow_destroy: true
 
   def self.search(query)
     if query
@@ -42,13 +47,16 @@ class Team < ApplicationRecord
     return self.has_at_least_one_of_the_players(player_ids)
   end
 
-  def location(city = city, state = state)
-    if city && state
-      return "#{city}, #{state}"
-    elsif city
-      return city
-    elsif state
-      return state
+  def location(city_arg = nil, state_arg = nil)
+    city_val = city_arg ? city_arg : city
+    state_val = state_arg ? state_arg : state
+
+    if city_val && !city_val.empty? && state_val && !state_val.empty?
+      return "#{city_val}, #{state_val}"
+    elsif city_val && !city_val.empty?
+      return city_val
+    elsif state_val && !state_val.empty?
+      return state_val
     else
       return ""
     end

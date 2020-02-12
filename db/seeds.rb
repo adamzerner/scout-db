@@ -5,36 +5,54 @@ HighSchoolTeam.all.delete_all
 Field.all.delete_all
 Address.all.delete_all
 Tournament.all.delete_all
+Coach.all.delete_all
+Manager.all.delete_all
 
 HIGH_SCHOOL_TEAMS = [{
   name: 'Syosset',
   team_name: 'Braves',
-  address: Address.new
+  coach: Coach.new,
+  manager: Manager.new,
+  address: Address.new,
 }, {
   name: 'Jericho',
   team_name: 'Japs',
-  address: Address.new
+  coach: Coach.new,
+  manager: Manager.new,
+  address: Address.new,
 }, {
   name: 'Roslyn',
   team_name: 'Rich Pricks',
-  address: Address.new
+  coach: Coach.new,
+  manager: Manager.new,
+  address: Address.new,
 }, {
   name: 'Massapequa',
   team_name: 'Firemen',
-  address: Address.new
+  coach: Coach.new,
+  manager: Manager.new,
+  address: Address.new,
 }, {
   name: 'Plainview',
   team_name: 'Jews',
-  address: Address.new
+  coach: Coach.new,
+  manager: Manager.new,
+  address: Address.new,
 }]
 HIGH_SCHOOL_TEAMS.each { |high_school_team| HighSchoolTeam.create(high_school_team) }
 
 CLUB_TEAMS = [{
-  name: 'Fighters'
+  name: 'Fighters',
+  coach: Coach.new,
+  manager: Manager.new,
 }, {
-  name: 'Flyers'
+  name: 'Flyers',
+  coach: Coach.new,
+  manager: Manager.new,
 }, {
-  name: 'Lightning'
+  name: 'Lightning',
+  coach: Coach.new,
+  manager: Manager.new,
 }]
 CLUB_TEAMS.each { |club_team| ClubTeam.create(club_team) }
 

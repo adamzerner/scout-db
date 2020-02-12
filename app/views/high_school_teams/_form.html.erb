@@ -9,6 +9,22 @@
   </section>
   <section class="card">
     <section class="card-header">
+      Coach
+    </section>
+    <section class="card-body">
+      <%= render "shared/coach_manager_form", f: f, coach_or_manager: :coach %>
+    </section>
+  </section>
+  <section class="card">
+    <section class="card-header">
+      Manager
+    </section>
+    <section class="card-body">
+      <%= render "shared/coach_manager_form", f: f, coach_or_manager: :manager %>
+    </section>
+  </section>
+  <section class="card">
+    <section class="card-header">
       Address
     </section>
     <section class="card-body">

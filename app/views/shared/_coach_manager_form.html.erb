@@ -1,0 +1,22 @@
+<%= f.fields_for coach_or_manager do |ff| %>
+  <section class="form-group">
+    <%= ff.label :first_name, "First name" %>
+    <%= ff.text_field :first_name, class: "form-control" %>
+  </section>
+  <section class="form-group">
+    <%= ff.label :middle_name, "Middle name" %>
+    <%= ff.text_field :middle_name, class: "form-control" %>
+  </section>
+  <section class="form-group">
+    <%= ff.label :last_name, "Last name" %>
+    <%= ff.text_field :last_name, class: "form-control" %>
+  </section>
+  <section class="form-group">
+    <%= ff.label :phone_number %>
+    <%= ff.phone_field :phone_number, class: "form-control" %>
+  </section>
+  <section class="form-group">
+    <%= ff.label :email %>
+    <%= ff.email_field :email, class: "form-control" %>
+  </section>
+<% end %>

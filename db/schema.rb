@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_190036) do
+ActiveRecord::Schema.define(version: 2020_02_12_015125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,18 @@ ActiveRecord::Schema.define(version: 2020_02_10_190036) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
+  create_table "coaches", force: :cascade do |t|
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "email"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_coaches_on_team_id"
+  end
+
   create_table "fields", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -78,6 +90,18 @@ ActiveRecord::Schema.define(version: 2020_02_10_190036) do
     t.index ["team_one_id"], name: "index_games_on_team_one_id"
     t.index ["team_two_id"], name: "index_games_on_team_two_id"
     t.index ["tournament_id"], name: "index_games_on_tournament_id"
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "email"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_managers_on_team_id"
   end
 
   create_table "player_list_players", force: :cascade do |t|
@@ -164,10 +188,12 @@ ActiveRecord::Schema.define(version: 2020_02_10_190036) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "coaches", "teams"
   add_foreign_key "games", "fields"
   add_foreign_key "games", "teams", column: "team_one_id"
   add_foreign_key "games", "teams", column: "team_two_id"
   add_foreign_key "games", "tournaments"
+  add_foreign_key "managers", "teams"
   add_foreign_key "player_list_players", "player_lists"
   add_foreign_key "player_list_players", "players"
   add_foreign_key "player_lists", "users"
