@@ -18,6 +18,10 @@
       <%= @player.age %>
     </li>
     <li class="list-group-item">
+      <strong>Position:</strong>
+      <%= @player.positions %>
+    </li>
+    <li class="list-group-item">
       <strong>High school:</strong>
       <%= link_to @player.high_school_team.full_name, high_school_team_path(@player.high_school_team) if @player.try(:high_school_team).try(:school_name) %>
     </li>
@@ -34,12 +38,24 @@
   </section>
   <ul class="list-group">
     <li class="list-group-item">
+      <strong>Class year:</strong>
+      <%= @player.class_year %>
+    </li>
+    <li class="list-group-item">
       <strong>GPA:</strong>
       <%= @player.gpa %>
     </li>
     <li class="list-group-item">
-      <strong>Class year:</strong>
-      <%= @player.class_year %>
+      <strong>SAT:</strong>
+      <%= @player.sat_score %>
+    </li>
+    <li class="list-group-item">
+      <strong>PSAT:</strong>
+      <%= @player.psat_score %>
+    </li>
+    <li class="list-group-item">
+      <strong>ACT:</strong>
+      <%= @player.act_score %>
     </li>
     <li class="list-group-item">
       <strong>Intended major:</strong>

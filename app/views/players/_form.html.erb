@@ -40,6 +40,18 @@
         <%= f.date_field :birthday, class: "form-control" %>
       </section>
       <section class="form-group">
+        <%= f.label :position %>
+        <%= f.text_field :position, class: "form-control" %>
+      </section>
+      <section class="form-group">
+        <%= f.label :secondary_position %>
+        <%= f.text_field :secondary_position, class: "form-control" %>
+      </section>
+      <section class="form-group">
+        <%= f.label :tertiary_position %>
+        <%= f.text_field :tertiary_position, class: "form-control" %>
+      </section>
+      <section class="form-group">
         <%= f.label :high_school_team %>
         <%= f.collection_select(:high_school_team_id, HighSchoolTeam.all, :id, :full_name, { include_blank: true }, class: "form-control") %>
       </section>
@@ -56,12 +68,24 @@
     </section>
     <section class="card-body">
       <section class="form-group">
+        <%= f.label :class_year %>
+        <%= f.select(:class_year, ['Freshman', 'Sophomore', 'Junior', 'Senior'], { include_blank: true }, class: "form-control") %>
+      </section>
+      <section class="form-group">
         <%= f.label :gpa, "GPA" %>
         <%= f.number_field :gpa, class: "form-control", in: 0..4, step: 0.05 %>
       </section>
       <section class="form-group">
-        <%= f.label :class_year %>
-        <%= f.select(:class_year, ['Freshman', 'Sophomore', 'Junior', 'Senior'], { include_blank: true }, class: "form-control") %>
+        <%= f.label :sat_score, "SAT" %>
+        <%= f.number_field :sat_score, class: "form-control", in: 400..1600, step: 10 %>
+      </section>
+      <section class="form-group">
+        <%= f.label :psat_score, "PSAT" %>
+        <%= f.number_field :psat_score, class: "form-control", in: 400..1600, step: 10 %>
+      </section>
+      <section class="form-group">
+        <%= f.label :act_score, "ACT" %>
+        <%= f.number_field :act_score, class: "form-control", in: 1..36, step: 1 %>
       </section>
       <section class="form-group">
         <%= f.label :intended_major %>

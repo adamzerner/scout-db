@@ -211,6 +211,14 @@ class Player < ApplicationRecord
     end
   end
 
+  def positions
+    result = position
+    result += ", #{secondary_position}" if (secondary_position && !secondary_position.empty?)
+    result += ", #{tertiary_position}" if (tertiary_position && !tertiary_position.empty?)
+
+    return result
+  end
+
   def age
     if !birthday
       nil
