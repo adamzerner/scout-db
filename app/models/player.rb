@@ -56,6 +56,7 @@ class Player < ApplicationRecord
         high_school_teams << player.high_school_team
       end
     end
+    high_school_teams = high_school_teams.filter { |t| !!t }
 
     return high_school_teams.sort { |a,b| a.name <=> b.name }
   end
@@ -68,12 +69,13 @@ class Player < ApplicationRecord
         club_teams << player.club_team
       end
     end
+    club_teams = club_teams.filter { |t| !!t }
 
     return club_teams.sort { |a,b| a.name <=> b.name }
   end
 
   def self.class_years_filter_options(players)
-    order = ["Freshman", "Sophomore", "Junior", "Senior"]
+    order = ["Senior", "Junior", "Sophomore", "Freshman", "8th grade", "7th grade", "6th grade", "5th grade"]
     class_years = []
 
     players.each do |player|

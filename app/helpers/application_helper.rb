@@ -10,13 +10,14 @@ module ApplicationHelper
   def sortable(column, sort_column, sort_direction, title = nil)
     title ||= column.titleize
     direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
-    url_params = {}
+    url_params = { sort: column, direction: direction }
+    filter_params = filter_params || nil
 
     if filter_params
-      url_params = filter_params.merge({ sort: column, direction: direction })
+      url_params = url_params.merge(filter_params)
     end
 
-    link = link_to title, filter_params.merge({ sort: column, direction: direction })
+    link = link_to title, url_params
 
     if column == sort_column && sort_direction == "asc"
       icon = " ▴"
