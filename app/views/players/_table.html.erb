@@ -55,7 +55,7 @@
             </section>
           </section>
           <% if !excludes.include?(:high_school_team) && !@filter_options[:high_school_teams].empty? %>
-            <section class="filter-category">
+            <section class="filter-category filter-category-fixed-height">
               <span>High school teams</span>
               <% @filter_options[:high_school_teams].each do |high_school_team| %>
                 <section class="form-check">
@@ -68,7 +68,7 @@
             </section>
           <% end %>
           <% if !excludes.include?(:club_team) && !@filter_options[:club_teams].empty? %>
-            <section class="filter-category">
+            <section class="filter-category filter-category-fixed-height">
               <span>Club teams</span>
               <% @filter_options[:club_teams].each do |club_team| %>
                 <section class="form-check">

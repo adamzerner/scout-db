@@ -23,11 +23,18 @@ h1.page-header {
   text-decoration: underline;
 }
 
-.filters .filter-category {
-  margin-bottom: 10px;
+.filters {
+  .filter-category {
+    margin-bottom: 10px;
 
-  .col-header, span {
-    text-decoration: underline;
+    .col-header, span {
+      text-decoration: underline;
+    }
+  }
+
+  .filter-category-fixed-height {
+    max-height: 300px;
+    overflow-y: scroll;
   }
 }
 
