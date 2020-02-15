@@ -124,11 +124,5 @@ def parse_academics(player_line)
   sat = player_line.split(/(^SAT: )/)[1].to_f
   act = player_line.split('ACT: ')[1].to_f
 
-  academics = {}
-  academics[:gpa] = gpa if gpa > 0
-  academics[:psat_score] = psat if psat > 0
-  academics[:sat_score] = sat if sat > 0
-  academics[:act_score] = act if act > 0
-
-  return academics
+  return [gpa, psat, sat, act]
 end
