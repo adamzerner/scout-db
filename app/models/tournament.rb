@@ -184,7 +184,7 @@ class Tournament < ApplicationRecord
     dates = []
 
     games.each do |game|
-      dates << game.date if !dates.include?(game.date)
+      dates << game.date if (!dates.include?(game.date) && game.date)
     end
 
     return dates.sort { |a,b| a <=> b }
