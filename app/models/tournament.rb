@@ -103,10 +103,12 @@ class Tournament < ApplicationRecord
     earliest = nil
 
     self.games.each do |game|
-      if !earliest
-        earliest = game.date
-      elsif game.date < earliest
-        earliest = game.date
+      if game.date
+        if !earliest
+          earliest = game.date
+        elsif game.date < earliest
+          earliest = game.date
+        end
       end
     end
 
