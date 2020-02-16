@@ -5,7 +5,7 @@
 <table class="table table-hover">
   <tr>
     <th><%= sortable "name", sort_column, sort_direction %></th>
-    <th><%= sortable "location", sort_column, sort_direction %></th>
+    <th><%= sortable "city", sort_column, sort_direction, "Location" %></th>
     <th><%= sortable "coach", sort_column, sort_direction %></th>
     <th><%= sortable "manager", sort_column, sort_direction %></th>
     <% if is_admin? %>

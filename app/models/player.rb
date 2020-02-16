@@ -24,17 +24,26 @@ class Player < ApplicationRecord
     sorted_players = nil
 
     if sort_column === "class_year"
-      class_years = ["freshman", "sophomore", "junior", "senior"]
-      sorted_players = players.sort do |a,b|
+      class_years = ["5th grade", "6th grade", "7th grade", "8th grade", "Freshman", "Sophomore", "Junior", "Senior"]
+      players_with_attr = players.where("#{sort_column} IS NOT NULL")
+      players_without_attr = players.where("#{sort_column} IS NULL")
+      players_with_attr = players_with_attr.select(&:class_year).sort do |a,b|
         class_years.index(a.class_year) <=> class_years.index(b.class_year)
       end
-      sorted_players.reverse! if sort_direction === "desc"
+      players_with_attr.reverse! if sort_direction === "desc"
+      sorted_players = players_with_attr + players_without_attr
     elsif sort_column === "high_school_team"
-      sorted_players = players.joins("INNER JOIN teams ON teams.id = players.high_school_team_id").order("teams.name #{sort_direction}")
+      players_with_attr = players.where("high_school_team_id IS NOT NULL")
+      players_without_attr = players.where("high_school_team_id IS NULL")
+      sorted_players = players_with_attr.joins("INNER JOIN teams ON teams.id = players.high_school_team_id").order("teams.name #{sort_direction}") + players_without_attr
     elsif sort_column === "club_team"
-      sorted_players = players.joins("INNER JOIN teams ON teams.id = players.club_team_id").order("teams.name #{sort_direction}")
+      players_with_attr = players.where("club_team_id IS NOT NULL")
+      players_without_attr = players.where("club_team_id IS NULL")
+      sorted_players = players_with_attr.joins("INNER JOIN teams ON teams.id = players.club_team_id").order("teams.name #{sort_direction}") + players_without_attr
     else
-      sorted_players = players.order("#{sort_column} #{sort_direction}")
+      players_with_attr = players.where("#{sort_column} IS NOT NULL")
+      players_without_attr = players.where("#{sort_column} IS NULL")
+      sorted_players = players_with_attr.order("#{sort_column} #{sort_direction}") + players_without_attr
     end
 
     return sorted_players

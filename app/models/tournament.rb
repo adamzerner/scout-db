@@ -14,20 +14,24 @@ class Tournament < ApplicationRecord
   def self.sorted_tournaments(sort_column, sort_direction)
     sorted_tournaments = nil
 
-    if sort_column === "name"
-      sorted_tournaments = self.all.order("#{sort_column} #{sort_direction}")
-    elsif sort_column === "dates"
-      sorted_tournaments = self.all.sort do |a,b|
+    if sort_column === "dates"
+      tournaments_with_attr, tournaments_without_attr = self.all.partition { |t| !t.date_range.empty? }
+      tournaments_with_attr = tournaments_with_attr.sort do |a,b|
         a.date_range <=> b.date_range
       end
-      sorted_tournaments.reverse! if sort_direction === "asc"
+      tournaments_with_attr.reverse! if sort_direction === "asc"
+      sorted_tournaments = tournaments_with_attr + tournaments_without_attr
     elsif sort_column === "location"
-      sorted_tournaments = self.all.sort do |a,b|
+      tournaments_with_attr, tournaments_without_attr = self.all.partition { |t| !t.location.empty? }
+      tournaments_with_attr = tournaments_with_attr.sort do |a,b|
         a.location <=> b.location
       end
-      sorted_tournaments.reverse! if sort_direction === "asc"
+      tournaments_with_attr.reverse! if sort_direction === "asc"
+      sorted_tournaments = tournaments_with_attr + tournaments_without_attr
     else
-      sorted_tournaments = self.all
+      tournaments_with_attr = self.where("#{sort_column} IS NOT NULL")
+      tournaments_without_attr = self.where("#{sort_column} IS NULL")
+      sorted_tournaments = tournaments_with_attr.order("#{sort_column} #{sort_direction}") + tournaments_without_attr
     end
 
     return sorted_tournaments
@@ -131,13 +135,25 @@ class Tournament < ApplicationRecord
 
   def sorted_games(sort_column, sort_direction)
     if sort_column === "team_one"
-      return games.joins("INNER JOIN teams ON teams.id = games.team_one_id").order("teams.name #{sort_direction}")
+      teams_with_attr = games.where("team_one_id IS NOT NULL")
+      teams_without_attr = games.where("team_one_id IS NULL")
+
+      return teams_with_attr.joins("INNER JOIN teams ON teams.id = games.team_one_id").order("teams.name #{sort_direction}") + teams_without_attr
     elsif sort_column === "team_two"
-      return games.joins("INNER JOIN teams ON teams.id = games.team_two_id").order("teams.name #{sort_direction}")
+      teams_with_attr = games.where("team_two_id IS NOT NULL")
+      teams_without_attr = games.where("team_two_id IS NULL")
+
+      return teams_with_attr.joins("INNER JOIN teams ON teams.id = games.team_two_id").order("teams.name #{sort_direction}") + teams_without_attr
     elsif sort_column === "field"
-      return games.left_joins(:field).order("fields.name #{sort_direction}")
+      teams_with_attr = games.where("field_id IS NOT NULL")
+      teams_without_attr = games.where("field_id IS NULL")
+
+      return teams_with_attr.left_joins(:field).order("fields.name #{sort_direction}") + teams_without_attr
     else
-      return games.order("#{sort_column} #{sort_direction}")
+      games_with_attr = games.where("#{sort_column} IS NOT NULL")
+      games_without_attr = games.where("#{sort_column} IS NULL")
+
+      return games_with_attr.order("#{sort_column} #{sort_direction}") + games_without_attr
     end
   end
 

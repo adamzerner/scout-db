@@ -16,7 +16,9 @@ class Field < ApplicationRecord
     if sort_column === "location"
       return self.all.left_joins(:address).order("addresses.city #{sort_direction}")
     else
-      return self.all.order("#{sort_column} #{sort_direction}")
+      fields_with_attr = self.where("#{sort_column} IS NOT NULL")
+      fields_without_attr = self.where("#{sort_column} IS NULL")
+      return fields_with_attr.order("#{sort_column} #{sort_direction}") + fields_without_attr
     end
   end
 

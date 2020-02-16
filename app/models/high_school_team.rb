@@ -10,7 +10,10 @@ class HighSchoolTeam < Team
     elsif sort_column === "manager"
       return self.all.left_joins(:manager).order("managers.first_name #{sort_direction}")
     else
-      return self.all.order("#{sort_column} #{sort_direction}")
+      high_school_teams_with_attr = self.where("#{sort_column} IS NOT NULL")
+      high_school_teams_without_attr = self.where("#{sort_column} IS NULL")
+
+      return high_school_teams_with_attr.order("#{sort_column} #{sort_direction}") + high_school_teams_without_attr
     end
   end
 

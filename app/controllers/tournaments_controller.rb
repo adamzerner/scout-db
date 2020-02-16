@@ -63,7 +63,11 @@ class TournamentsController < ApplicationController
     end
 
     def sort_column
-      %w[name dates location id team_one team_two date start_time field].include?(params[:sort]) ? params[:sort] : "date"
+      if params[:action] === "index"
+        return %w[name dates location].include?(params[:sort]) ? params[:sort] : "name"
+      elsif params[:action] === "show"
+        return %w[id team_one team_two date start_time field].include?(params[:sort]) ? params[:sort] : "date"
+      end
     end
 
     def sort_direction
