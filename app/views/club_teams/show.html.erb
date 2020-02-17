@@ -26,6 +26,6 @@
 
 <br>
 <h4>Players</h4>
-<%= render "players/table", players: @players, filters_url: club_team_path(@club_team), sort_column: players_table_sort_column, sort_direction: sort_direction, excludes: [:club_team] %>
+<%= render "players/table", players: @players, paginate: false, filters_url: club_team_path(@club_team), sort_column: players_table_sort_column, sort_direction: sort_direction, excludes: [:club_team] %>
 
 <%= link_to 'Edit', edit_club_team_path if is_admin? %>

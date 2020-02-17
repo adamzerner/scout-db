@@ -10,11 +10,18 @@ class TournamentsController < ApplicationController
   end
 
   def show
+    page = (params[:page] || 1).to_i
+    index_of_first_game = (page * Game.ITEMS_PER_PAGE) - Game.ITEMS_PER_PAGE
+    index_of_last_game = page * Game.ITEMS_PER_PAGE
+
     @tournament = Tournament.find(params[:id])
     @filter_options = @tournament.filter_options(current_user)
     @filters_to_apply = filter_params && !filter_params.empty?
     @games = @tournament.sorted_games(sort_column, sort_direction)
     @games = @filters_to_apply ? get_filtered_games(@games, filter_params) : @games
+    @num_filtered_games = @games.length
+    @curr_page = page
+    @games = @games[index_of_first_game...index_of_last_game]
   end
 
   def new

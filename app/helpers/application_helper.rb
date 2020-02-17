@@ -11,6 +11,7 @@ module ApplicationHelper
     title ||= column.titleize
     direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
     url_params = { sort: column, direction: direction }
+    url_params[:page] = h(params[:page]) if h(params[:page])
     filter_params = filter_params || nil
 
     if filter_params

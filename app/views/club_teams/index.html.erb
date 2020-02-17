@@ -30,3 +30,5 @@
     </tr>
   <% end %>
 </table>
+
+<%= render "shared/pagination", curr_page: @curr_page, num_pages: (ClubTeam.count / ClubTeam.ITEMS_PER_PAGE).ceil %>

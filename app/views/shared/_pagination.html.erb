@@ -1,0 +1,31 @@
+<ul class="pagination">
+  <% if num_pages > 1 %>
+    <li class="page-item <%= 'disabled' if curr_page === 1 %>">
+      <%= link_to "&laquo;".html_safe, request.query_parameters.merge({ page: curr_page - 1 }), class: "page-link" %>
+    </li>
+  <% end %>
+  <% if num_pages > 0 %>
+    <li class="page-item <%= 'active' if curr_page === 1 %>">
+      <%= link_to "1", request.query_parameters.merge({ page: 1 }), class: "page-link" %>
+    </li>
+  <% end %>
+  <% if curr_page >= 6 %>
+    <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
+  <% end %>
+  <% ([curr_page-3, 2].max..[curr_page+3, num_pages-1].min).each do |page_num| %>
+    <li class="page-item <%= 'active' if page_num === curr_page %>">
+      <%= link_to page_num, request.query_parameters.merge({ page: page_num }), class: "page-link" %>
+    </li>
+  <% end %>
+  <% if curr_page <= (num_pages - 5) %>
+    <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
+  <% end %>
+  <% if num_pages > 1 %>
+    <li class="page-item <%= 'active' if curr_page === num_pages %>">
+      <%= link_to num_pages, request.query_parameters.merge({ page: num_pages }), class: "page-link" %>
+    </li>
+    <li class="page-item <%= 'disabled' if curr_page === num_pages %>">
+      <%= link_to "&raquo;".html_safe, request.query_parameters.merge({ page: curr_page + 1 }), class: "page-link" %>
+    </li>
+  <% end %>
+</ul>

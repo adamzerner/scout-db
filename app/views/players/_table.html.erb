@@ -8,6 +8,7 @@
         <%= form_with url: filters_url, method: :get, local: true do |f| %>
           <%= hidden_field_tag 'sort', params[:sort] if params[:sort] %>
           <%= hidden_field_tag 'direction', params[:direction] if params[:direction] %>
+          <%= hidden_field_tag 'page', params[:page] if params[:page] %>
           <section class="filter-category height">
             <span>Height</span>
             <section class="form-group">
@@ -129,5 +130,8 @@
         </tr>
       <% end %>
     </table>
-  </section>
+    <% if paginate %>
+      <%= render "shared/pagination", curr_page: curr_page, num_pages: (num_filtered_players / Player.ITEMS_PER_PAGE).ceil %>
+    <% end %>
+   </section>
 </section>

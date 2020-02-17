@@ -3,10 +3,17 @@ class PlayersController < ApplicationController
   helper_method :filter_params
 
   def index
+    page = (params[:page] || 1).to_i
+    index_of_first_player = (page * Player.ITEMS_PER_PAGE) - Player.ITEMS_PER_PAGE
+    index_of_last_player = page * Player.ITEMS_PER_PAGE
+
     @filter_options = Player.filter_options
     @filters_to_apply = players_table_filter_params && !players_table_filter_params.empty?
     @players = Player.sorted_players(players_table_sort_column, sort_direction)
     @players = @filters_to_apply ? get_filtered_players(@players, players_table_filter_params) : @players
+    @num_filtered_players = @players.length
+    @curr_page = page
+    @players = @players[index_of_first_player...index_of_last_player]
   end
 
   def show

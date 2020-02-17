@@ -3,7 +3,13 @@ class HighSchoolTeamsController < ApplicationController
   helper_method :sort_column, :filter_params
 
   def index
+    page = (params[:page] || 1).to_i
+    index_of_first_high_school_team = (page * HighSchoolTeam.ITEMS_PER_PAGE) - HighSchoolTeam.ITEMS_PER_PAGE
+    index_of_last_high_school_team = page * HighSchoolTeam.ITEMS_PER_PAGE
+
     @high_school_teams = HighSchoolTeam.sorted_high_school_teams(sort_column, sort_direction)
+    @curr_page = page
+    @high_school_teams = @high_school_teams[index_of_first_high_school_team...index_of_last_high_school_team]
   end
 
   def show
