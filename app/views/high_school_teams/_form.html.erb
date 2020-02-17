@@ -12,7 +12,7 @@
       Coach
     </section>
     <section class="card-body">
-      <%= render "shared/coach_manager_form", f: f, coach_or_manager: :coach %>
+      <%= render "shared/person_form", f: f, person_type: :coach %>
     </section>
   </section>
   <section class="card">
@@ -20,7 +20,7 @@
       Manager
     </section>
     <section class="card-body">
-      <%= render "shared/coach_manager_form", f: f, coach_or_manager: :manager %>
+      <%= render "shared/person_form", f: f, person_type: :manager %>
     </section>
   </section>
   <section class="card">

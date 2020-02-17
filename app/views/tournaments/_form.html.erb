@@ -4,6 +4,44 @@
     <%= f.text_field :name, class: "form-control" %>
   </section>
 
+  <section class="card">
+    <section class="card-header">
+      Tournament Director
+    </section>
+    <section class="card-body">
+      <%= f.fields_for :tournament_director do |ff| %>
+        <section class="form-group">
+          <%= ff.label :first_name %>
+          <%= ff.text_field :first_name, class: "form-control" %>
+        </section>
+        <section class="form-group">
+          <%= ff.label :middle_name %>
+          <%= ff.text_field :middle_name, class: "form-control" %>
+        </section>
+        <section class="form-group">
+          <%= ff.label :last_name %>
+          <%= ff.text_field :last_name, class: "form-control" %>
+        </section>
+        <section class="form-group">
+          <%= ff.label :email %>
+          <%= ff.email_field :email, class: "form-control" %>
+        </section>
+        <section class="form-group">
+          <%= ff.label :phone_number %>
+          <%= ff.phone_field :phone_number, class: "form-control" %>
+        </section>
+        <section class="card">
+          <section class="card-header">
+            Address
+          </section>
+          <section class="card-body">
+            <%= render "shared/address_form", f: ff %>
+          </section>
+        </section>
+      <% end %>
+    </section>
+  </section>
+
   <section class="games">
     <%= f.fields_for :games do |game| %>
       <%= render 'game_fields', f: game %>

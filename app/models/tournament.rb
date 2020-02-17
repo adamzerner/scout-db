@@ -1,6 +1,8 @@
 class Tournament < ApplicationRecord
+  has_one :tournament_director, dependent: :destroy
   has_many :games, inverse_of: :tournament, dependent: :destroy
 
+  accepts_nested_attributes_for :tournament_director, allow_destroy: true
   accepts_nested_attributes_for :games, allow_destroy: true
 
   def self.search(query)

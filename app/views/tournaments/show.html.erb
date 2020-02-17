@@ -85,6 +85,15 @@
     </section>
   </section>
   <section class="col-lg-9">
+    <section class="card">
+      <section class="card-header">
+        Director
+      </section>
+      <section class="card-body">
+        <%= render "shared/person", person: @tournament.tournament_director %>
+        <%= render "shared/address", address: @tournament.tournament_director.address %>
+      </section>
+    </section>
     <table class="table">
       <thead>
         <tr>

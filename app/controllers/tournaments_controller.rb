@@ -19,6 +19,8 @@ class TournamentsController < ApplicationController
 
   def new
     @tournament = Tournament.new
+    @tournament.tournament_director = TournamentDirector.new
+    @tournament.tournament_director.address = Address.new
   end
 
   def create
@@ -59,7 +61,10 @@ class TournamentsController < ApplicationController
     def tournament_params
       params
         .require(:tournament)
-        .permit(:name, games_attributes: [:id, :_destroy, :team_one_id, :team_two_id, :field_id, :date, :start_time])
+        .permit(:name,
+          tournament_director_attributes: [:first_name, :middle_name, :last_name, :email, :phone_number, address_attributes: [ :id, :line_one, :line_two, :city, :state, :zip ]],
+          games_attributes: [:id, :_destroy, :team_one_id, :team_two_id, :field_id, :date, :start_time]
+        )
     end
 
     def sort_column
