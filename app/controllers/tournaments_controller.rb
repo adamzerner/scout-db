@@ -10,7 +10,6 @@ class TournamentsController < ApplicationController
   end
 
   def show
-    page = (params[:page] || 1).to_i
     index_of_first_game = (page * Game.ITEMS_PER_PAGE) - Game.ITEMS_PER_PAGE
     index_of_last_game = page * Game.ITEMS_PER_PAGE
 
@@ -68,9 +67,9 @@ class TournamentsController < ApplicationController
     def tournament_params
       params
         .require(:tournament)
-        .permit(:name,
-          tournament_director_attributes: [:first_name, :middle_name, :last_name, :email, :phone_number, address_attributes: [ :id, :line_one, :line_two, :city, :state, :zip ]],
-          games_attributes: [:id, :_destroy, :team_one_id, :team_two_id, :field_id, :date, :start_time]
+        .permit(:id, :commit, :name,
+          tournament_director_attributes: [:id, :first_name, :middle_name, :last_name, :email, :phone_number, address_attributes: [ :id, :line_one, :line_two, :city, :state, :zip ]],
+          games_attributes: [:id, :_destroy, :team_one_id, :team_two_id, :field_id, :field_number, :date, :start_time]
         )
     end
 

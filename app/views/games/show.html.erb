@@ -19,7 +19,19 @@
     </li>
     <li class="list-group-item">
       <strong>Field:</strong>
-      <%= link_to @game.field.name, field_path(@game.field) %>
+      <%= link_to @game.field.name, field_path(@game.field) if @game.field %>
+    </li>
+    <li class="list-group-item">
+      <strong>Field number:</strong>
+      <%= @game.field_number %>
+    </li>
+    <li class="list-group-item">
+      <strong>Date:</strong>
+      <%= @game.date.to_formatted_s(:long) if @game.date %>
+    </li>
+    <li class="list-group-item">
+      <strong>Start time:</strong>
+      <%= @game.start_time.strftime("%I:%M %p") if @game.start_time %>
     </li>
   </ul>
 </section>

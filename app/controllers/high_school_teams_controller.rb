@@ -3,7 +3,6 @@ class HighSchoolTeamsController < ApplicationController
   helper_method :sort_column, :filter_params
 
   def index
-    page = (params[:page] || 1).to_i
     index_of_first_high_school_team = (page * HighSchoolTeam.ITEMS_PER_PAGE) - HighSchoolTeam.ITEMS_PER_PAGE
     index_of_last_high_school_team = page * HighSchoolTeam.ITEMS_PER_PAGE
 

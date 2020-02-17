@@ -104,6 +104,7 @@
           <th><%= sortable "date", sort_column, sort_direction %></th>
           <th><%= sortable "start_time", sort_column, sort_direction %></th>
           <th><%= sortable "field", sort_column, sort_direction %></th>
+          <th>Field number</th>
         </tr>
       </thead>
       <tbody>
@@ -115,6 +116,7 @@
             <td><%= game.date.to_formatted_s(:long) if game.date %></td>
             <td><%= game.start_time.strftime("%I:%M %p") if game.start_time %></td>
             <td><%= link_to game.field.name, field_path(game.field) if game.field %></td>
+            <td><%= game.field_number %></td>
           </tr>
         <% end %>
       </tbody>

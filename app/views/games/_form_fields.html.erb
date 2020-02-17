@@ -7,22 +7,22 @@
         <%= f.label :team_one %>
         <%= render 'games/team_select', f: f, team_number: "one", game: game %>
       </section>
-
       <section class="form-group">
         <%= f.label :team_two %>
         <%= render 'games/team_select', f: f, team_number: "two", game: game %>
       </section>
-
       <section class="form-group">
         <%= f.label :field %>
         <%= f.collection_select(:field_id, Field.all, :id, :name, {}, class: "form-control") %>
       </section>
-
+      <section class="form-group">
+        <%= f.label :field_number %>
+        <%= f.text_field :field_number, class: "form-control" %>
+      </section>
       <section class="form-group">
         <%= f.label :date %>
         <%= f.date_field :date, class: "form-control" %>
       </section>
-
       <section class="form-group">
         <%= f.label :start_time %>
         <%= f.time_field :start_time, class: "form-control" %>

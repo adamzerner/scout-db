@@ -40,4 +40,12 @@ class ApplicationController < ActionController::Base
       player.passes_through_filters(filters)
     end
   end
+
+  def page
+    if !params[:page] || params[:page].empty?
+      return 1
+    else
+      return params[:page].to_i
+    end
+  end
 end

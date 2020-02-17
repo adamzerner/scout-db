@@ -3,7 +3,6 @@ class PlayersController < ApplicationController
   helper_method :filter_params
 
   def index
-    page = (params[:page] || 1).to_i
     index_of_first_player = (page * Player.ITEMS_PER_PAGE) - Player.ITEMS_PER_PAGE
     index_of_last_player = page * Player.ITEMS_PER_PAGE
 
