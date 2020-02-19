@@ -7,7 +7,7 @@
 <%= form_with url: '/exports', scope: :export, local: true do |f| %>
   <section class="form-group">
     <%= f.label :format %>
-    <%= f.select(:format, ['CSV', 'Excel'], {}, { class: "form-control" }) %>
+    <%= f.select(:format, ['Excel', 'CSV'], {}, { class: "form-control" }) %>
   </section>
   <section class="form-group">
     <%= f.label :player_ids, "Players" %>

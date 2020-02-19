@@ -26,7 +26,9 @@ class ExportsController < ApplicationController
 
   def create
     if export_params[:format] === "CSV"
-      send_data generate_csv, filename: "scout-db-players.csv"
+      send_data generate_arr.to_csv, filename: "scout-db-players.csv"
+    elsif export_params[:format] === "Excel"
+      send_data generate_arr.to_csv(col_sep: "\t"), filename: "scout-db-players.xls"
     end
   end
 
@@ -41,13 +43,13 @@ class ExportsController < ApplicationController
       return p
     end
 
-    def generate_csv
+    def generate_arr
       arr = [ export_params[:columns] ]
       export_params[:player_ids].each do |player_id|
         arr << get_row_for_player(player_id)
       end
 
-      return arr.to_csv
+      return arr
     end
 
     def get_row_for_player(player_id)
