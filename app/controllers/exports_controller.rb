@@ -68,9 +68,9 @@ class ExportsController < ApplicationController
       elsif column === "Phone number"
         return player.phone_number
       elsif column === "Notes"
-        return player.try(:notes).try(:to_s)
+        return player.try(:notes).try(:to_plain_text)
       elsif column === "My notes"
-        return 'todo'
+        return player.current_user_notes(current_user).try(:notes).try(:to_plain_text)
       elsif column === "Height"
         return player.height
       elsif column === "Weight"
