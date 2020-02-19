@@ -96,6 +96,14 @@ class Player < ApplicationRecord
     return class_years.sort { |a,b| order.index(a) <=> order.index(b) }
   end
 
+  def self.ids_with_my_notes(current_user)
+    self.all.filter { |player|
+      !!player.current_user_notes(current_user)
+    }.map { |player|
+      player.id
+    }
+  end
+
   def passes_through_filters(filters)
     return (
       passes_through_height_filters(filters[:shortest_feet], filters[:shortest_inches], filters[:tallest_feet], filters[:tallest_inches]) &&

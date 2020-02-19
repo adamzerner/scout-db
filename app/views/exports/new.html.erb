@@ -11,7 +11,7 @@
   </section>
   <section class="form-group">
     <%= f.label :player_ids, "Players" %>
-    <%= f.collection_select(:player_ids, @players, :id, :full_name, {}, { multiple: true, size: 6, class: "form-control" }) %>
+    <%= f.collection_select(:player_ids, @players, :id, :full_name, { selected: Player.ids_with_my_notes(current_user) }, { multiple: true, size: 6, class: "form-control" }) %>
   </section>
   <section class="form-group">
     <%= f.label :columns %>
