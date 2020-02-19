@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     resources :fields
     resources :games, only: [:new, :show, :edit, :update]
     resources :player_lists
+    resources :exports, only: [:new, :create]
   end
 end

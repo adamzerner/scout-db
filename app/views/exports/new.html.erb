@@ -1,0 +1,23 @@
+<h1 class="page-header">Export players</h1>
+
+<section class="alert alert-secondary">
+  To select multiple values use the <kbd>Ctrl</kbd>, <kbd>Command</kbd> or <kbd>Shift</kbd> keys. For more information see <%= link_to 'the <select> documentation', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select.html' %>.
+</section>
+
+<%= form_with url: '/exports', scope: :export, local: true do |f| %>
+  <section class="form-group">
+    <%= f.label :format %>
+    <%= f.select(:format, ['CSV', 'Excel'], {}, { class: "form-control" }) %>
+  </section>
+  <section class="form-group">
+    <%= f.label :player_ids, "Players" %>
+    <%= f.collection_select(:player_ids, @players, :id, :full_name, {}, { multiple: true, size: 6, class: "form-control" }) %>
+  </section>
+  <section class="form-group">
+    <%= f.label :columns %>
+    <%= f.select(:columns, @columns, {}, { multiple: true, size: 6, class: "form-control" }) %>
+  </section>
+  <section class="form-group">
+    <%= f.submit "Export", class: "btn btn-primary" %>
+  </section>
+<% end %>
