@@ -18,6 +18,6 @@
     <%= f.select(:columns, @columns, {}, { multiple: true, size: 6, class: "form-control" }) %>
   </section>
   <section class="form-group">
-    <%= f.submit "Export", class: "btn btn-primary" %>
+    <%= f.submit "Export", class: "btn btn-primary", data: { disable_with: false } %>
   </section>
 <% end %>
